@@ -2,7 +2,7 @@
 title: Playbook: Site-to-site VPN with Cert
 description: Site-to-site VPN Ansible playbook for RRAS - Strongswan (legacy)
 published: true
-date: 2025-02-24T08:36:35.299Z
+date: 2025-02-24T10:45:05.693Z
 tags: linux, windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T08:05:30.200Z
@@ -68,10 +68,10 @@ dateCreated: 2025-02-24T08:05:30.200Z
         -Force
       listen: Create Root CA
 
-		- name: Wait for Windows to recognise everything is fine
-    	ansible.builtin.pause:
-      	seconds: 30
-       listen: Enable IPSec template
+    - name: Wait for Windows to recognise everything is fine
+      ansible.builtin.pause:
+        seconds: 30
+      listen: Enable IPSec template
 
     - name: Add IPSec to managed templates
       ansible.windows.win_shell: > 
@@ -124,6 +124,82 @@ dateCreated: 2025-02-24T08:05:30.200Z
       loop: "{{ s2s.fetchfiles }}"
       listen: Certs
 
+- name: Configure RRAS
+  hosts: WIN-SRV-AD.TEST.DK
+  gather_facts: false
+  tasks:
+    - name: Install RRAS
+      ansible.windows.win_feature:
+        name:
+          - RemoteAccess
+          - Routing
+        state: present
+        include_management_tools: true
+
+    - name: Check VPN service installation (1/2)
+      ansible.windows.win_shell: 'Get-RemoteAccess'
+      register: vpn
+      changed_when: '"RoutingStatus      : Installed" not in vpn.stdout'
+      notify: Configure VPN RoutingOnly
+    
+    - name: Check VPN service installation (2/2)
+      ansible.windows.win_shell: 'Get-RemoteAccess'
+      register: vpn
+      changed_when: '"VpnS2SStatus       : Installed" not in vpn.stdout'
+      notify: Configure VPN S2S
+    
+    - name: Run handlers for Services
+      ansible.builtin.meta: flush_handlers
+
+    - name: Check VPN interface status
+      ansible.windows.win_shell: 'Get-VpnS2SInterface | Select-Object -ExpandProperty Name'
+      register: vpns2s
+      changed_when: '"LIN-RTR.lego.dk" not in vpns2s.stdout'
+      notify: Configure S2S Interface
+    
+    - name: Check VPN protocol status
+      ansible.windows.win_shell: 'Get-VpnAuthProtocol | Select-Object -ExpandProperty UserAuthProtocolAccepted'
+      register: vpns2scert
+      changed_when: '"Certificate" not in vpns2scert.stdout'
+      notify: S2S Cert
+    
+  handlers:    
+    - name: Install VPN RoutingOnly
+      win_shell: >
+        Install-RemoteAccess -Legacy -VpnType RoutingOnly
+      listen: Configure VPN RoutingOnly
+    
+    - name: Install VPN VpnS2S
+      win_shell: >
+        Install-RemoteAccess -Legacy -VpnType VpnS2S
+      listen: Configure VPN S2S
+
+    - name: Add new Demand-dial interface 
+      win_shell: >
+        $mycert = ( Get-ChildItem -Path cert:LocalMachine\My | Where-Object { $_.Subject -match "CN=WIN-SRV-AD.test.dk" } )[0]
+
+        Add-VpnS2SInterface -Name "LIN-RTR.lego.dk" 
+        -Destination LIN-RTR.lego.dk
+        -Persistent 
+        -IPv4Subnet "10.10.0.0/24:10" 
+        -Protocol IKEv2 
+        -AuthenticationMethod MachineCertificates 
+        -Certificate $mycert
+      listen: Configure S2S Interface
+
+    - name: Add Certificate to send
+      win_shell: >
+        $mycert = ( Get-ChildItem -Path cert:LocalMachine\My | Where-Object { $_.Subject -match "CN=WIN-SRV-AD.test.dk" } )[0]
+
+        Set-VpnAuthProtocol  
+        -UserAuthProtocolAccepted EAP,Certificate 
+        -TunnelAuthProtocolsAdvertised Certificates 
+        -CertificateAdvertised $mycert
+      listen: S2S Cert
+
+    - name: Reboot windows to work proper
+      win_reboot:
+      listen: S2S Cert
 
 - name: S2S Strongswan Cert - Legacy
   hosts: lin_rtr
@@ -202,87 +278,6 @@ dateCreated: 2025-02-24T08:05:30.200Z
         name: strongswan-starter
         state: restarted
       listen: Restart strongswan
-
-- name: Configure RRAS
-  hosts: WIN-SRV-AD.TEST.DK
-  gather_facts: false
-  tasks:
-    - name: Install RRAS
-      ansible.windows.win_feature:
-        name:
-          - RemoteAccess
-          - Routing
-        state: present
-        include_management_tools: true
-
-    - name: Check VPN service installation (1/2)
-      ansible.windows.win_shell: 'Get-RemoteAccess'
-      register: vpn
-      changed_when: '"RoutingStatus      : Installed" not in vpn.stdout'
-      notify: Configure VPN RoutingOnly
-    
-    - name: Check VPN service installation (2/2)
-      ansible.windows.win_shell: 'Get-RemoteAccess'
-      register: vpn
-      changed_when: '"VpnS2SStatus       : Installed" not in vpn.stdout'
-      notify: Configure VPN S2S
-    
-    - name: Run handlers for Services
-      ansible.builtin.meta: flush_handlers
-
-    - name: Check VPN interface status
-      ansible.windows.win_shell: 'Get-VpnS2SInterface | Select-Object -ExpandProperty Name'
-      register: vpns2s
-      changed_when: '"LIN-RTR.lego.dk" not in vpns2s.stdout'
-      notify: Configure S2S Interface
-    
-    - name: Check VPN protocol status
-      ansible.windows.win_shell: 'Get-VpnAuthProtocol | Select-Object -ExpandProperty UserAuthProtocolAccepted'
-      register: vpns2scert
-      changed_when: '"Certificate" not in vpns2scert.stdout'
-      notify: S2S Cert
-
-    - name: Run handlers before start
-      ansible.builtin.meta: flush_handlers
-    
-    - name: Start connection
-      win_shell: >
-        Connect-VpnS2SInterface -Name "LIN-RTR.lego.dk"
-      changed_when: false
-    
-  handlers:    
-    - name: Install VPN RoutingOnly
-      win_shell: >
-        Install-RemoteAccess -Legacy -VpnType RoutingOnly
-      listen: Configure VPN RoutingOnly
-    
-    - name: Install VPN VpnS2S
-      win_shell: >
-        Install-RemoteAccess -Legacy -VpnType VpnS2S
-      listen: Configure VPN S2S
-
-    - name: Add new Demand-dial interface 
-      win_shell: >
-        $mycert = ( Get-ChildItem -Path cert:LocalMachine\My | Where-Object { $_.Subject -match "CN=WIN-SRV-AD.test.dk" } )[0]
-
-        Add-VpnS2SInterface -Name "LIN-RTR.lego.dk" 
-        -Destination LIN-RTR.lego.dk
-        -Persistent 
-        -IPv4Subnet "10.10.0.0/24:10" 
-        -Protocol IKEv2 
-        -AuthenticationMethod MachineCertificates 
-        -Certificate $mycert
-      listen: Configure S2S Interface
-
-    - name: Add Certificate to send
-      win_shell: >
-        $mycert = ( Get-ChildItem -Path cert:LocalMachine\My | Where-Object { $_.Subject -match "CN=WIN-SRV-AD.test.dk" } )[0]
-
-        Set-VpnAuthProtocol  
-        -UserAuthProtocolAccepted EAP,MsChapv2,Certificate 
-        -TunnelAuthProtocolsAdvertised Certificates 
-        -CertificateAdvertised $mycert
-      listen: S2S Cert
 ```
 
 # Inventory
