@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-02-21T07:12:07.686Z
+date: 2025-02-24T07:35:41.333Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -13,5 +13,10 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Bind9 DNS with Master/Slave replication](/ansible/playbook/dns)
 - [OpenLDAP setup](/ansible/playbook/openldap)
 - [OpenSSL certificate creation](/ansible/playbook/openssl)
-- [Site-to-site VPN with PSK](/ansible/playbook/s2s-cert)
-- [Site-to-site VPN with Certificate](/ansible/playbook/s2s-psk)
+- [Site-to-site VPN with PSK](/ansible/playbook/s2s-psk)
+- [Site-to-site VPN with Certificate](/ansible/playbook/s2s-cert)
+- [Active directory setup](/ansible/playbook/ad)
+- [Windows DHCP setup](/ansible/playbook/windows-dhcp)
+- [Windows DNS setup](/ansible/playbook/windows-dns)
+- [Site-to-site VPN with PSK Legacy](/ansible/playbook/s2s-psk-legacy)
+- [Site-to-site VPN with Certificate Legacy](/ansible/playbook/s2s-cert-legacy)
