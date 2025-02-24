@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-02-24T08:45:20.648Z
+date: 2025-02-24T13:38:27.499Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -13,6 +13,8 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Linux initial configuartion](/ansible/playbook/linux-initial)
 - [Bind9 DNS with Master/Slave replication](/ansible/playbook/dns)
 - [OpenLDAP setup](/ansible/playbook/openldap)
+- [Mailing with Postfix and Dovecot](/ansible/playbook/mail)
+- [Roundcube Webmail](/ansible/playbook/webmail)
 - [OpenSSL certificate creation](/ansible/playbook/openssl)
 - [Site-to-site VPN with PSK](/ansible/playbook/s2s-psk)
 - [Site-to-site VPN with Certificate](/ansible/playbook/s2s-cert)
