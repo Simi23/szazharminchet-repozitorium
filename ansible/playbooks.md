@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-02-24T07:35:41.333Z
+date: 2025-02-24T08:45:20.648Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -10,6 +10,7 @@ dateCreated: 2025-02-21T07:12:07.686Z
 
 # Ansible playbooks
 
+- [Linux initial configuartion](/ansible/playbook/linux-initial)
 - [Bind9 DNS with Master/Slave replication](/ansible/playbook/dns)
 - [OpenLDAP setup](/ansible/playbook/openldap)
 - [OpenSSL certificate creation](/ansible/playbook/openssl)
