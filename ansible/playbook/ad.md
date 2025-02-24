@@ -2,8 +2,8 @@
 title: Playbook: Active Directory setup
 description: Active Directory setup with Ansible
 published: true
-date: 2025-02-24T07:41:14.056Z
-tags: 
+date: 2025-02-24T11:15:16.280Z
+tags: windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T07:40:44.879Z
 ---
