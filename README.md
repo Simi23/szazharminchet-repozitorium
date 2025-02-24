@@ -4,43 +4,43 @@
 
 Guides related to creating and managing certification authorities, creating certificates.
 
- - [OpenSSL CA](/cert/openssl): Create a certification authority using OpenSSL
- - [SCEP](/cert/scep): Automatically request/renew certificates from AD CS using a Linux client
+ - [OpenSSL CA](/cert/openssl.md): Create a certification authority using OpenSSL
+ - [SCEP](/cert/scep.md): Automatically request/renew certificates from AD CS using a Linux client
 
 ## DHCP
 
-- [ISC DHCP Server](/DHCP/isc-dhcp-server)
+- [ISC DHCP Server](/DHCP/isc-dhcp-server.md)
 
 ## Directory services
 
- - [OpenLDAP](/directory-services/openldap)
+ - [OpenLDAP](/directory-services/openldap.md)
 
 ## DNS
 
-- [Bind9](/DNS/Bind9)
+- [Bind9](/DNS/Bind9.md)
 
 
 ## Mail Services
 
- - [SMTP/IMAP](/mail/smtp-imap): Configure a mailing system with Postfix/Dovecot on separate servers, with LDAP authentication backend, and MySQL alias storage.
- - [Roundcube](/mail/roundcube): Install a webmail service on top of your mailing system.
+ - [SMTP/IMAP](/mail/smtp-imap.md): Configure a mailing system with Postfix/Dovecot on separate servers, with LDAP authentication backend, and MySQL alias storage.
+ - [Roundcube](/mail/roundcube.md): Install a webmail service on top of your mailing system.
 
 ## Virtual Private Networking
 
 ### Site-to-site VPN
 
  - **Strongswan**-**RRAS** with **pre-shared** authentication
-   - [`swanctl` config](/vpn/linux-windows-strongswan-new)
-   - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-psk)
+   - [`swanctl` config](/vpn/linux-windows-strongswan-new.md)
+   - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-psk.md)
  - **Strongswan**-**RRAS** with **certificate** authentication
-   - [`swanctl` config](/vpn/linux-windows-strongswan-cert-new)
-   - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-cert)
+   - [`swanctl` config](/vpn/linux-windows-strongswan-cert-new.md)
+   - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-cert.md)
 
 ### Remote Access VPN
 
  - **RRAS server** and **Strongswan client** with **certificate authentication**
-   - [`swanctl` config](/vpn/rras-srv-strongswan-ra-client-cert)
-   - [`ipsec.conf` config](/vpn/rras-strong-cl-cert-legacy)
+   - [`swanctl` config](/vpn/rras-srv-strongswan-ra-client-cert.md)
+   - [`ipsec.conf` config](/vpn/rras-strong-cl-cert-legacy.md)
  - **Strongswan server** and **Windows built-in IKEv2 client** with **certificate authentication**
-   - [`swanctl` config](/vpn/strongswan-srv-windows-client-cert)
-   - [`ipsec.conf` config](/vpn/win-clt-strong-srv-cert-legacy)
+   - [`swanctl` config](/vpn/strongswan-srv-windows-client-cert.md)
+   - [`ipsec.conf` config](/vpn/win-clt-strong-srv-cert-legacy.md)
