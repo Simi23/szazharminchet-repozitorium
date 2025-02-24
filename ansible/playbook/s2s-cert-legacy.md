@@ -2,7 +2,7 @@
 title: Playbook: Site-to-site VPN with Cert
 description: Site-to-site VPN Ansible playbook for RRAS - Strongswan (legacy)
 published: true
-date: 2025-02-24T08:34:53.483Z
+date: 2025-02-24T08:36:35.299Z
 tags: linux, windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T08:05:30.200Z
@@ -67,6 +67,11 @@ dateCreated: 2025-02-24T08:05:30.200Z
         -KeyLength 2048
         -Force
       listen: Create Root CA
+
+		- name: Wait for Windows to recognise everything is fine
+    	ansible.builtin.pause:
+      	seconds: 30
+       listen: Enable IPSec template
 
     - name: Add IPSec to managed templates
       ansible.windows.win_shell: > 
