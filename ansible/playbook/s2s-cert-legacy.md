@@ -2,7 +2,7 @@
 title: Playbook: Site-to-site VPN with Cert
 description: Site-to-site VPN Ansible playbook for RRAS - Strongswan (legacy)
 published: true
-date: 2025-02-24T10:45:05.693Z
+date: 2025-02-24T10:45:13.150Z
 tags: linux, windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T08:05:30.200Z
@@ -361,7 +361,6 @@ conn rras-cert
     right= {{ s2s.windows_public_ipv4 }}
     rightsubnet= {{ s2s.windows_subnet }}
     rightid = {{ s2s.winid }}
-    rightsourceip= = {{ s2s.tunnel_subnet }}
 ```
 
 
