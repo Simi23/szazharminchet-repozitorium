@@ -2,7 +2,7 @@
 title: Playbook: Linux initial configuration
 description: Linux initial SSH key copy 
 published: true
-date: 2025-02-24T08:42:11.465Z
+date: 2025-02-24T08:44:00.096Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-24T08:42:11.465Z
@@ -38,4 +38,19 @@ dateCreated: 2025-02-24T08:42:11.465Z
       ansible.builtin.command:
         cmd: sort -u -o /root/.ssh/known_hosts /root/.ssh/known_hosts
       changed_when: false
+```
+
+# Inventory
+
+```c
+debian_severs:
+	hosts:
+  	LIN-RTR.lego.dk:
+    	ansible_host: RTR.lego.dk
+      
+    LIN-SRV1.lego.dk:
+    	ansible_host: LIN-SRV1.lego.dk
+    
+    LIN-SRV2.lego.dk:
+    	ansible_host: LIN-SRV2.lego.dk
 ```
