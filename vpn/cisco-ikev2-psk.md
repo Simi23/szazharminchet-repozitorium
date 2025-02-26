@@ -2,7 +2,7 @@
 title: IOS Site-to-site VPN IKEv2 PSK
 description: Cisco IOS Site-to-site route-based VPN with IKEv2 PSK authentication
 published: true
-date: 2025-02-25T10:17:17.948Z
+date: 2025-02-26T14:22:43.413Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-02-25T10:17:17.948Z
@@ -43,7 +43,7 @@ crypto ikev2 profile PROFILE
   authentication remote pre-share
   keyring local KEYRING
   match address local LOCAL_ADDRESS
-  match remote identity address REMOTE_ADDRESS
+  match identity remote address REMOTE_ADDRESS
 ```
 
 Create an IPsec transform set.
@@ -89,7 +89,7 @@ crypto ikev2 profile PROFILE
   authentication remote pre-share
   keyring local KEYRING
   match address local LOCAL_ADDRESS
-  match remote identity address REMOTE_ADDRESS
+  match identity remote address REMOTE_ADDRESS
 
 crypto ipsec transform-set TSET esp-aes 256 esp-sha512-hmac
   mode tunnel
