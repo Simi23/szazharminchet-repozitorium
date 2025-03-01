@@ -2,8 +2,8 @@
 title: Playbook: Windows DNS setup
 description: Windows DNS server setup using Ansible
 published: true
-date: 2025-02-24T07:53:15.115Z
-tags: 
+date: 2025-03-01T14:04:14.037Z
+tags: windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T07:53:15.115Z
 ---
