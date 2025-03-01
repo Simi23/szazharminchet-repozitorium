@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-02-24T13:38:27.499Z
+date: 2025-03-01T13:43:06.068Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -10,6 +10,7 @@ dateCreated: 2025-02-21T07:12:07.686Z
 
 # Ansible playbooks
 
+## Linux
 - [Linux initial configuartion](/ansible/playbook/linux-initial)
 - [Bind9 DNS with Master/Slave replication](/ansible/playbook/dns)
 - [OpenLDAP setup](/ansible/playbook/openldap)
@@ -18,8 +19,17 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [OpenSSL certificate creation](/ansible/playbook/openssl)
 - [Site-to-site VPN with PSK](/ansible/playbook/s2s-psk)
 - [Site-to-site VPN with Certificate](/ansible/playbook/s2s-cert)
+- [Site-to-site VPN with PSK Legacy](/ansible/playbook/s2s-psk-legacy)
+- [Site-to-site VPN with Certificate Legacy](/ansible/playbook/s2s-cert-legacy)
+
+## Windows
 - [Active directory setup](/ansible/playbook/ad)
 - [Windows DHCP setup](/ansible/playbook/windows-dhcp)
 - [Windows DNS setup](/ansible/playbook/windows-dns)
-- [Site-to-site VPN with PSK Legacy](/ansible/playbook/s2s-psk-legacy)
-- [Site-to-site VPN with Certificate Legacy](/ansible/playbook/s2s-cert-legacy)
+
+## Cisco
+- [IP settings](/ansible/playbook/cisco/ip-g)
+- [Static routing](/ansible/playbook/cisco/static-g)
+- [BGP](/ansible/playbook/cisco/bgp-g)
+- [OSPF](/ansible/playbook/cisco/ospf-g)
+- [S2S-PSK Tunnel with EIGRP](/ansible/playbook/cisco/s2s-psk-g)
