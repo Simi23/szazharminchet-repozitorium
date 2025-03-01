@@ -2,7 +2,7 @@
 title: Playbook: S2S PSK (G)
 description: S2S VPN using pre-shared-key with Ansible. Including EIGRP routing.
 published: true
-date: 2025-03-01T14:00:31.212Z
+date: 2025-03-01T14:02:05.862Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-01T13:58:55.638Z
@@ -13,6 +13,176 @@ dateCreated: 2025-03-01T13:58:55.638Z
 ## Playbook
 
 ```yaml
+---
+- name: Configure S2S GRE Tunnel (PSK)
+  hosts: border_routers
+  gather_facts: false
+  tasks:
+    # | Configure IKEv2, IPSEC |
+    - name: Configure IKEv2 keyring
+      cisco.ios.ios_config:
+        lines:
+          - address {{ remote_public_ip }} 255.255.255.0
+          - pre-shared-key {{ psk }}
+        parents:
+          - crypto ikev2 keyring {{ IKEv2_keyring }}
+          - peer {{ IKEv2_keyring_peer }}
+      register: keyring
+      notify: Save
+    
+    - name: Configure IKEv2 proposal
+      cisco.ios.ios_config:
+        lines:
+          - encryption aes-cbc-256
+          - integrity sha512
+          - group 16
+        parents: 
+          - crypto ikev2 proposal {{ IKEv2_proposal }}
+      notify: Save
+    
+    - name: Configure IKEv2 policy
+      cisco.ios.ios_config:
+        lines:
+          - proposal {{ IKEv2_proposal }}
+        parents:
+          - crypto ikev2 policy {{ IKEv2_policy }}
+      notify: Save
+
+    - name: Configure IKEv2 profile
+      cisco.ios.ios_config:
+        lines:
+          - authentication remote pre-share
+          - authentication local pre-share
+          - keyring local {{ IKEv2_keyring }}
+          - match address local {{ public_ip }}
+          - match identity remote address {{ remote_public_ip }} 255.255.255.255
+        parents:
+          - crypto ikev2 profile {{ IKEv2_profile }}
+      notify: Save
+    
+    - name: Configure IPSEC transform set
+      cisco.ios.ios_config:
+        lines:
+          - mode tunnel
+        parents:
+          - crypto ipsec transform-set {{ IPSEC_transform_set }} esp-aes 256 esp-sha512-hmac 
+      notify: Save
+    
+    - name: Configure IPSEC profile
+      cisco.ios.ios_config:
+        lines:
+          - set transform-set {{ IPSEC_transform_set }}
+          - set ikev2-profile {{ IKEv2_profile }}
+        parents:
+          - crypto ipsec profile {{ IPSEC_profile }} 
+      notify: Save
+    
+    # | Configure Tunnel interface |
+    - name: Configure Tunnel0 interface
+      cisco.ios.ios_config:
+        lines:
+          - tunnel source {{ tunnel_source }}
+          - tunnel destination {{ remote_public_ip }}
+          - tunnel protection ipsec profile {{ IPSEC_profile }}
+          - no ip split-horizon eigrp {{ eigrp_as }}
+          - no ipv6 split-horizon eigrp {{ eigrp_as }}
+        parents:
+          - interface Tunnel0
+      notify: Save
+    
+    # | Configure EIGRP |
+    - name: Configure EIGRP networks
+      cisco.ios.ios_config:
+        lines:
+          - network {{ item.network }} {{ item.wildcard_mask }}
+        parents:
+          - router eigrp {{ eigrp_as }}
+      loop: "{{ eigrp_network }}"
+      notify: Save
+
+    - name: Configure EIGRPv6 networks
+      cisco.ios.ios_config:
+        lines:
+          - ipv6 eigrp {{ item.as }}
+        parents:
+          - interface {{ item.name }}
+      loop: "{{ eigrp_v6_network }}"
+      notify: 
+        - Start Process
+        - Save
+    
+    - name: Configure EIGRP passive interfaces
+      cisco.ios.ios_config:
+        lines:
+          - passive-interface {{ item }}
+        parents:
+          - router eigrp {{ eigrp_as }}
+      loop: "{{ eigrp_passive }}"
+      notify: Save
+    
+    - name: Configure EIGRPv6 passive interfaces
+      cisco.ios.ios_config:
+        lines:
+          - passive-interface {{ item }}
+        parents:
+          - ipv6 router eigrp {{ eigrp_as }}
+      loop: "{{ eigrp_passive }}"
+      notify: 
+        - Start Process
+        - Save
+    
+    - name: Configure EIGRP redistribute
+      cisco.ios.ios_config:
+        lines:
+          - redistribute ospf {{ ospf_id }} metric 10000 1 255 1 1
+        parents:
+          - router eigrp {{ eigrp_as }}
+      notify: Save
+    
+    - name: Configure EIGRPv6 redistribute
+      cisco.ios.ios_config:
+        lines:
+          - redistribute ospf {{ ospf_id }} metric 10000 1 255 1 1 include-connected
+        parents:
+          - ipv6 router eigrp {{ eigrp_as }}
+      notify: 
+        - Start Process
+        - Save
+    
+    # | Redistribute EIGRP into OSPF |
+    - name: Configure OSPF redistribute
+      cisco.ios.ios_config:
+        lines:
+          - redistribute eigrp {{ eigrp_as }} subnets
+        parents:
+          - router ospf {{ eigrp_as }}
+      notify: Save
+    
+    - name: Configure OSPFv3 redistribute
+      cisco.ios.ios_config:
+        lines:
+          - redistribute eigrp {{ eigrp_as }} include-connected
+        parents:
+          - ipv6 router ospf {{ eigrp_as }}
+      notify: 
+        - Start Process
+        - Save
+    
+  handlers:
+    # | Start EIGRPv6 |
+    - name: Start EIGRPv6
+      cisco.ios.ios_config:
+        lines:
+          - no shutdown
+        parents:
+          - ipv6 router eigrp {{ eigrp_as }}
+      listen: Start Process
+
+    # | Save settings |
+    - name: Save IOS
+      cisco.ios.ios_command:
+        commands: "write mem"
+      listen: Save
 
 ```
 
