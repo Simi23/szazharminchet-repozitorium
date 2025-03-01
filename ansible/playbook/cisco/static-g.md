@@ -2,15 +2,13 @@
 title: Playbook: Static IP routing (G)
 description: Static IPv4, IPv6 routing configured with Ansible
 published: true
-date: 2025-03-01T13:48:47.518Z
+date: 2025-03-01T14:06:31.216Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-01T13:48:47.518Z
 ---
 
-# Static IP routing
-
-## Playbook
+# Playbook
 
 ```yaml
 ---
@@ -61,7 +59,7 @@ dateCreated: 2025-03-01T13:48:47.518Z
 
 ```
 
-## Inventory
+# Inventory
 
 ```yaml
 all:
