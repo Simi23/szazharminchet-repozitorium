@@ -2,15 +2,13 @@
 title: Playbook: OSPF (G)
 description: Configure OSPFv2, OSPFv3 using Ansible
 published: true
-date: 2025-03-01T13:57:16.070Z
+date: 2025-03-01T14:06:02.273Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-01T13:57:16.070Z
 ---
 
-# OSPF
-
-## Playbook
+# Playbook
 
 ```yaml
 ---
@@ -164,7 +162,7 @@ dateCreated: 2025-03-01T13:57:16.070Z
       listen: Save
 ```
 
-## Inventory
+# Inventory
 
 ```yaml
 all:
