@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-01T13:43:06.068Z
+date: 2025-03-01T13:52:44.015Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -28,8 +28,8 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Windows DNS setup](/ansible/playbook/windows-dns)
 
 ## Cisco
-- [IP settings](/ansible/playbook/cisco/ip-g)
-- [Static routing](/ansible/playbook/cisco/static-g)
-- [BGP](/ansible/playbook/cisco/bgp-g)
-- [OSPF](/ansible/playbook/cisco/ospf-g)
-- [S2S-PSK Tunnel with EIGRP](/ansible/playbook/cisco/s2s-psk-g)
+- [IP settings (G)](/ansible/playbook/cisco/ip-g)
+- [Static routing (G)](/ansible/playbook/cisco/static-g)
+- [BGP (G)](/ansible/playbook/cisco/bgp-g)
+- [OSPF (G)](/ansible/playbook/cisco/ospf-g)
+- [S2S-PSK Tunnel with EIGRP (G)](/ansible/playbook/cisco/s2s-psk-g)
