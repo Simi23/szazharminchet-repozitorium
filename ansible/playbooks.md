@@ -2,8 +2,8 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-01T13:52:44.015Z
-tags: linux, ansible
+date: 2025-03-01T14:03:43.112Z
+tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
 ---
