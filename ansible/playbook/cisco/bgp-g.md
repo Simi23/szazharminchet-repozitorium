@@ -2,15 +2,13 @@
 title: Playbook: BGP (G)
 description: Configure BGP through Ansible
 published: true
-date: 2025-03-01T13:52:19.908Z
+date: 2025-03-01T14:05:38.897Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-01T13:52:19.908Z
 ---
 
-# BGP
-
-## Playbook
+# Playbook
 
 ```yaml
 ---
@@ -71,7 +69,7 @@ dateCreated: 2025-03-01T13:52:19.908Z
       listen: Save
 ```
 
-## Inventory
+# Inventory
 
 ```yaml
 all:
