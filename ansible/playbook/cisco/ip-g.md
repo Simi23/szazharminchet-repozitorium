@@ -2,15 +2,13 @@
 title: Playbook: IP settings (G)
 description: IPv4, IPv6 settings, enabling interfaces using Ansible
 published: true
-date: 2025-03-01T13:44:45.364Z
+date: 2025-03-01T14:05:50.407Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-01T13:43:00.658Z
 ---
 
-# IP settings
-
-## Playbook
+# Playbook
 
 ```yaml
 ---
@@ -51,7 +49,7 @@ dateCreated: 2025-03-01T13:43:00.658Z
       listen: Save
 ```
 
-## Inventory
+# Inventory
 
 ```yaml
 all:
