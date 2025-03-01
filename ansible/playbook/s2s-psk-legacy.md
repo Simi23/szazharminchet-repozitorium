@@ -2,8 +2,8 @@
 title: Playbook: Site-to-site VPN with PSK
 description: Site-to-site VPN Ansible playbook for RRAS - Strongswan (legacy)
 published: true
-date: 2025-02-24T08:02:05.278Z
-tags: 
+date: 2025-03-01T14:05:11.097Z
+tags: linux, windows, ansible
 editor: markdown
 dateCreated: 2025-02-24T08:02:05.278Z
 ---
