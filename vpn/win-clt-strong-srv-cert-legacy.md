@@ -2,7 +2,7 @@
 title: Strongswan Server - Windows Native Client (Certificate - Legacy)
 description: Strongswan IKEv2 Remote Access Server with Certificate Authentication, and Windows 11 Native Client
 published: true
-date: 2025-02-18T13:54:44.153Z
+date: 2025-03-02T09:52:40.077Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-18T13:51:11.059Z
@@ -65,6 +65,9 @@ Save your configuration and go to advanded options. On this tab click on edit at
 Apply it, and your windows side configurations are done.
 
 # Debian Setup
+
+```bash
+apt install strongswan strongswan-starter
 
 Edit the `ipsec.conf` configuration.
 
