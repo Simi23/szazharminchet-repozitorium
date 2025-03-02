@@ -2,7 +2,7 @@
 title: S2S Strongswan - RRAS (PSK - old_syntax)
 description: Site-to-site VPN between Windows and Linux using RRAS and Strongswan
 published: true
-date: 2025-02-18T13:23:55.474Z
+date: 2025-03-02T09:52:18.145Z
 tags: linux, windows
 editor: markdown
 dateCreated: 2025-02-17T10:44:52.793Z
@@ -26,7 +26,7 @@ This guide will use the old configuration syntax.
 If you install `strongswan`, you get the legacy version, so instead, other packages are needed.
 
 ```bash
-apt install strongswan strongswan strongswan-starter
+apt install strongswan strongswan-starter
 ```
 
 ## Configure Strongswan
