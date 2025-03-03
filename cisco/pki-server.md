@@ -2,7 +2,7 @@
 title: PKI Server and clients
 description: Cisco IOS Certification Authority setup
 published: true
-date: 2025-03-03T10:06:27.938Z
+date: 2025-03-03T10:08:02.187Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-03-03T10:06:27.938Z
@@ -35,10 +35,13 @@ crypto pki server CASRV
 ```
 
 > **Notes**
-> - `<ip-address>` is the IP address of the PKI server.
-> - `grant auto` is used to accept all requests without checking the SCEP OTP.
-> - If you want to use CRL checking on the clients, the CDP URL needs to follow this format: `http://<ip-address>/cgi-bin/pkiclient.exe?operation=GetCRL`
-> - Only issue `no shutdown` after configuring everything else in this block because it locks the configuration of the PKI server. You can issue `shutdown` later to unlock it.
+> `<ip-address>` is the IP address of the PKI server.
+> 
+> `grant auto` is used to accept all requests without checking the SCEP OTP.
+> 
+> If you want to use CRL checking on the clients, the CDP URL needs to follow this format: `http://<ip-address>/cgi-bin/pkiclient.exe?operation=GetCRL`
+> 
+> Only issue `no shutdown` after configuring everything else in this block because it locks the configuration of the PKI server. You can issue `shutdown` later to unlock it.
 {.is-info}
 
 The server is now ready to accept signing requests through SCEP.
@@ -58,13 +61,18 @@ crypto pki trustpoint CASRV
 ```
 
 > **Notes**
-> - The enrollment URL has to point to the PKI server.
-> - The `serial-number` option will include the device SN in the certificate's subject identifier.
-> - The `ip-address` option will include an IP address in the subject alternative name.
-> - Set revocation check as needed.
-> - The `rsakeypair` option specifies the name and key length of the certificate to generate when enrolling with the authority.
-> - `auto-enroll 90 regenerate` tells the device to automatically renew its certificate when it reaches 90% of its lifetime.
-.{is-info}
+> The enrollment URL has to point to the PKI server.
+> 
+> The `serial-number` option will include the device SN in the certificate's subject identifier.
+> 
+> The `ip-address` option will include an IP address in the subject alternative name.
+> 
+> Set revocation check as needed.
+> 
+> The `rsakeypair` option specifies the name and key length of the certificate to generate when enrolling with the authority.
+> 
+> `auto-enroll 90 regenerate` tells the device to automatically renew its certificate when it reaches 90% of its lifetime.
+{.is-info}
 
 After configuring the trustpoint, you have to authenticate it using its fingerprint. Issue the following command and accept the fingerprint.
 
