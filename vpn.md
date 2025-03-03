@@ -2,13 +2,13 @@
 title: VPN
 description: VPN Guides
 published: true
-date: 2025-03-03T10:46:43.367Z
+date: 2025-03-03T11:04:16.152Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:43:56.838Z
 ---
 
-# Server configuration
+# Server guides
 
 ## Site-to-site VPN
 
@@ -28,6 +28,6 @@ dateCreated: 2025-03-03T10:43:56.838Z
    - [`swanctl` config](/vpn/strongswan-srv-windows-client-cert)
    - [`ipsec.conf` config](/vpn/win-clt-strong-srv-cert-legacy)
 
-# Cisco configuration
+# Cisco guides
 
 - [Site-to-site VPN with IKEv2 PSK](/vpn/cisco-ikev2-psk)
