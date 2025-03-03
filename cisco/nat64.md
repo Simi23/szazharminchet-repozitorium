@@ -2,7 +2,7 @@
 title: NAT64 configuration
 description: Cisco NAT64 configuration with Bind9 as DNS64 server
 published: true
-date: 2025-03-03T10:31:23.340Z
+date: 2025-03-03T10:56:48.319Z
 tags: linux, cisco
 editor: markdown
 dateCreated: 2025-03-03T10:31:23.340Z
