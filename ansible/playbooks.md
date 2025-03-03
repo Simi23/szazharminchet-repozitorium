@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-01T14:03:43.112Z
+date: 2025-03-03T08:52:55.701Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -33,3 +33,6 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [BGP (G)](/ansible/playbook/cisco/bgp-g)
 - [OSPF (G)](/ansible/playbook/cisco/ospf-g)
 - [S2S-PSK Tunnel with EIGRP (G)](/ansible/playbook/cisco/s2s-psk-g)
+- [Collection: Routing full setup](/ansible/playbook/cisco/routing-full)
+- [Collection: IKEv2 PSK full setup](/ansible/playbook/cisco/vpn-psk-full)
+- [Collection: IKEv2 Certificate full setup (with CA)](/ansible/playbook/cisco/vpn-cert-full)
