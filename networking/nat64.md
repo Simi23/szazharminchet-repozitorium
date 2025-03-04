@@ -2,7 +2,7 @@
 title: NAT64 configuration
 description: Cisco NAT64 configuration with Bind9 as DNS64 server
 published: true
-date: 2025-03-03T10:56:48.319Z
+date: 2025-03-04T10:07:19.040Z
 tags: linux, cisco
 editor: markdown
 dateCreated: 2025-03-03T10:31:23.340Z
@@ -65,3 +65,7 @@ nat64 v6v4 list NAT64ACL pool MYPOOL overload
 >
 > The **IPv4 pool** is the pool for the **source address translation**. It does not have to match the IPv4 address of the router.
 {.is-info}
+
+# Other guides
+
+Check out [Playbook Collection: NAT64](/ansible/playbook/cisco/nat64) to configure this network with Ansible.
