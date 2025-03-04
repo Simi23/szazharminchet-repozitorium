@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-04T10:27:47.312Z
+date: 2025-03-04T10:28:19.200Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -40,3 +40,4 @@ dateCreated: 2025-02-21T07:12:07.686Z
 ## Cisco - NAT64
 
 - [Collection: NAT64](/ansible/playbook/cisco/nat64)
+- [Collection: NAT64 (G)](/ansible/playbook/cisco/nat64-g)
