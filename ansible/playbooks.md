@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-03T10:01:36.174Z
+date: 2025-03-04T10:27:47.312Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -36,3 +36,7 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Collection: Routing full setup](/ansible/playbook/cisco/routing-full)
 - [Collection: IKEv2 PSK full setup](/ansible/playbook/cisco/vpn-psk-full)
 - [Collection: IKEv2 Certificate full setup (with CA)](/ansible/playbook/cisco/vpn-cert-full)
+
+## Cisco - NAT64
+
+- [Collection: NAT64](/ansible/playbook/cisco/nat64)
