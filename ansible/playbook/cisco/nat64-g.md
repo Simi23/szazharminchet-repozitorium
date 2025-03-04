@@ -2,7 +2,7 @@
 title: Playbook Collection: NAT64 (G)
 description: NAT64 setup with Ansible
 published: true
-date: 2025-03-04T10:29:53.164Z
+date: 2025-03-04T10:30:43.381Z
 tags: ansible, cisco
 editor: markdown
 dateCreated: 2025-03-04T10:29:53.164Z
@@ -18,48 +18,43 @@ For the manual configuration guide, check out [NAT64 configuration](/networking/
 <summary>playbook_1_interfaces.yml</summary>
   
   ```yml
-  - name: Setting up interfaces
-    hosts: all
-    tasks:
-      - name: Setting IPv4 addresses
-        cisco.ios.ios_l3_interfaces:
-          config:
-            - name: "{{ item.name }}"
-              ipv4:
-                - address: "{{ item.address4 }}"
-        loop: "{{ interfaces }}"
-        when: item.address4 is defined
-        loop_control:
-          label: "{{ item.name }}"
+---
+- name: Set interfaces
+  hosts: routers
+  gather_facts: false
+  tasks:
+    # | Set IP addresses |
+    - name: Set IP addresses
+      cisco.ios.ios_l3_interfaces: 
+        config:
+          - name: "{{ item.name }}"
+            ipv4: 
+              - address: "{{ item.ipv4 }}"
+            ipv6:
+              - address: "{{ item.ipv6 }}"
+      loop: "{{ interfaces }}"
+      loop_control:
+        label: "{{ item.name }}"
+      notify: Save
+    
+    # | Start interfaces |
+    - name: Start interfaces
+      cisco.ios.ios_interfaces: 
+        config:
+          - name: "{{ item.name }}"
+            enabled: true
+      loop: "{{ interfaces }}"
+      loop_control:
+        label: "{{ item.name }}"
+      notify: Save
 
-      - name: Setting IPv6 GUA addresses
-        cisco.ios.ios_config:
-          lines:
-            - "ipv6 address {{ item.address6.gua }}"
-          parents:
-            - "interface {{ item.name }}"
-        loop: "{{ interfaces }}"
-        when: (item.address6 is defined) and (item.address6.gua is defined)
-        loop_control:
-          label: "{{ item.name }}"
-
-      - name: Setting IPv6 LLA adresses
-        cisco.ios.ios_config:
-          lines:
-            - ipv6 address {{ item.address6.lla }} link-local
-          parents:
-            - interface {{ item.name }}
-        loop: "{{ interfaces }}"
-        when: item.address6 is defined and item.address6.lla is defined
-        loop_control:
-          label: "{{ item.name }}"
-
-      - name: Enabling interfaces
-        cisco.ios.ios_interfaces:
-          config:
-            - name: "{{ item.name }}"
-              enabled: true
-        loop: "{{ interfaces }}"
+  handlers:
+    # | Save IOS config |
+    - name: Save IOS config
+      cisco.ios.ios_command:
+        commands:
+          - command: "write memory"
+      listen: Save
 
 ```
 </details>
@@ -68,33 +63,46 @@ For the manual configuration guide, check out [NAT64 configuration](/networking/
 <summary>playbook_2_routing.yml</summary>
   
   ```yml
-  - name: Configuring routing
-    hosts: all
-    tasks:
-      - name: Enabling IPv6 Unicast routing
-        cisco.ios.ios_config:
-          lines:
-            - ipv6 unicast-routing
-        when: ipv6_routing
+---
+- name: Configure IP routing
+  hosts: routers
+  gather_facts: false
+  tasks:
+    # | Configure IPv4 routes |
+    - name: Configure IPv4 routes
+      cisco.ios.ios_config:
+        lines:
+          - ip route {{ item.network }} {{ item.destination }}
+      loop: "{{ routesv4 }}"
+      when: routesv4 is defined
+      loop_control:
+        label: "{{ item.network }}"
+      notify: Save
 
-      - name: Creating IPv4 static routes
-        cisco.ios.ios_config:
-          lines:
-            - ip route {{ item.network }} {{ item.destination }}
-        loop: "{{ routes4 }}"
-        when: routes4 is defined
-        loop_control:
-          label: "{{ item.network }}"
+    # | Configure IPv6 unicast-routing | 
+    - name: Configure IPv6 unicast-routing
+      cisco.ios.ios_config:
+        lines: ipv6 unicast-routing
+      notify: Save
 
-      - name: Creating IPv6 static routes
-        cisco.ios.ios_config:
-          lines:
-            - ipv6 route {{ item.network }} {{ item.destination }}
-        loop: "{{ routes6 }}"
-        when: routes6 is defined
-        loop_control:
-          label: "{{ item.network }}"
+    # | Configure IPv6 routes |
+    - name: Configure IPv6 routes
+      cisco.ios.ios_config:
+        lines:
+          - ipv6 route {{ item.network }} {{ item.destination }}
+      loop: "{{ routesv6 }}"
+      when: routesv6 is defined
+      loop_control:
+        label: "{{ item.network }}"
+      notify: Save
 
+  handlers:
+    # | Save IOS config |
+    - name: Save IOS config
+      cisco.ios.ios_command:
+        commands:
+          - command: "write memory"
+      listen: Save
 
 ```
 </details>
@@ -104,40 +112,46 @@ For the manual configuration guide, check out [NAT64 configuration](/networking/
 <summary>playbook_3_nat64.yml</summary>
 
 ```yml
+---
+- name: NAT64 setup
+  hosts: NAT64.lego.dk
+  gather_facts: false
+  tasks:
+    # | Enable NAT64 |
+    - name: Enable NAT64
+      cisco.ios.ios_config:
+        lines:
+          - nat64 enable
+        parents:
+          - interface {{ item.name }}
+      loop: "{{ nat64_interfaces }}"
+      notify: Save
+    
+    # | Set up IPv6 ACL |
+    - name: Set up IPv6 ACL 
+      cisco.ios.ios_config:
+        lines:
+          - permit ipv6 {{ aclv6_permit }} any
+        parents:
+          - ipv6 access-list {{ aclv6_name }}
+      notify: Save
+    
+    # | Set up NAT64 |
+    - name: Set up NAT64
+      cisco.ios.ios_config:
+        lines:
+          - nat64 v4 pool {{ nat64_name }} {{ nat64_start }} {{ nat64_end }}
+          - nat64 v6v4 list {{ aclv6_name }} pool {{ nat64_name }} overload
+      notify: Save
+
+  handlers:
+    # | Save IOS config |
+    - name: Save IOS config
+      cisco.ios.ios_command:
+        commands:
+          - command: "write memory"
+      listen: Save
   
-  - name: Configuring NAT64
-    hosts: NAT64.lego.dk
-    tasks:
-      - name: Creating IPv6 access list
-        cisco.ios.ios_config:
-          lines:
-            - "permit ipv6 {{ item.src }} any"
-          parents:
-            - ipv6 access-list nat64acl
-        loop: "{{ nat64.sources }}"
-        loop_control:
-          label: "{{ item.src }}"
-
-      - name: Creating IPv4 translation pool
-        cisco.ios.ios_config:
-          lines:
-            - nat64 v4 pool {{ nat64.destination.name }} {{ nat64.destination.start }} {{ nat64.destination.end }}
-
-      - name: Enabling NAT64 on interfaces
-        cisco.ios.ios_config:
-          lines:
-            - nat64 enable
-          parents:
-            - interface {{ item }}
-        loop: "{{ nat64.interfaces }}"
-        loop_control:
-          label: "{{ item }}"
-
-      - name: Creating NAT64 mapping
-        cisco.ios.ios_config:
-          lines:
-            - nat64 v6v4 list nat64acl pool {{ nat64.destination.name }} overload
-
 ```
 
 </details>
