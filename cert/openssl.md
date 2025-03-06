@@ -2,7 +2,7 @@
 title: Certification Authority
 description: x509 Certification Authority setup with openssl
 published: true
-date: 2025-02-12T20:59:29.513Z
+date: 2025-03-06T11:13:54.958Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-11T11:13:16.841Z
@@ -40,6 +40,42 @@ update-ca-certificates
 > The `update-ca-certificates` command only reads files with `.crt` extension.
 {.is-warning}
 
+# Subordinate Certification Authority
+
+In order to make a sub CA, you need to generate a signing request and a private key.
+
+```bash
+openssl req -new -nodes \
+  -out subca.csr \
+  -newkey rsa:4096 \
+  -keyout subca.key \
+  -subj '/C=HU/O=My Org/CN=My Org SubCA'
+```
+
+Create a file for the v3 extensions.
+
+<kbd>subca.v3.ext</kbd>
+
+```bash
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer
+basicConstraints=CA:TRUE
+```
+
+Sign the certificate with the root CA certificate. Make sure to include the v3 extension file.
+
+```bash
+openssl x509 -req \
+  -in subca.csr \
+  -CA CA.crt \
+  -CAkey CA.key \
+  -CAcreateserial \
+  -out subca.crt \
+  -days 365 \
+  -sha256 \
+  -extfile subca.v3.ext
+```
+
 # Generate certificates
 
 To generate a certificate, first create a signing request (CSR). This command will also create the key alongside the request.
@@ -57,8 +93,8 @@ Create and edit the file `CERT.v3.ext`. This will be used to supply the x509v3 e
 ```bash
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-subjectAltName = @alt_names
+keyUsage=digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName=@alt_names
 
 # Add any alternative DNS names or IP addresses for the certificate
 [alt_names]
@@ -79,6 +115,15 @@ openssl x509 -req \
   -sha256 \
   -extfile CERT.v3.ext
 ```
+
+> When using end certificates with programs such as web servers or mail servers, you should include the whole trust chain in the certificate.
+>
+> For example:
+> ```bash
+> cat cert.crt subca.crt ca.crt > chain.pem
+> ```
+> Use the newly created `chain.pem` as the certificate with your services. This way the server will send the whole trust chain so the client can verify trust using only the root certificate.
+{.is-warning}
 
 If needed, bundle a certificate and its key into a pkcs12 pack:
 
