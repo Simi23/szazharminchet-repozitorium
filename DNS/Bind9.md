@@ -2,7 +2,7 @@
 title: Bind9
 description: Bind9 DNS server configuration. DDNS, high availability included.
 published: true
-date: 2025-02-17T10:57:44.242Z
+date: 2025-03-06T11:27:53.196Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-15T08:40:05.945Z
@@ -245,4 +245,41 @@ zone esher.com IN {
 Restart the daemon.
 ```
 systemctl restart named
+```
+
+# Common record types
+
+- **A** record
+
+```
+<NAME> 					A <IPv4>
+web.skillsit.hu	A 10.0.0.1
+```
+
+- **AAAA** record
+
+```
+<NAME> 					AAAA <IPv6>
+web.skillsit.hu	AAAA 2001:db8:1001::10
+```
+
+- **NS** record
+
+```
+<NAME> 			NS <SERVER>
+skillsit.hu	NS ns1.skillsit.hu.
+```
+
+- **MX** record
+
+```
+<NAME> 			MX <PRIORITY> <ADDRESS>
+skillsit.hu	MX 10 mail.skillsit.hu.
+```
+
+- **SRV** record
+
+```
+_<service>._<proto>.<NAME>				SRV <PRIORITY> <WEIGHT> <PORT> <TARGET>
+_minecraft._tcp.mc1.skillsit.hu 	SRV 10 0 25565 srv4.skillsit.hu.
 ```
