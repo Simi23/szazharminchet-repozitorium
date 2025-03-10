@@ -2,7 +2,7 @@
 title: Apache2
 description: Apache2 general configs, mods
 published: true
-date: 2025-03-10T10:18:38.037Z
+date: 2025-03-10T10:20:34.732Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:13:08.895Z
@@ -59,8 +59,11 @@ The sites are located under `/etc/apache2/sites-available`. If you add here a .c
     </Directory>
 
     ErrorDocument 404 error.html # Error documents
-
-    Alias /whoami /opt/wwwroot/whoami/main.html
+    Alias /whoami /opt/wwwroot/whoami/main.html # Alias for anything
+    
+    # Logging
+    ErrorLog /var/log/apache2/company/error.log
+    CustomLog /var/log/apache2/company/access.log combined
 </VirtualHost>
 ```
 
@@ -85,8 +88,11 @@ The sites are located under `/etc/apache2/sites-available`. If you add here a .c
     </Directory>
 
     ErrorDocument 404 error.html # Error documents
-
-    Alias /whoami /opt/wwwroot/whoami/main.html
+    Alias /whoami /opt/wwwroot/whoami/main.html # Alias for anything
+    
+    # Logging
+    ErrorLog /var/log/apache2/company/error.log
+    CustomLog /var/log/apache2/company/access.log combined
 </VirtualHost>
 ```
 
