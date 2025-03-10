@@ -2,7 +2,7 @@
 title: Apache2
 description: Apache2 general configs, mods
 published: true
-date: 2025-03-10T10:20:34.732Z
+date: 2025-03-10T10:21:44.007Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:13:08.895Z
@@ -64,6 +64,10 @@ The sites are located under `/etc/apache2/sites-available`. If you add here a .c
     # Logging
     ErrorLog /var/log/apache2/company/error.log
     CustomLog /var/log/apache2/company/access.log combined
+    
+    
+    # Redirect to https
+    Redirect permanent / https://web.company.com/
 </VirtualHost>
 ```
 
