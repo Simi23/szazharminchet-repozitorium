@@ -2,13 +2,13 @@
 title: Samba
 description: Samba file share configuration on Debian
 published: true
-date: 2025-03-10T09:30:53.698Z
+date: 2025-03-10T09:31:03.184Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:30:53.698Z
 ---
 
-# Samab
+# Samba
 
 ## Install
 Install `samba` package to use samba.
