@@ -2,7 +2,7 @@
 title: Postfix Echo
 description: Echo configuration for Postfix
 published: true
-date: 2025-03-10T10:19:43.074Z
+date: 2025-03-10T14:06:05.457Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:19:43.074Z
@@ -24,7 +24,7 @@ Edit <kbd>/etc/postfix/master.cf</kbd> and add the following line(s) at the end 
 
 ```bash
 autoreply unix - n n - - pipe
-flags=Rq user=administrator argv=/etc/postfix/scripts/autoreply.sh $sender
+  flags=Rq user=administrator argv=/etc/postfix/scripts/autoreply.sh $sender
 ```
 
 This transport created with the [pipe](https://www.postfix.org/pipe.8.html) daemon will call the `autoreply.sh` script with the sender address as an argument.
