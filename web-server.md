@@ -2,7 +2,7 @@
 title: Web Server
 description: Web Server Guides
 published: true
-date: 2025-03-10T09:58:39.194Z
+date: 2025-03-10T10:04:28.607Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-10T09:01:10.116Z
@@ -12,3 +12,4 @@ dateCreated: 2025-03-10T09:01:10.116Z
 
 - [HaProxy](/web-server/haproxy) with **High availability** and **FHRP**
 - [Squid](/web-server/transparent-proxy) transparent proxy with *TLS inspection (soon)*
+- [Apache2](/web-server/apache2) general configs
