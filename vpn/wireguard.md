@@ -2,7 +2,7 @@
 title: Wireguard VPN
 description: Wireguard Remote Access VPN Configuration guide
 published: true
-date: 2025-03-10T09:27:56.634Z
+date: 2025-03-10T09:37:20.308Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:27:56.634Z
@@ -93,3 +93,10 @@ Endpoint = 1.1.1.10:51820
 
 The same commands can be utilized to bring up the tunnel.
 
+## Setup with NetworkManager
+
+To import your Wireguard config into NetworkManager, use the following command:
+
+```bash
+nmcli connection import type wireguard file /etc/wireguard/wg0.conf
+```
