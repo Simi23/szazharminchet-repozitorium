@@ -2,7 +2,7 @@
 title: HAProxy
 description: HAProxy configuratinon with high availibilty and FHRP
 published: true
-date: 2025-03-10T10:02:12.615Z
+date: 2025-03-10T10:03:00.978Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:43:05.489Z
@@ -33,10 +33,10 @@ frontend https-in
   
 backend web_servers
 	balance roundrobin
-  server	web01 web01.company.com:80 check
+  server	web01	web01.company.com:80 check
   server	web02	web02.company.com:80 check
-
 ```
+
 > You have to include your full chain in your certificate file in the order:
 > --> private key
 > --> certificate
