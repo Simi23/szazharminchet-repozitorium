@@ -2,7 +2,7 @@
 title: Samba
 description: Samba file share configuration on Debian
 published: true
-date: 2025-03-10T09:32:08.059Z
+date: 2025-03-10T09:34:29.529Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:30:53.698Z
@@ -38,7 +38,7 @@ smbpasswd -e jamie
 
 ## File sharing
 ### Create folders
-
+Create directories with the corresponding permissions.
 ```
 mkdir -p /smb/public
 chmod 2777 /smb/public
@@ -50,3 +50,30 @@ chown jamie:jamie /smb/public
 ```
 
 ### Edit `/etc/samba/smb.conf`
+
+Add these configs to the end of the `/etc/samba/smb.conf` file
+```
+[public]
+	path = /smb/public
+	read only = yes
+	guest ok = yes
+	writeable = no
+	force user = nobody
+	force group = nogroup
+	create mask = 0777
+	directory mask = 0777
+	write list = @smbshare
+
+[private]
+	path = /smb/private
+	valid users = jamie
+	guest ok = no
+	writeable = yes
+	create mask = 0770
+	directory mask = 0770
+```
+
+Restart the service
+```
+systemctl restart smbd
+```
