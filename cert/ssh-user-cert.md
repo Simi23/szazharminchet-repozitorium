@@ -2,7 +2,7 @@
 title: SSH user certificate
 description: Using certificates to log in to servers.
 published: true
-date: 2025-03-10T10:45:25.204Z
+date: 2025-03-10T11:19:40.046Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:37:00.880Z
@@ -10,7 +10,7 @@ dateCreated: 2025-03-10T10:37:00.880Z
 
 # SSH user certificate
 
-## Servet configuration
+## Server configuration
 ### Generate a SSH CA.
 ```
 ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_ca
