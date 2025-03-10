@@ -2,7 +2,7 @@
 title: HAProxy
 description: HAProxy configuratinon with high availibilty and FHRP
 published: true
-date: 2025-03-10T10:03:00.978Z
+date: 2025-03-10T10:03:29.255Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:43:05.489Z
@@ -49,7 +49,7 @@ Restart the service
 systemctl restart haproxy
 ```
 
-## Keepalived
+## Keepalived (FHRP)
 Install the service using apt.
 ```
 apt install keepalived
