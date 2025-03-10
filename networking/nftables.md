@@ -2,7 +2,7 @@
 title: NFTables
 description: NFTables Firewall Common Configurations
 published: true
-date: 2025-03-10T11:20:18.855Z
+date: 2025-03-10T11:22:01.449Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T11:15:55.818Z
@@ -121,47 +121,47 @@ flush ruleset
 
 table inet filter {
 	chain forward {
-  	type filter hook forward priority forward;
-    # Apply default drop policy
-    policy drop;
+		type filter hook forward priority forward;
+		# Apply default drop policy
+		policy drop;
     
-    # Accept return traffic
-    ct state { established, related } accept;
+		# Accept return traffic
+		ct state { established, related } accept;
     
-    # Allow traffic from INT and DMZ to internet
-    ip saddr { 10.1.10.0/24, 10.1.20.0/24 } oif ens18 accept;
-    ip6 saddr { 2001:db8:1001:10::/64, 2001:db8:1001:20::/64 } oif ens18 accept;
+		# Allow traffic from INT and DMZ to internet
+		ip saddr { 10.1.10.0/24, 10.1.20.0/24 } oif ens18 accept;
+		ip6 saddr { 2001:db8:1001:10::/64, 2001:db8:1001:20::/64 } oif ens18 accept;
     
-    # Allow traffic from INT to DMZ
-    ip saddr 10.1.10.0/24 ip daddr 10.1.20.0/24 accept;
-    ip6 saddr 2001:db8:1001:10::/64 ip6 daddr 2001:db8:1001:20::/64 accept;
+		# Allow traffic from INT to DMZ
+		ip saddr 10.1.10.0/24 ip daddr 10.1.20.0/24 accept;
+		ip6 saddr 2001:db8:1001:10::/64 ip6 daddr 2001:db8:1001:20::/64 accept;
     
-    # Allow traffic from VPN clients to DMZ and INT
-    ip saddr 10.1.30.0/24 ip daddr { 10.1.10.0/24, 10.1.20.0/24 } accept;
-    ip6 saddr 2001:db8:1001:30::/64 ip6 daddr { 2001:db8:1001:10::/64, 2001:db8:1001:20::/64 } accept;
+		# Allow traffic from VPN clients to DMZ and INT
+		ip saddr 10.1.30.0/24 ip daddr { 10.1.10.0/24, 10.1.20.0/24 } accept;
+		ip6 saddr 2001:db8:1001:30::/64 ip6 daddr { 2001:db8:1001:10::/64, 2001:db8:1001:20::/64 } accept;
     
-    # Allow mail server to reach LDAP/LDAPS
-    ip saddr 10.1.20.10 ip daddr 10.1.10.10 tcp dport { 389,636 } accept;
-    ip6 saddr 2001:db8:1001:20::10 ip6 daddr 2001:db8:1001:10::10 tcp dport { 389,636 } accept;
-  }
+		# Allow mail server to reach LDAP/LDAPS
+		ip saddr 10.1.20.10 ip daddr 10.1.10.10 tcp dport { 389,636 } accept;
+		ip6 saddr 2001:db8:1001:20::10 ip6 daddr 2001:db8:1001:10::10 tcp dport { 389,636 } accept;
+	}
   
-  chain srcnat {
-  	type nat hook postrouting priority srcnat;
+	chain srcnat {
+		type nat hook postrouting priority srcnat;
     
-    # Configure PAT for INT and DMZ networks
-    ip saddr { 10.1.10.0/24, 10.1.20.0/24 } oif ens18 masquerade;
-  }
+		# Configure PAT for INT and DMZ networks
+		ip saddr { 10.1.10.0/24, 10.1.20.0/24 } oif ens18 masquerade;
+	}
   
-  chain dstnat {
-  	type nat hook prerouting priority dstnat;
+	chain dstnat {
+		type nat hook prerouting priority dstnat;
     
-    # Create port forwarding rules for external HTTP(S) and DNS traffic
-    ip daddr 1.1.1.10 tcp dport { 53,80,443 } dnat to 10.1.20.20;
-    ip daddr 1.1.1.10 udp dport 53 dnat to 10.1.20.20;
+		# Create port forwarding rules for external HTTP(S) and DNS traffic
+		ip daddr 1.1.1.10 tcp dport { 53,80,443 } dnat to 10.1.20.20;
+		ip daddr 1.1.1.10 udp dport 53 dnat to 10.1.20.20;
     
-    # Route INT and VPN networks to transparent HTTP proxy running on this host
-    ip saddr { 10.1.10.0/24, 10.1.30.0/24 } tcp dport 80 redirect to 3128;
-    ip6 saddr { 2001:db8:1001:10::/64, 2001:db8:1001:30::/64 } tcp dport 80 redirect to 3128;
-  }
+		# Route INT and VPN networks to transparent HTTP proxy running on this host
+		ip saddr { 10.1.10.0/24, 10.1.30.0/24 } tcp dport 80 redirect to 3128;
+		ip6 saddr { 2001:db8:1001:10::/64, 2001:db8:1001:30::/64 } tcp dport 80 redirect to 3128;
+	}
 }
 ```
