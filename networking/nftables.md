@@ -2,7 +2,7 @@
 title: NFTables
 description: NFTables Firewall Common Configurations
 published: true
-date: 2025-03-10T11:22:01.449Z
+date: 2025-03-10T11:25:16.849Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T11:15:55.818Z
@@ -32,6 +32,8 @@ To get an understanding of the **packet flow**, and the different **hooks**, stu
 {.is-info}
 
 # Configuration
+
+## Packet forwarding
 
 Most likely you will want to use the firewall with multiple interfaces and with packet forwarding. You will need to enable forwarding in <kbd>/etc/sysctl.conf</kbd> by uncommenting these lines:
 
