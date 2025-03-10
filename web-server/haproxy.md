@@ -2,7 +2,7 @@
 title: HAProxy
 description: HAProxy configuratinon with high availibilty and FHRP
 published: true
-date: 2025-03-10T10:01:32.139Z
+date: 2025-03-10T10:02:12.615Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:43:05.489Z
@@ -19,9 +19,8 @@ apt install haproxy
 ## Configuration
 Edit the configuration in `/etc/haproxy/haproxy.cfg`. Add these lines to the end:
 ```
-.
-.
-.
+...
+
 frontend http-in
 	bind *80,:::80 v6only
   redirect scheme https if !{ ssl_fc }
@@ -138,4 +137,9 @@ vrrp_instance VI_2 {
 		chk_haproxy
 	}
 }
+```
+
+Restart the service
+```
+systemctl restart keepalived
 ```
