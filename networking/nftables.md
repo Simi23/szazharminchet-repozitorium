@@ -2,7 +2,7 @@
 title: NFTables
 description: NFTables Firewall Common Configurations
 published: true
-date: 2025-03-10T11:15:55.818Z
+date: 2025-03-10T11:20:18.855Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T11:15:55.818Z
@@ -53,7 +53,7 @@ A regular chain has a definition consisting of a type, a hook, and a priority. Y
 ```c
 chain my_chain {
 	type filter hook forward priority filter;
-  policy drop;
+	policy drop;
 }
 ```
 
