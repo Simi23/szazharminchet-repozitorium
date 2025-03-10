@@ -2,7 +2,7 @@
 title: SSH user certificate
 description: Using certificates to log in to servers.
 published: true
-date: 2025-03-10T10:43:33.824Z
+date: 2025-03-10T10:45:25.204Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:37:00.880Z
@@ -39,17 +39,27 @@ systemctl restart sshd
 
 ### Generate an SSH key
 ```
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/ha_prx01_key
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/client_key
 ```
 This creates:
-- `~/.ssh/ha_prx01_key` (private key)
-- `~/.ssh/ha_prx01_key.pub` (public key)
+- `~/.ssh/client_key` (private key)
+- `~/.ssh/client_key.pub` (public key)
 
 ###  Sign the Public Key with the SSH CA
 ```
-ssh-keygen -s /etc/ssh/ssh_ca -I ha-prx01 -n root -V +52w ~/.ssh/ha_prx01_key.pub
+ssh-keygen -s /etc/ssh/ssh_ca -I client -n root -V +52w ~/.ssh/client_key.pub
 ```
-This generates a certificate file: `~/.ssh/ha_prx01_key-cert.pub`.
+This generates a certificate file: `~/.ssh/client_key-cert.pub`.
 
 ### Configure SSH on the client to Use the Certificate
-EditÉssh/config`
+Edit the `~/.ssh/config` file
+```
+Host ssh-server
+    HostName ssh-server
+    User root
+    IdentityFile ~/.ssh/client_key
+    CertificateFile ~/.ssh/client_key-cert.pub
+```
+
+
+And try login with `ssh root@ssh-server`
