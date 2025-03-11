@@ -2,7 +2,7 @@
 title:  Home
 description: 
 published: true
-date: 2025-03-11T14:39:40.929Z
+date: 2025-03-11T14:39:50.872Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-11T09:45:23.641Z
@@ -47,4 +47,4 @@ Guides related to creating and managing certification authorities, creating cert
 
 ---
 
-[**Virtual Private Networking**](/web-server)
+[**Web server**](/web-server)
