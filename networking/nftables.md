@@ -2,7 +2,7 @@
 title: NFTables
 description: NFTables Firewall Common Configurations
 published: true
-date: 2025-03-10T11:25:16.849Z
+date: 2025-03-11T14:12:02.810Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T11:15:55.818Z
@@ -111,6 +111,36 @@ This is useful to accept return traffic.
 
 > These two actions are **non-final actions**, they always have to be added **before the final action**, e.g. `accept` or `drop`.
 {.is-info}
+
+## Named sets
+
+You can define named sets which can accelerate writing your configurations. You write them at top level then use them in the rules.
+
+```bash
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+define INT4 = { 10.1.10.0/24 }
+
+define INT_DMZ4 = { $INT4, 10.1.20.0/24 }
+define INT_DMZ6 = { 2001:db8:1001:10::/64, 2001:db8:1001:20::/64 }
+
+table inet filter {
+	chain forward {
+		type filter hook forward priority forward;
+		# Apply default drop policy
+		policy drop;
+    
+		# Accept return traffic
+		ct state { established, related } accept;
+    
+		# Allow traffic from INT and DMZ to internet
+		ip saddr $INT_DMZ4 oif ens18 accept;
+		ip6 saddr $INT_DMZ6 oif ens18 accept;
+	}
+}
+```
 
 # Example configuration
 
