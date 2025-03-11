@@ -2,7 +2,7 @@
 title:  Home
 description: 
 published: true
-date: 2025-03-11T14:39:50.872Z
+date: 2025-03-11T14:41:00.645Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-11T09:45:23.641Z
@@ -26,11 +26,15 @@ Guides related to creating and managing certification authorities, creating cert
 
 ---
 
+[**DNS**](/DNS)
+
+---
+
 [**Directory Services**](/directory-services)
 
 ---
 
-[**DNS**](/DNS)
+[**File sharing**](/fileshare)
 
 ---
 
