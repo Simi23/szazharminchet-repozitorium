@@ -2,7 +2,7 @@
 title: HAProxy
 description: HAProxy configuratinon with high availibilty and FHRP
 published: true
-date: 2025-03-10T11:44:34.506Z
+date: 2025-03-11T08:24:00.220Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:43:05.489Z
@@ -58,8 +58,9 @@ apt install keepalived
 ### Primary server
 Edit `/etc/keepalived/keepalived.conf`:
 ```
-vrrp script chk_haproxy {
-	script "nc -zv localhost 80" interval 2
+vrrp_script chk_haproxy {
+	script "nc -zv localhost 80"
+  interval 2
 }
 
 vrrp_instance VI_1 { 
@@ -68,7 +69,8 @@ vrrp_instance VI_1 {
 	virtual_router_id 51 
 	priority 100	
 	advert_int 1	
-	unicast_src_ip 10.1.20.21 unicast_peer {
+	unicast_src_ip 10.1.20.21
+  unicast_peer {
 		10.1.20.22
 	}
 	authentication {
@@ -89,7 +91,8 @@ vrrp_instance VI_2 {
 	virtual_router_id 52 
 	priority 100
 	advert_int 1
-	unicast_src_ip 2001:db8:1001:20::21 unicast_peer {
+	unicast_src_ip 2001:db8:1001:20::21
+  unicast_peer {
 		2001:db8:1001:20::22
 	}
 	authentication {
@@ -108,8 +111,9 @@ vrrp_instance VI_2 {
 ### Backup server
 Edit `/etc/keepalived/keepalived.conf`:
 ```
-vrrp script chk_haproxy {
-	script "nc -zv localhost 80" interval 2
+vrrp_script chk_haproxy {
+	script "nc -zv localhost 80"
+  interval 2
 }
 
 vrrp_instance VI_1 { 
@@ -118,7 +122,8 @@ vrrp_instance VI_1 {
 	virtual_router_id 51 
 	priority 90
 	advert_int 1
-	unicast_src_ip 10.1.20.22 unicast_peer {
+	unicast_src_ip 10.1.20.22
+  unicast_peer {
 		10.1.20.21
 	}
 	authentication {
@@ -139,7 +144,8 @@ vrrp_instance VI_2 {
 	virtual_router_id 52 
 	priority 90
 	advert_int 1
-	unicast_src_ip 2001:db8:1001:20::22 unicast_peer {
+	unicast_src_ip 2001:db8:1001:20::22
+  unicast_peer {
 		2001:db8:1001:20::21
 	}
 	authentication {
