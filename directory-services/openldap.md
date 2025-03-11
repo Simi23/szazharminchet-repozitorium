@@ -2,7 +2,7 @@
 title: OpenLDAP
 description: Directory services with OpenLDAP
 published: true
-date: 2025-02-18T16:04:23.553Z
+date: 2025-03-11T14:06:07.850Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-18T15:05:31.500Z
@@ -169,6 +169,27 @@ userPassword: {CRYPT}x
 loginShell: /bin/bash
 homeDirectory: /home/magnus
 ```
+
+## Setting passwords
+
+After creating users, you can set their password by running:
+
+```bash
+ldappasswd -x -W -D <ADMIN_DN> -S <USER_DN>
+```
+
+This will change the password of `USER_DN`.
+
+---
+
+Alternatively, you can **pregenerate** the password hash.
+
+```bash
+slappasswd -s Passw0rd
+# {SSHA}...........................
+```
+
+You can insert this into the `userPassword` property when creating the user to set the password upon creation.
 
 # TLS
 
