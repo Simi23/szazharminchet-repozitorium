@@ -2,7 +2,7 @@
 title: Playbook: Wireguard
 description: Wireguard configuration for n client.
 published: true
-date: 2025-03-12T15:14:59.355Z
+date: 2025-03-12T15:15:31.120Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:14:59.354Z
@@ -12,25 +12,124 @@ dateCreated: 2025-03-12T15:14:59.354Z
 
 Main playbook:
 ```yaml
-- name: Configuring file backup
-  hosts: backup
+---
+- name: Create wireguard config files
+  hosts: fw
+  gather_facts: false
   tasks:
-    - name: Creating script
-      ansible.builtin.template:
-        src: configs/backup.sh.j2
-        dest: /opt/backup.sh
-        mode: "755"
+    # | Install Wireguard |
+    - name: Install Wireguard
+      ansible.builtin.apt:
+        name:
+          - wireguard
+          - wireguard-tools
+        state: present
+      notify: Install
+
     
-    - name: Creating cron job
-      ansible.builtin.cron:
-        name: backup_job
-        minute: "0"
-        job: "/bin/bash /opt/backup.sh"
+  handlers:
+    # | Generate private key |
+    - name: Generate private key
+      ansible.builtin.shell: wg genkey > /etc/wireguard/server.key
+      listen: Install
+
+    # | Generate public key |
+    - name: Generate public key
+      ansible.builtin.shell: wg pubkey < /etc/wireguard/server.key > /etc/wireguard/server.pub
+      listen: Install
+
+    # | Generate psk |
+    - name: Generate psk
+      ansible.builtin.shell: wg genpsk > /etc/wireguard/psk
+      listen: Install
+
+    # | Get private key |
+    - name: Get private key
+      ansible.builtin.command: cat /etc/wireguard/server.key
+      register: wg_srv_priv
+      listen: Install
+
+    # | Get public key |
+    - name: Get public key
+      ansible.builtin.command: cat /etc/wireguard/server.pub
+      register: wg_srv_pub
+      listen: Install
+    
+    # | Get psk |
+    - name: Get psk
+      ansible.builtin.command: cat /etc/wireguard/psk
+      register: wg_psk
+      listen: Install 
+
+    # | Copy main config file |
+    - name: Copy main config file
+      ansible.builtin.template:
+        src: configs/wg-srv.j2
+        dest: /etc/wireguard/wg0.conf
+      notify: Install
 
 
+    # | Add client configurations |
+    - name: Add client configurations
+      include_tasks: wg-clt.yml
+      loop: "{{ wg_clt_add }}"
+      loop_control:
+        loop_var: item
+      listen: Install
+
+
+    # | Start the service |
+    - name: Start the service
+      ansible.builtin.command: wg-quick up wg0
+      listen: Install
+
+    # | Enable the service |
+    - name: Enable the service
+      ansible.builtin.service:
+        name: wg-quick@wg0
+        enabled: true
+      listen: Install
+      
 ```
 
 wg-clt.yml:
+```
+# | Create directory for client config|
+- name: Create peers configuration
+  ansible.builtin.file:
+    path: /etc/wireguard/{{ item.name }}
+    state: directory
+    mode: '0777'
+
+# | Create private key |
+- name: Create private key
+  ansible.builtin.shell: wg genkey > /etc/wireguard/{{ item.name }}/client.key
+
+# | Create public key |
+- name: Create public key
+  ansible.builtin.shell: wg pubkey < /etc/wireguard/{{ item.name }}/client.key > /etc/wireguard/{{ item.name }}/client.pub
+
+# | Get private key |
+- name: Get private key
+  ansible.builtin.command: cat /etc/wireguard/{{ item.name }}/client.key
+  register: wg_clt_priv
+
+# | Get public key |
+- name: Get public key
+  ansible.builtin.command: cat /etc/wireguard/{{ item.name }}/client.pub
+  register: wg_clt_pub
+
+# | Add peer information to servers config |
+- name: Add peer information to servers config
+  ansible.builtin.shell: printf "\n[Peer]\nAllowedIPs={{ item.v4 }},{{ item.v6 }}\nPresharedKey={{ wg_psk.stdout }}\nPublicKey={{ wg_clt_pub.stdout }}\n" >> /etc/wireguard/wg0.conf
+
+# | Create peers configuration |
+- name: Create peers configuration
+  ansible.builtin.template:
+    src: configs/wg-clt.j2
+    dest: /etc/wireguard/{{ item.name }}/wg0.conf
+
+```
 
 # Inventory
 
