@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-12T14:59:11.486Z
+date: 2025-03-12T15:08:57.118Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -24,6 +24,10 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Samba](/ansible/playbook/samba)
 - [SSH Certificates](/ansible/playbook/ssh-cert)
 - [Backup shell script](/ansible/playbook/backup-script)
+- [Wireguard](/ansible/playbook/wireguard)
+- [Squid](/ansible/playbook/squid)
+- [Nftables](/ansible/playbook/nftables)
+- [Haproxy, keepalived](/ansible/playbook/haproxy-keepalived)
 
 ## Windows
 - [Active directory setup](/ansible/playbook/ad)
