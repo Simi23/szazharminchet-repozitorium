@@ -2,7 +2,7 @@
 title: Squid Transparent Proxy
 description: Squid Transparent Proxy configuration
 published: true
-date: 2025-03-12T12:13:50.098Z
+date: 2025-03-12T18:17:17.667Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:57:25.661Z
@@ -165,7 +165,6 @@ chown -R proxy:proxy /var/lib/ssl_db
 http_port 3128
 http_port 3129 intercept
 
-# Write this as one line
 https_port 3130 intercept ssl-bump \
   generate-host-certificates=on \
   dynamic_cert_mem_cache_size=4MB \
