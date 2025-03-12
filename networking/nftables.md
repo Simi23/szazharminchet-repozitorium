@@ -2,7 +2,7 @@
 title: NFTables
 description: NFTables Firewall Common Configurations
 published: true
-date: 2025-03-11T14:12:02.810Z
+date: 2025-03-12T14:44:55.164Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T11:15:55.818Z
@@ -153,7 +153,7 @@ flush ruleset
 
 table inet filter {
 	chain forward {
-		type filter hook forward priority forward;
+		type filter hook forward priority filter;
 		# Apply default drop policy
 		policy drop;
     
