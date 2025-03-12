@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-12T15:08:57.118Z
+date: 2025-03-12T15:20:50.017Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -29,7 +29,7 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Nftables](/ansible/playbook/nftables)
 - [Haproxy, keepalived](/ansible/playbook/haproxy-keepalived)
 
-## Windows
+## Windows 
 - [Active directory setup](/ansible/playbook/ad)
 - [Windows DHCP setup](/ansible/playbook/windows-dhcp)
 - [Windows DNS setup](/ansible/playbook/windows-dns)
