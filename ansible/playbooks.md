@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-04T10:31:11.820Z
+date: 2025-03-12T14:59:11.486Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -21,6 +21,9 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Site-to-site VPN with Certificate](/ansible/playbook/s2s-cert)
 - [Site-to-site VPN with PSK Legacy](/ansible/playbook/s2s-psk-legacy)
 - [Site-to-site VPN with Certificate Legacy](/ansible/playbook/s2s-cert-legacy)
+- [Samba](/ansible/playbook/samba)
+- [SSH Certificates](/ansible/playbook/ssh-cert)
+- [Backup shell script](/ansible/playbook/backup-script)
 
 ## Windows
 - [Active directory setup](/ansible/playbook/ad)
