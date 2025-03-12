@@ -2,7 +2,7 @@
 title: Squid Transparent Proxy
 description: Squid Transparent Proxy configuration
 published: true
-date: 2025-03-12T12:04:58.407Z
+date: 2025-03-12T12:13:50.098Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:57:25.661Z
@@ -196,3 +196,4 @@ service squid restart
 - The firewall needs to redirect **HTTP** (port 80) traffic **to port 3129**, and redirect **HTTPS** (port 443) traffic **to port 3130**.
 - The **client browser** will need to **trust the CA certificate** used by **squid**, in this case <kbd>/etc/squid/cert/proxy.crt</kbd>
 - The option `tls-default-ca=on` means that squid will **trust the system CA certificates**. This is **important if you use custom certificates** and store them in <kbd>/usr/local/share/ca-certificates</kbd> because this option is **disabled by default**. Sites that squid doesn't trust will not be signed correctly and **display an error in the browser**.
+- When using an **intermediate CA** for the proxy, the file referenced with `tsl-cert=` can contain the **whole trust chain**, which will be sent to the client, so it can verify trust using only the root CA certificate.
