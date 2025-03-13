@@ -2,15 +2,13 @@
 title: Playbook: Squid
 description: Transparent proxy configuration with HTTP
 published: true
-date: 2025-03-12T15:17:14.504Z
+date: 2025-03-13T07:58:38.492Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:17:14.504Z
 ---
 
 # Playbook
-
-Main playbook:
 ```yaml
 ---
 - name: Install and configure squid
