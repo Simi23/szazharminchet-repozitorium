@@ -2,7 +2,7 @@
 title: Playbook: Reverse proxy
 description: HaProxy, keepalived high availibilty configuartion with ansible
 published: true
-date: 2025-03-12T15:20:30.469Z
+date: 2025-03-13T07:58:28.915Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:20:30.469Z
@@ -10,7 +10,6 @@ dateCreated: 2025-03-12T15:20:30.469Z
 
 # Playbook
 
-Main playbook:
 ```yaml
 ---
 - name: Install and configure Haproxy
