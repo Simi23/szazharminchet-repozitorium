@@ -2,7 +2,7 @@
 title: Playbook: Wireguard
 description: Wireguard configuration for n client.
 published: true
-date: 2025-03-13T08:23:43.862Z
+date: 2025-03-13T08:26:16.898Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:14:59.354Z
@@ -93,7 +93,7 @@ Main playbook:
 ```
 
 wg-clt.yml:
-```
+```yml
 # | Create directory for client config|
 - name: Create peers configuration
   ansible.builtin.file:
