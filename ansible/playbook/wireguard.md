@@ -2,7 +2,7 @@
 title: Playbook: Wireguard
 description: Wireguard configuration for n client.
 published: true
-date: 2025-03-12T15:15:31.120Z
+date: 2025-03-13T08:23:43.862Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:14:59.354Z
@@ -66,7 +66,7 @@ Main playbook:
       ansible.builtin.template:
         src: configs/wg-srv.j2
         dest: /etc/wireguard/wg0.conf
-      notify: Install
+      listen: Install
 
 
     # | Add client configurations |
