@@ -2,7 +2,7 @@
 title: Playbook: Nftables
 description: Nftables rule setup with ansible
 published: true
-date: 2025-03-12T15:18:43.343Z
+date: 2025-03-13T07:58:17.448Z
 tags: linux, ansible
 editor: markdown
 dateCreated: 2025-03-12T15:18:43.343Z
@@ -10,7 +10,7 @@ dateCreated: 2025-03-12T15:18:43.343Z
 
 # Playbook
 
-Main playbook:
+
 ```yaml
 ---
 - name: Install and configure nftables
