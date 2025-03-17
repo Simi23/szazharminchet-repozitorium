@@ -2,7 +2,7 @@
 title: VoIP
 description: VoIP guides
 published: true
-date: 2025-03-17T08:17:54.180Z
+date: 2025-03-17T08:31:43.950Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-17T08:17:54.180Z
@@ -10,4 +10,6 @@ dateCreated: 2025-03-17T08:17:54.180Z
 
 # VoIP Guides
 
-...
+## Asterisk
+- [Defaults](/voip/defaults)
+- [TTS + Playback](/voip/tts-playback)
