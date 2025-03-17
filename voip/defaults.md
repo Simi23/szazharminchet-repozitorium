@@ -2,7 +2,7 @@
 title: Asterisk default settings
 description: Here are the install and the settings for asterisk.
 published: true
-date: 2025-03-17T09:19:06.290Z
+date: 2025-03-17T09:22:50.886Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-17T09:15:46.348Z
@@ -115,12 +115,12 @@ exten = 100,1,Answer()
 - application: The apllication that will run in each priorty
 
 
-After editing this file you can reload the dialplan by:
+After editing this file you can reload the dialplan by: 
 ```
 asterisk -rx "dialplan reload"
 ```
 
-Patterns to use in extension files:
+Patterns to use in extension files: ([Read more here.](https://docs.asterisk.org/Configuration/Dialplan/Pattern-Matching/))
 | character | meaning |
 | :-: | :-: |
 | x/X | a digit from 0 to 9 |
@@ -131,6 +131,14 @@ Patterns to use in extension files:
 | ! | zero or more character |
 
 ## Call files
+
+You can submit calls using call files.  First you have to enable `pbx_spool.so` if you haven't already.
+```
+asrerisk -rx "load module pbx_spool.so"
+```
+This is the syntax of a call file:
+
+After creating your call file you have to MOVE the file into `var/spool/asterisk/outgoing` directory with neccessary permissions. ([Read more here.](https://docs.asterisk.org/Configuration/Interfaces/Asterisk-Call-Files/))
 
 ## Asterisk CLI
 You can enter the Asterisk CLI by using `asterisk -rvvvv` command. You can use the cmdlets, and get the logs when something is happening through asterisk. It is useful because it highlit words. (Mostly it is the same as under `/var/log/asterisk/`, but the highlithting helps read the errors.)
