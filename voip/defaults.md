@@ -2,7 +2,7 @@
 title: Asterisk default settings
 description: Here are the install and the settings for asterisk.
 published: true
-date: 2025-03-17T09:22:50.886Z
+date: 2025-03-17T09:41:17.413Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-17T09:15:46.348Z
@@ -27,6 +27,7 @@ sudo tar xvf asterisk-22-current.tar.gz
 Compile and install Asterisk. After that create sample configuartion files (the command will create all 108 config files under `/etc/asterisk/` directory):
 ```
 cd asterisk-22*
+contrib/scripts/install_prereq
 ./configure --with-pjsip-bundled
 make && make install
 make samples && make config
@@ -136,9 +137,39 @@ You can submit calls using call files.  First you have to enable `pbx_spool.so` 
 ```
 asrerisk -rx "load module pbx_spool.so"
 ```
+
 This is the syntax of a call file:
+| Key - value | What it does |
+| :-: | :- |
+| Channel: | The channel to call in format: **technology/resource** |
+| Callerid: | The caller id to use |
+| WaitTime: |  How many seconds to wait for an answer. Defaults to 45 seconds. |
+| MaxRetries: | Number of retries before failing, not including the initial attempt. Default = 0. |
+| RetryTime: | How many seconds to wait before retry. The default is 300. |
+| Archive: | yes (keep the call file) / no (delete the call file) |
+
+You have two options. 
+1. Execute a single application
+2. Use a dialplan
+
+#### Execute a single application
+| Key - value | What it does |
+| :-: | :- |
+| Application: | The application to execute |
+| Data: | The application arguments |
+
+#### Use a dialplan
+| Key - value | What it does |
+| :-: | :- |
+| Context: | The context in the dialplan |
+| Extension: | The extension in the specified context |
+| Context: | The priority of the specified extension (numeric / label) |
+| Setvar: | You can assign variables in the way `var=values` |
+
 
 After creating your call file you have to MOVE the file into `var/spool/asterisk/outgoing` directory with neccessary permissions. ([Read more here.](https://docs.asterisk.org/Configuration/Interfaces/Asterisk-Call-Files/))
 
 ## Asterisk CLI
 You can enter the Asterisk CLI by using `asterisk -rvvvv` command. You can use the cmdlets, and get the logs when something is happening through asterisk. It is useful because it highlit words. (Mostly it is the same as under `/var/log/asterisk/`, but the highlithting helps read the errors.)
+
+
