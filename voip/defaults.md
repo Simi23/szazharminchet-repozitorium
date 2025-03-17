@@ -2,7 +2,7 @@
 title: Asterisk default settings
 description: Here are the install and the settings for asterisk.
 published: true
-date: 2025-03-17T09:15:46.348Z
+date: 2025-03-17T09:19:06.290Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-17T09:15:46.348Z
@@ -121,14 +121,14 @@ asterisk -rx "dialplan reload"
 ```
 
 Patterns to use in extension files:
-|           |                    |
-| :-------: | :----------------: |
-|    x/X    | a digit from 0 to 9|
-|    z/Z    | a digit from 1 to 9|
-|    n/N    | a digit from 2 to 9|
-| [123 - 4] | Numeric range      |
-|     .     |                    |
-|     !     |                    |
+| character | meaning |
+| :-: | :-: |
+| x/X | a digit from 0 to 9 |
+| z/Z | a digit from 1 to 9 |
+| n/N | a digit from 2 to 9 |
+| [123 - 4] | Numeric range |
+| . | one or more chatacter  |
+| ! | zero or more character |
 
 ## Call files
 
