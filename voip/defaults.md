@@ -2,7 +2,7 @@
 title: Asterisk default settings
 description: Here are the install and the settings for asterisk.
 published: true
-date: 2025-03-17T09:41:17.413Z
+date: 2025-03-17T09:47:31.370Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-17T09:15:46.348Z
@@ -135,7 +135,7 @@ Patterns to use in extension files: ([Read more here.](https://docs.asterisk.org
 
 You can submit calls using call files.  First you have to enable `pbx_spool.so` if you haven't already.
 ```
-asrerisk -rx "load module pbx_spool.so"
+echo "load = pbx_spool.so" >> /etc/asterisk/modules.conf
 ```
 
 This is the syntax of a call file:
