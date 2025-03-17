@@ -2,7 +2,7 @@
 title: Squid Transparent Proxy
 description: Squid Transparent Proxy configuration
 published: true
-date: 2025-03-12T18:17:17.667Z
+date: 2025-03-17T09:10:38.515Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:57:25.661Z
@@ -66,6 +66,38 @@ For example, this would display the file CUSTOM_ERROR when the request was denie
 
 ```ini
 deny_info CUSTOM_ERROR blockdomains
+```
+
+## ACLs in external files
+
+You can store access control entries in a separate text file. The text file should contain all entries in a separate line, like this:
+
+<kbd>video-mime.txt</kbd>
+
+```
+^video/x-ms-asf$
+^application/vnd.ms.wms-hdr.asfv1$
+^application/x-mms-framed$
+^application/vnd.yt-ump$
+^application/vnd.apple.mpegurl$
+```
+
+This example contains a few MIME types used for streaming video content. To reference this file, create an ACL directive and put the filename in quotes.
+
+```
+acl streamreq req_mime_type -i "/etc/squid/video-mime.txt"
+```
+
+## Block video streaming
+
+To block streamed videos, you need to filter for content type. This example will use the external ACL file created in the previous section. It is a good idea to block in both directions.
+
+```
+acl streamreq req_mime_type -i "/etc/squid/video-mime.txt"
+acl streamrep rep_mime_type -i "/etc/squid/video-mime.txt"
+
+http_access				deny streamreq
+http_reply_access	deny streamrep
 ```
 
 ## Miscellaneous config
@@ -196,3 +228,63 @@ service squid restart
 - The **client browser** will need to **trust the CA certificate** used by **squid**, in this case <kbd>/etc/squid/cert/proxy.crt</kbd>
 - The option `tls-default-ca=on` means that squid will **trust the system CA certificates**. This is **important if you use custom certificates** and store them in <kbd>/usr/local/share/ca-certificates</kbd> because this option is **disabled by default**. Sites that squid doesn't trust will not be signed correctly and **display an error in the browser**.
 - When using an **intermediate CA** for the proxy, the file referenced with `tsl-cert=` can contain the **whole trust chain**, which will be sent to the client, so it can verify trust using only the root CA certificate.
+
+## Inspection-only mode
+
+To disable decryption and only filter based on TCP/TLS metadata, like SNI, replace `ssl_bump bump all` with `ssl_bump splice all`:
+
+```c
+...
+
+acl step1 at_step SslBump1
+
+ssl_bump peek step1
+ssl_bump splice all
+```
+
+> For additional information on what pieces of information are available at which stage, read the [official documentation](https://wiki.squid-cache.org/Features/SslPeekAndSplice).
+{.is-info}
+
+# Non-transparent configuration
+
+For a non-transparent behaviour, set the following port mode:
+
+```bash
+http_port 3131 ssl-bump \
+  generate-host-certificates=on \
+  dynamic_cert_mem_cache_size=4MB \
+  tls-cert=/etc/squid/cert/proxy.crt \
+  tls-key=/etc/squid/cert/proxy.key \
+  tls-dh=/etc/squid/cert/dhparam.pem \
+  tls-default-ca=on \
+  options=NO_SSLv3,NO_TLSv1,NO_TLSv1_1
+```
+
+> Note the use of `http_port` instead of `https_port`. This port will handle all traffic for your clients. (HTTP ans HTTPS)
+{.is-info}
+
+## APT proxy configuration
+
+To use a proxy server with APT package manager, create and edit the file <kbd>/etc/apt/apt.conf.d/80proxy</kbd>.
+
+```bash
+Acquire::http::proxy "http://10.1.30.1:3131";
+Acquire::https::proxy "http://10.1.30.1:3131";
+```
+
+## WGET proxy configuration
+
+To force a proxy configuration for all users, edit /etc/wgetrc and add the following lines:
+
+```c
+http_proxy=10.1.30.1:3131
+https_proxy=10.1.30.1:3131
+```
+
+Alternatively, you can also enter these lines into <kbd>~/.wgetrc</kbd>, which will only affect the given user.
+
+You can also use inline options with the `-e` parameter:
+
+```c
+wget .. -e http_proxy=10.1.30.1:3131 ..
+```
