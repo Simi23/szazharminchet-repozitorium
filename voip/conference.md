@@ -2,7 +2,7 @@
 title: Conference calls
 description: Conference calls in Asterisk
 published: true
-date: 2025-03-18T14:37:23.324Z
+date: 2025-03-18T14:38:52.043Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-18T14:37:23.324Z
@@ -23,7 +23,7 @@ music_on_hold_when_empty = yes
 
 [my_menu]
 type = menu
-* = playback_and_continue(press&digits/1&confbridge-dec-list-vol-out&press&digits/2&confbridge-inc-list-vol-out&press&digits/3&>
+* = playback_and_continue(press&digits/1&confbridge-dec-list-vol-out&press&digits/2&confbridge-inc-list-vol-out&press&digits/3&confbridge-mute-out&confbridge-menu-exit-in&press&digits/0)
 *1 = decrease_listening_volume
 1 = decrease_listening_volume
 *2 = increase_listening_volume
