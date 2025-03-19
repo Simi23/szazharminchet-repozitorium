@@ -2,7 +2,7 @@
 title: IVR Menu
 description: Interactive Voice Response menu configuration in Asterisk
 published: true
-date: 2025-03-19T08:28:08.916Z
+date: 2025-03-19T08:28:30.957Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-19T08:28:08.916Z
@@ -10,7 +10,7 @@ dateCreated: 2025-03-19T08:28:08.916Z
 
 # Extension configuration
 
-Creating an IVR menu is straight-forward, as you only need to configure your <kbd>extensions.conf</kbd> file.
+Creating an **IVR** (Internal Voice Response) menu is straight-forward, as you only need to configure your <kbd>extensions.conf</kbd> file.
 
 For readability, the menu will get its own context, here called **menu**.
 
