@@ -2,7 +2,7 @@
 title: Voicemail with Speech-to-text
 description: Asterisk voicemail with python-based speech-to-text email notification
 published: true
-date: 2025-03-18T15:06:27.873Z
+date: 2025-03-19T09:07:27.535Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-18T15:06:27.873Z
@@ -44,6 +44,8 @@ same = n,HangUp()
 ```
 
 # The Python script
+
+## Vosk
 
 Create the directory, allow access to everyone, then initiate the Python virtual environment. The script will require an external module called **vosk**.
 
@@ -151,4 +153,102 @@ os.system(sendmail_command)
 
 # Delete the text file which is no longer needed
 os.system(f"rm {textfile}")
+```
+
+## Whisper
+
+Create the directory, allow access to everyone, then initiate the Python virtual environment. The script will require an external module called **whisper**.
+
+```bash
+mkdir /voicemails && cd /voicemails
+chmod 777 .
+
+python3 -m venv voicemail
+source voicemail/bin/activate
+
+pip3 install whisper openai-whisper
+```
+
+Now, create the script file called <kbd>process.py</kbd>
+
+```python
+#!/voicemails/voicemail/bin/python3
+
+import sys
+import os
+import base64
+import email
+import whisper
+import tempfile
+from email.message import EmailMessage
+from subprocess import Popen, PIPE
+
+model = whisper.load_model("tiny") # There are more models tiny is the smallest.
+
+def extract_audio_and_body(raw_email):
+    """Extract text body and base64 encoded audio from email"""
+    msg = email.message_from_string(raw_email)
+    body = []
+    base64_audio = None
+    audio_filename = "voicemail.wav"
+    print("At extract")
+    for part in msg.walk():
+        content_type = part.get_content_type()
+        if content_type == "text/plain":
+            if payload := part.get_payload(decode=True):
+                body.append(payload.decode(errors="ignore"))
+                print("Added body")
+        elif content_type in ["audio/wav", "audio/x-wav"] and not base64_audio:
+            base64_audio = part.get_payload()
+            if part.get_filename():
+                audio_filename = part.get_filename()
+            print("Added audio")
+
+    return base64_audio, "\n".join(body), audio_filename
+
+def transcribe_audio(base64_data):
+    """Transcribe base64 encoded WAV data using Whisper"""
+    temp_wav = None
+   
+    decoded_audio = base64.b64decode(base64_data)
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+        f.write(decoded_audio)
+        temp_wav = f.name
+   
+    result = model.transcribe(temp_wav, fp16=False)
+    print(result["text"].strip())
+    return result["text"].strip()
+
+def send_email(original_msg, new_body, audio_data, audio_filename):
+    """Send updated email using sendmail with attachment"""
+    msg = EmailMessage()
+    msg["From"] = original_msg["From"]
+    msg["To"] = original_msg["To"]
+    msg["Subject"] = f"{original_msg.get('Subject', 'Voicemail')}"
+    msg.set_content(new_body)
+    
+    if audio_data:
+        audio_bytes = base64.b64decode(audio_data)
+        msg.add_attachment(audio_bytes, maintype="audio", subtype="wav", filename=audio_filename)
+    
+    with Popen(["/usr/sbin/sendmail", "-t"], stdin=PIPE) as proc:
+        proc.communicate(msg.as_bytes())
+
+def main():
+    raw_email = sys.stdin.read() 
+
+    base64_audio, body, audio_filename = extract_audio_and_body(raw_email)
+
+    try:
+        transcription = transcribe_audio(base64_audio)
+        updated_body = f"{body}\n\nVOICEMAIL TRANSCRIPTION:\n{transcription}"
+        original_msg = email.message_from_string(raw_email)
+        send_email(original_msg, updated_body, base64_audio, audio_filename)
+
+    except Exception as e:
+        print(f"Error processing email: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
 ```
