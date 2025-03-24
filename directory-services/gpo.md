@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:08:07.656Z
+date: 2025-03-24T11:09:45.573Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -131,5 +131,8 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Automatic mapping
 
 #### Default map
+`Preferences > Windows Settings > Drive Maps`
 
+> Add a new Drive with the letter you want from the network location you want. Check reconnect, and set up a name for the network drive.
+{.is-info}
 
