@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:23:43.903Z
+date: 2025-03-24T12:10:57.307Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -157,6 +157,19 @@ Share permissions:
 > --> **Don't run specified Windows applications**: 
 > --> Add *powershell.exe* and *cmd.exe*.
 > --> **Prevent access to the command prompt** (enabled)
+{.is-info}
+
+### Disable portable drives
+`Preferences > Control Panel Settings > Devices`
+
+> The device that you want to disable have to connect to your domain controller
+{.is-warning}
+
+
+> Add a new device with the following configuration:
+> --> **Action:** Do not use this device (disable)
+> --> **Device class:** Select CD/DVD Drive or Floppy or what you want. One time you can choose just one!
+> --> Press apply and add a new one!
 {.is-info}
 
 ### Automatic mapping
