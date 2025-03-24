@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T12:10:57.307Z
+date: 2025-03-24T12:15:52.814Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -170,6 +170,17 @@ Share permissions:
 > --> **Action:** Do not use this device (disable)
 > --> **Device class:** Select CD/DVD Drive or Floppy or what you want. One time you can choose just one!
 > --> Press apply and add a new one!
+{.is-info}
+
+### Create shortcut for usres
+`Preferences > Windows Settings > Shortcuts`
+
+> Add a new shortcut with the following configuration:
+> --> **Name:** inkname
+> --> **Target type:** File System Object
+> --> **Location:** Specify full path
+> --> **Target Path:** C:/path/to/your/exe
+> You can set some extra things with the .ink.
 {.is-info}
 
 ### Automatic mapping
