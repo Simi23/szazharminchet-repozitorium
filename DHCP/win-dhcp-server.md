@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:12:48.825Z
+date: 2025-03-24T09:20:23.588Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -21,3 +21,11 @@ Example configuration:
 - Duration: **13 days, 13 hours, 13 minute**
 - Time server (42): **10.30.0.1**
 - TFTP server (150): **10.30.0.1**
+
+# Configure with PowerShell
+## Install DHCP
+```
+Install-WindowsFeature `
+	-name DHCP `
+  -IncludeManagementTools
+```
