@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:43:54.001Z
+date: 2025-03-24T09:44:19.700Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -15,7 +15,7 @@ Install the DHCP service.
 ```
 Install-WindowsFeature `
 	-name DHCP `
-  -IncludeManagementTools
+	-IncludeManagementTools
 ```
 
 Authorize the DHCP server if it's not standalone.
