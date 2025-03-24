@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:28:05.961Z
+date: 2025-03-24T10:34:21.022Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -32,6 +32,11 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > **Accounts:** Administrator account status (disabled)
 {.is-info}
 
+### Disable CTRL+ALT+DEL
+`Policies > Security Settings > Local Policies > User Rights Assignment`
+
+> **Interactive logon:** Do not require CTRL+ALT+DEL (enabled)
+{.is-info}
 
 ### Login banner
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
@@ -39,14 +44,17 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > **Interactive logon:** Message text for users attempting to log on
 {.is-info}
 
+
 ### Prevent LM hash from being stored locally in the SAM Database and Active Directory
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
 
 > **Network security:** Do not store LAN Manager hash value oin next password change
 {.is-info}
 
+
+
 ### Enable users log in to DC
-`Policies > Security Settings > Local Policies > User Rights Assignment`
+`Policies > Windows Settings > Security Settings > Local Policies > User Rights Assignment`
 
 > **Allow log on locally** and define the users/groups who you want to have permission to log in to DC
 {.is-info}
@@ -57,13 +65,17 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > Set up everything you want.
 {.is-info}
 
+### Disable first login animation
+`Policies > Administrative Templates > System > Logon`
+
+> **Show first sign-in animation** (disabled)
+{.is-info}
+
 ### Set envriotment variables
 `Preferences > Windows settings > Environment Variables`
 
 > Click add and set up the variables you need!
 {.is-info}
-
-
 
 ### Automatic program start
 
@@ -79,9 +91,6 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 ### Force Wallpapers
 
-### Disable first login animation
-
-### Disable CTRL+ALT+DEL
 
 
 
