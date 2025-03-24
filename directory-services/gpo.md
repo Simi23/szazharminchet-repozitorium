@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:14:13.662Z
+date: 2025-03-24T10:16:21.509Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -21,12 +21,17 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Login banner
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
  
->  Interactive logon: Message text for users attempting to log on
+> Interactive logon: Message text for users attempting to log on
+{.is-info}
+
+### Disable local Administrator
+`Policies > Windows Settings > Security settings > Local Policies > Security Options`
+
+> Accounts: Administrator account status (disabled)
 {.is-info}
 
 ### Set envriotment variables
 
-### Disable local Administrator
 
 ### Enable users log in to DC
 
