@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:43:37.657Z
+date: 2025-03-24T09:43:54.001Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -85,7 +85,6 @@ Example IPv6 configuration:
 - Default gateway: **2001:db8:3010::1**
 - DNS: **2001:db8:1010::10**
 - Secondary DNS: **2001:db8:1010::11**
-- Lease: **2001:db8:3010::100 – 200**
 - Scope name: **clientV6**
 - Duration: **13 days, 13 hours, 13 minute**
 - Time server (42): **2001:db8:3010::1**
