@@ -2,7 +2,7 @@
 title: Playbook: Group creation, file sharing
 description: Windows File Sharing in Ansible
 published: true
-date: 2025-03-24T09:04:04.421Z
+date: 2025-03-24T09:47:01.855Z
 tags: windows, ansible
 editor: markdown
 dateCreated: 2025-03-24T08:44:56.003Z
