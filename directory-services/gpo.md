@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:26:36.921Z
+date: 2025-03-24T10:28:05.961Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -54,11 +54,14 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Check for Windows updates
 `Policies > Administrative Templates > Windows components > Windows Update`
 
+> Set up everything you want.
+{.is-info}
 
 ### Set envriotment variables
-`Preferences > Windows settings > Environment Variables
+`Preferences > Windows settings > Environment Variables`
 
-
+> Click add and set up the variables you need!
+{.is-info}
 
 
 
