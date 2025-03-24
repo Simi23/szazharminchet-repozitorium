@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:38:39.452Z
+date: 2025-03-24T10:40:16.658Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -59,17 +59,6 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > **Allow log on locally** and define the users/groups who you want to have permission to log in to DC
 {.is-info}
 
-### Check for Windows updates
-`Policies > Administrative Templates > Windows components > Windows Update`
-
-> Set up everything you want.
-{.is-info}
-
-### Disable first login animation
-`Policies > Administrative Templates > System > Logon`
-
-> **Show first sign-in animation** (disabled)
-{.is-info}
 
 ### Set envriotment variables
 `Preferences > Windows settings > Environment Variables`
@@ -78,12 +67,29 @@ dateCreated: 2025-03-24T08:46:54.588Z
 {.is-info}
 
 
+### Disable first login animation
+`Policies > Administrative Templates > System > Logon`
+
+> **Show first sign-in animation** (disabled)
+{.is-info}
+
+### Turn off file history
+`Policies > Administrative Templates > Windows components > File history`
+
+> **Turn off File History** (enabled)
+{.is-info}
+
+### Check for Windows updates
+`Policies > Administrative Templates > Windows components > Windows Update`
+
+> Set up everything you want.
+{.is-info}
+
 
 ### Disable regedit
 
 ### Disable "cmd" "run" and "powershell"
 
-### Turn off file history
 
 ### Automatically map home folder
 
