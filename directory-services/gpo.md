@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:09:09.046Z
+date: 2025-03-24T10:10:56.062Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -14,7 +14,9 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Password policies
 `Policies > Windows settings > Account Policies > Password Policy`
 
-If you want to set the minimum password length more than 14 characters, you have to enable 
+> If you want to set the minimum password length more than 14 characters, you have to enable ***Relax minimum password length limits***.
+{.is-info}
+
 
 ### Login banner
 
