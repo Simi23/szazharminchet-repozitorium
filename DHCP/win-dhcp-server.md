@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:31:13.609Z
+date: 2025-03-24T09:34:12.743Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -64,7 +64,7 @@ Set up the lease time:
 ```
 Set-DhcpServerv4Scope `
 	-ScopeID 10.30.0.0 `
-  -LeaseDuration 13:13:13
+  -LeaseDuration 13.00:13:13
 ```
 
 Setting up remaining options for the DHCP scope:
@@ -86,7 +86,7 @@ Example IPv6 configuration:
 - DNS: **2001:db8:1010::10**
 - Secondary DNS: **2001:db8:1010::11**
 - Lease: **2001:db8:3010::100 – 200**
-- Scope name: **client**
+- Scope name: **clientV6**
 - Exclude: **2001:db8:3010::100 – 150**
 - Duration: **13 days, 13 hours, 13 minute**
 - Time server (42): **2001:db8:3010::1**
@@ -94,12 +94,13 @@ Example IPv6 configuration:
 
 Create a new scope
 ```
-Add-DhcpServerv4Scope `
-	-name "client" `
-  -StartRange 10.30.0.100 `
-  -EndRange 10.30.0.200 `
-  -SubnetMask 255.255.255.0 `
-  -State Active
+Add-DhcpServerv6Scope `
+	-ComputerName "dhcpserver.contoso.com" `
+  -Prefix 2001:4898:7020:1020:: `
+  -Name "clienV6" `
+  -PreferredLifeTime 4.00:00:00 `
+  -ValidLifeTime 6.00:00:00 `
+  -State "Active"
 ```
 
 Exclude the addresses you don't need.
@@ -114,7 +115,7 @@ Set up the lease time:
 ```
 Set-DhcpServerv4Scope `
 	-ScopeID 10.30.0.0 `
-  -LeaseDuration 13:13:13
+  -LeaseDuration 13.00:13:13
 ```
 
 Setting up remaining options for the DHCP scope:
