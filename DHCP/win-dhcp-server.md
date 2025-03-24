@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:38:02.452Z
+date: 2025-03-24T09:39:48.569Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -106,7 +106,7 @@ Setting up remaining options for the DHCP scope:
 ```
 Set-DhcpServerv6OptionValue `
     -Prefix 2001:db8:3010:0000:: `
-    -DnsServer 10.10.0.10, 10.10.0.11 `
+    -DnsServer 2001:db8:1010::10, 2001:db8:1010::11 `
     -DnsDomain "paris.local" `
     -Router 10.30.0.1 `
     -OptionId 42 -Value "10.30.0.1" `
