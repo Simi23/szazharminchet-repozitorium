@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:31:02.099Z
+date: 2025-03-24T09:31:13.609Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -44,17 +44,27 @@ Example IPv4 configuration:
 
 Create a new scope
 ```
-Add-DhcpServerv4Scope -name "client" -StartRange 10.30.0.100 -EndRange 10.30.0.200 -SubnetMask 255.255.255.0 -State Active
+Add-DhcpServerv4Scope `
+	-name "client" `
+  -StartRange 10.30.0.100 `
+  -EndRange 10.30.0.200 `
+  -SubnetMask 255.255.255.0 `
+  -State Active
 ```
 
 Exclude the addresses you don't need.
 ```
-Add-DhcpServerv4ExclusionRange -ScopeID 10.30.0.0 -StartRange 10.30.0.100 -EndRange 10.30.0.150
+Add-DhcpServerv4ExclusionRange `
+	-ScopeID 10.30.0.0 `
+  -StartRange 10.30.0.100 `
+  -EndRange 10.30.0.150
 ```
 
 Set up the lease time:
 ```
-Set-DhcpServerv4Scope -ScopeID 10.30.0.0 -LeaseDuration 13:13:13
+Set-DhcpServerv4Scope `
+	-ScopeID 10.30.0.0 `
+  -LeaseDuration 13:13:13
 ```
 
 Setting up remaining options for the DHCP scope:
