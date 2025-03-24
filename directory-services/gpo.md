@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T09:59:03.270Z
+date: 2025-03-24T10:07:53.806Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -10,6 +10,10 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 # GPO
 ## Computer settings
+
+### Password policies
+`Policies > Windows settings > Account Policies > Password Policy`
+
 
 ### Login banner
 
@@ -41,7 +45,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 ### Disable CTRL+ALT+DEL
 
-### Password policies
+
 
 ## User settings
 
