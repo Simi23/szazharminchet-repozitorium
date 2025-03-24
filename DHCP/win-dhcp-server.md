@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:44:19.700Z
+date: 2025-03-24T09:45:32.306Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -46,36 +46,36 @@ Create a new scope
 ```
 Add-DhcpServerv4Scope `
 	-name "client" `
-  -StartRange 10.30.0.100 `
-  -EndRange 10.30.0.200 `
-  -SubnetMask 255.255.255.0 `
-  -State Active
+	-StartRange 10.30.0.100 `
+	-EndRange 10.30.0.200 `
+	-SubnetMask 255.255.255.0 `
+	-State Active
 ```
 
 Exclude the addresses you don't need.
 ```
 Add-DhcpServerv4ExclusionRange `
 	-ScopeID 10.30.0.0 `
-  -StartRange 10.30.0.100 `
-  -EndRange 10.30.0.150
+	-StartRange 10.30.0.100 `
+	-EndRange 10.30.0.150
 ```
 
 Set up the lease time:
 ```
 Set-DhcpServerv4Scope `
 	-ScopeID 10.30.0.0 `
-  -LeaseDuration 13.00:13:13
+	-LeaseDuration 13.00:13:13
 ```
 
 Setting up remaining options for the DHCP scope:
 ```
 Set-DhcpServerv4OptionValue `
-  -ScopeId 10.30.0.0 `
-  -DnsServer 10.10.0.10, 10.10.0.11 `
-  -DnsDomain "paris.local" `
-  -Router 10.30.0.1 `
-  -OptionId 42 -Value "10.30.0.1" `
-  -OptionId 150 -Value "10.30.0.1"
+	-ScopeId 10.30.0.0 `
+	-DnsServer 10.10.0.10, 10.10.0.11 `
+	-DnsDomain "paris.local" `
+	-Router 10.30.0.1 `
+	-OptionId 42 -Value "10.30.0.1" `
+	-OptionId 150 -Value "10.30.0.1"
 ```
 
 ## IPv6 configuration
