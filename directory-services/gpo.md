@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:22:03.903Z
+date: 2025-03-24T10:22:22.713Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -19,7 +19,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 
 ### Disable local Administrator
-`Preferences > Control Panel settings > Local Users and Groups`
+`Preferences > Control Panel settings > Local Users and Groups` <-- This one works
 
 > Add Administrator
 > --> Action: Update
