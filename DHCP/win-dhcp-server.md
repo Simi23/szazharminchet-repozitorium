@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:45:32.306Z
+date: 2025-03-24T09:45:46.670Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -95,10 +95,10 @@ Create a new scope
 Add-DhcpServerv6Scope `
 	-ComputerName "dhcpserver.contoso.com" `
 	-Prefix 2001:db8:3010:0000:: `
-  -Name "clienV6" `
-  -PreferredLifeTime 4.00:00:00 `
-  -ValidLifeTime 6.00:00:00 `
-  -State "Active"
+	-Name "clienV6" `
+	-PreferredLifeTime 4.00:00:00 `
+	-ValidLifeTime 6.00:00:00 `
+	-State "Active"
 ```
 
 Setting up remaining options for the DHCP scope:
