@@ -2,7 +2,7 @@
 title: Ansible Playbooks
 description: A list of the playbooks on this site
 published: true
-date: 2025-03-12T15:20:50.017Z
+date: 2025-03-24T08:45:01.996Z
 tags: linux, windows, ansible, cisco
 editor: markdown
 dateCreated: 2025-02-21T07:12:07.686Z
@@ -33,6 +33,7 @@ dateCreated: 2025-02-21T07:12:07.686Z
 - [Active directory setup](/ansible/playbook/ad)
 - [Windows DHCP setup](/ansible/playbook/windows-dhcp)
 - [Windows DNS setup](/ansible/playbook/windows-dns)
+- [Group creation, file sharing](/ansible/playbook/windows-grp-fileshare)
 
 ## Cisco - Routing (5 RTR)
 - [IP settings (G)](/ansible/playbook/cisco/ip-g)
