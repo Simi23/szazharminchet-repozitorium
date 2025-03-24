@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:24:17.220Z
+date: 2025-03-24T09:28:01.864Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -41,6 +41,27 @@ Example IPv4 configuration:
 - Duration: **13 days, 13 hours, 13 minute**
 - Time server (42): **10.30.0.1**
 - TFTP server (150): **10.30.0.1**
+
+Create a new scope
+```
+Add-DhcpServerv4Scope -name "client" -StartRange 10.30.0.100 -EndRange 10.30.0.200 -SubnetMask 255.255.255.0 -State Active
+```
+
+Exclude the addresses you don't need.
+```
+Add-DhcpServerv4ExclusionRange -ScopeID 10.30.0.0 -StartRange 10.30.0.100 -EndRange 10.30.0.150
+```
+
+Setting up remaining options for the DHCP scope:
+```
+Set-DhcpServerv4OptionValue `
+    -ScopeId 10.30.0.0 `
+    -DnsServer 10.10.0.10, 10.10.0.11 `
+    -DnsDomain "paris.local" `
+    -Router 10.30.0.1 `
+    -OptionId 42 -Value "10.30.0.1" `
+    -OptionId 150 -Value "10.30.0.1"
+```
 
 ## IPv6 configuration
 Example IPv6 configuration:
