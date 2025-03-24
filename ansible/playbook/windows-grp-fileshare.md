@@ -2,7 +2,7 @@
 title: Playbook: Group creation, file sharing
 description: Windows File Sharing in Ansible
 published: true
-date: 2025-03-24T09:47:01.855Z
+date: 2025-03-24T09:47:11.289Z
 tags: windows, ansible
 editor: markdown
 dateCreated: 2025-03-24T08:44:56.003Z
@@ -34,7 +34,6 @@ dateCreated: 2025-03-24T08:44:56.003Z
       ansible.windows.win_group:
         name: "{{ item.read }}"
         state: present
-        getent: yes
       loop: "{{ file_shares }}"
     
     # | Ensure Local groups exitsts (2/2) |
@@ -42,7 +41,6 @@ dateCreated: 2025-03-24T08:44:56.003Z
       ansible.windows.win_group:
         name: "{{ item.write }}"
         state: present
-        getent: yes
       loop: "{{ file_shares }}"
 
     # | Create the directory for project shares |
