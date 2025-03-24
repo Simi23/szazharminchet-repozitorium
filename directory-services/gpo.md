@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:18:43.369Z
+date: 2025-03-24T10:18:55.379Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -36,7 +36,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > Network security: Do not store LAN Manager hash value oin next password change
 {.is-info}
 
-### **Check for Windows updates**
+### Check for Windows updates
 `Policies > Administrative Templates > Windows components > Windows Update`
 
 
