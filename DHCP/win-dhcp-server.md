@@ -2,7 +2,7 @@
 title: Windows DHCP server
 description: Windows DHCP server configuration + PS
 published: true
-date: 2025-03-24T09:34:12.743Z
+date: 2025-03-24T09:38:02.452Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:41:22.712Z
@@ -87,7 +87,6 @@ Example IPv6 configuration:
 - Secondary DNS: **2001:db8:1010::11**
 - Lease: **2001:db8:3010::100 – 200**
 - Scope name: **clientV6**
-- Exclude: **2001:db8:3010::100 – 150**
 - Duration: **13 days, 13 hours, 13 minute**
 - Time server (42): **2001:db8:3010::1**
 - TFTP server (150): **2001:db8:3010::1**
@@ -96,32 +95,17 @@ Create a new scope
 ```
 Add-DhcpServerv6Scope `
 	-ComputerName "dhcpserver.contoso.com" `
-  -Prefix 2001:4898:7020:1020:: `
+  -Prefix 2001:db8:3010:0000:: `
   -Name "clienV6" `
   -PreferredLifeTime 4.00:00:00 `
   -ValidLifeTime 6.00:00:00 `
   -State "Active"
 ```
 
-Exclude the addresses you don't need.
-```
-Add-DhcpServerv4ExclusionRange `
-	-ScopeID 10.30.0.0 `
-  -StartRange 10.30.0.100 `
-  -EndRange 10.30.0.150
-```
-
-Set up the lease time:
-```
-Set-DhcpServerv4Scope `
-	-ScopeID 10.30.0.0 `
-  -LeaseDuration 13.00:13:13
-```
-
 Setting up remaining options for the DHCP scope:
 ```
-Set-DhcpServerv4OptionValue `
-    -ScopeId 10.30.0.0 `
+Set-DhcpServerv6OptionValue `
+    -Prefix 2001:db8:3010:0000:: `
     -DnsServer 10.10.0.10, 10.10.0.11 `
     -DnsDomain "paris.local" `
     -Router 10.30.0.1 `
