@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:07:27.668Z
+date: 2025-03-24T11:08:07.656Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -85,9 +85,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > Set up everything you want.
 {.is-info}
 
-### Automatic mappings
-
-#### Default mapping
+### Automatic mapping
 
 #### Home directory
 
@@ -129,5 +127,9 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > --> Add *powershell.exe* and *cmd.exe*.
 > --> **Prevent access to the command prompt** (enabled)
 {.is-info}
+
+### Automatic mapping
+
+#### Default map
 
 
