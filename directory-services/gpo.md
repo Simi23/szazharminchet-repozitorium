@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T12:16:29.145Z
+date: 2025-03-24T12:19:09.602Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -93,6 +93,7 @@ Set up a directory for users home directory.
 
 NTFS Permissions for the folder:
 - Go to advanced settings
+- **Delete** everyting what is not **CREATER OWNER**, or **SYSTEM**.
 - **Add** Domain Users
 - Disable inheritance
 - Press **edit**
