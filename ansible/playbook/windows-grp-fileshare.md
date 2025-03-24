@@ -2,7 +2,7 @@
 title: Playbook: Group creation, file sharing
 description: Windows File Sharing in Ansible
 published: true
-date: 2025-03-24T09:03:03.780Z
+date: 2025-03-24T09:04:04.421Z
 tags: windows, ansible
 editor: markdown
 dateCreated: 2025-03-24T08:44:56.003Z
@@ -29,16 +29,16 @@ dateCreated: 2025-03-24T08:44:56.003Z
     - inventory/group_vars
 
   tasks:
-    # | Ensure AD groups exitsts (1/2) |
-    - name: Ensure AD groups exitsts (1/2)
+    # | Ensure Local groups exitsts (1/2) |
+    - name: Ensure Local groups exitsts (1/2)
       ansible.windows.win_group:
         name: "{{ item.read }}"
         state: present
         getent: yes
       loop: "{{ file_shares }}"
     
-    # | Ensure AD groups exitsts (2/2) |
-    - name: Ensure AD groups exitsts (2/2)
+    # | Ensure Local groups exitsts (2/2) |
+    - name: Ensure Local groups exitsts (2/2)
       ansible.windows.win_group:
         name: "{{ item.write }}"
         state: present
