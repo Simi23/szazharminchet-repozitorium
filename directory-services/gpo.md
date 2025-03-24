@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T09:51:16.496Z
+date: 2025-03-24T09:53:05.645Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -30,6 +30,10 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Disable "cmd" "run" and "powershell"
 
 ### Turn off file history
+
+### Automatically map home folder
+
+### Automatically map folders
 
 ## User settings
 
