@@ -2,7 +2,7 @@
 title: Playbook: Group creation, file sharing
 description: Windows File Sharing in Ansible
 published: true
-date: 2025-03-24T09:02:24.926Z
+date: 2025-03-24T09:03:03.780Z
 tags: windows, ansible
 editor: markdown
 dateCreated: 2025-03-24T08:44:56.003Z
@@ -85,14 +85,14 @@ dateCreated: 2025-03-24T08:44:56.003Z
 
 # Inventory
 
-`ansible.cfg`
+### `ansible.cfg`
 ```yaml
 [defaults]
 inventory = inventory/ansible_hosts
 host_key_checking = False
 ```
 
-`ansible_hosts`
+### `ansible_hosts`
 ```yaml
 all:
   hosts:
@@ -119,7 +119,7 @@ all:
   
 ```
 
-`group_vars`
+### `group_vars`
 ```yaml
 file_shares:
   - name: "A"
