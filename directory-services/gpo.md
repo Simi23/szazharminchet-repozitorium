@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:49:38.282Z
+date: 2025-03-24T11:05:52.763Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -87,11 +87,15 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 ### Automatic mappings
 
-### Force Wallpapers
+
+
+
 
 
 
 ## User settings
+
+
 
 ### Automatic program start
 `Policies > Windows Settings > Scripts > Logon`
@@ -99,6 +103,12 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > Click add and set up a new startup script.
 > --> **Script name:** Define here the Path of the program.
 > --> **Script parameters:** Define the parameters if you need them.
+{.is-info}
+
+### Force Wallpapers
+`Policies > Administrative Templates > Desktop > Desktop`
+
+> **Desktop Wallpaper** (create a share for domain wide setup)
 {.is-info}
 
 ### Disable regedit
