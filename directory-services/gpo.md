@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:06:08.751Z
+date: 2025-03-24T11:07:27.668Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -87,14 +87,12 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 ### Automatic mappings
 
+#### Default mapping
 
-
-
-
+#### Home directory
 
 
 ## User settings
-
 
 
 ### Automatic program start
@@ -118,7 +116,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > --> **Prevent access to registry editing tools** (enabled)
 {.is-info}
 
-### Disable "cmd" "run" and "powershell"
+### Disable cmd, run and powershell
 `Policies > Administrative Templates > Start Menu and Taskbar`
 
 > **Remove Run menu from Start Menu** (enabled)
