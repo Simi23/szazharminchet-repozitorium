@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T12:19:09.602Z
+date: 2025-03-24T14:04:10.607Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -104,7 +104,7 @@ NTFS Permissions for the folder:
 Share permissions:
 - Give **Full control** for **Authenticated Users**
 
-`Computer settings > Preferences > Administrative Templates > System > User Profiles`
+`Computer settings > Policies > Administrative Templates > System > User Profiles`
 
 > **Set user home folder** (enabled)
 > --> **Path:** \\fqdn\SHARENAME
