@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:24:46.516Z
+date: 2025-03-24T10:26:27.932Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -47,6 +47,9 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 ### Enable users log in to DC
 `Policies > Security Settings > Local Policies > User Rights Assignment`
+
+> **Allow log on locally** and define the users/groups who you want to have permission to log in to DC
+{.is-info}
 
 ### Check for Windows updates
 `Policies > Administrative Templates > Windows components > Windows Update`
