@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T09:55:49.280Z
+date: 2025-03-24T09:57:00.320Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -36,6 +36,14 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Automatically map folders
 
 ### Wallpaper
+
+### Disable first login animation
+
+### Disable CTRL+ALT+DEL
+
+### Password policies
+
+### 
 
 ## User settings
 
