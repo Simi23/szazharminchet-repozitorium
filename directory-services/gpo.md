@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:09:45.573Z
+date: 2025-03-24T11:21:20.532Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -88,6 +88,31 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Automatic mapping
 
 #### Home directory
+
+Set up a directory for users home directory.
+
+NTFS Permissions for the folder:
+- Go to advanced settings
+- **Add** Domain Users
+- Disable inheritance
+- Press **edit**
+- **Show advanced permissions**
+- Set **Applies to:** This folder only
+- **Check in:** Create folders, Traverse folder, List folder
+
+Share permissions:
+- Give **Full control** for **Authenticated Users**
+
+
+`Preferences > Windows Settings > Drive Maps`
+
+> This share will have a strange name so I recommend to change it.
+> --> **Action:** Replace
+> --> **Location:** \\SHARE-COMPUTER\SHARENAME\%username%.%userdomain%
+> --> **Reconnect:** checked
+> --> **Label as:** whatyouwant (you can use %username% .... everything you want)
+> --> **Drive Letter:** **Use:** yourletter
+{.is-info}
 
 
 ## User settings
