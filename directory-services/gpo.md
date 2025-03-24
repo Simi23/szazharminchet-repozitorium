@@ -2,8 +2,8 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T09:57:26.696Z
-tags: windows
+date: 2025-03-24T09:58:50.182Z
+tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
 ---
