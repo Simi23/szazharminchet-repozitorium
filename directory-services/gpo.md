@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:18:55.379Z
+date: 2025-03-24T10:22:03.903Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -19,10 +19,19 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 
 ### Disable local Administrator
+`Preferences > Control Panel settings > Local Users and Groups`
+
+> Add Administrator
+> --> Action: Update
+> --> User name: Administrator
+> --> Account is disabled
+{.is-info}
+
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
 
 > Accounts: Administrator account status (disabled)
 {.is-info}
+
 
 ### Login banner
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
@@ -41,8 +50,9 @@ dateCreated: 2025-03-24T08:46:54.588Z
 
 
 ### Set envriotment variables
+`Preferences > Windows settings > Environment Variables`
 
-
+`Preferences > Control Panel settings > Local Users and Groups`
 
 
 
