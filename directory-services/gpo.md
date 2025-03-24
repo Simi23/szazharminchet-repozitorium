@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:22:22.713Z
+date: 2025-03-24T10:24:46.516Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -21,42 +21,42 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Disable local Administrator
 `Preferences > Control Panel settings > Local Users and Groups` <-- This one works
 
-> Add Administrator
-> --> Action: Update
-> --> User name: Administrator
-> --> Account is disabled
+> Add Administrator with following settings
+> --> **Action:** Update
+> --> **User name:** Administrator
+> --> **Account is disabled**
 {.is-info}
 
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
 
-> Accounts: Administrator account status (disabled)
+> **Accounts:** Administrator account status (disabled)
 {.is-info}
 
 
 ### Login banner
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
  
-> Interactive logon: Message text for users attempting to log on
+> **Interactive logon:** Message text for users attempting to log on
 {.is-info}
 
 ### Prevent LM hash from being stored locally in the SAM Database and Active Directory
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
 
-> Network security: Do not store LAN Manager hash value oin next password change
+> **Network security:** Do not store LAN Manager hash value oin next password change
 {.is-info}
+
+### Enable users log in to DC
+`Policies > Security Settings > Local Policies > User Rights Assignment`
 
 ### Check for Windows updates
 `Policies > Administrative Templates > Windows components > Windows Update`
 
 
 ### Set envriotment variables
-`Preferences > Windows settings > Environment Variables`
-
-`Preferences > Control Panel settings > Local Users and Groups`
+`Preferences > Windows settings > Environment Variables
 
 
 
-### Enable users log in to DC
 
 
 ### Automatic program start
