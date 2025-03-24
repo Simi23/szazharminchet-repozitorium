@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:43:50.157Z
+date: 2025-03-24T10:49:38.282Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -102,17 +102,24 @@ dateCreated: 2025-03-24T08:46:54.588Z
 {.is-info}
 
 ### Disable regedit
+`Policies > Administrative Templates > System`
+
+> --> **Don't run specified Windows applications** add *regedit.exe*
+> --> **Prevent access to registry editing tools** (enabled)
+{.is-info}
+
+### Disable "cmd" "run" and "powershell"
 `Policies > Administrative Templates > Start Menu and Taskbar`
 
 > **Remove Run menu from Start Menu** (enabled)
 {.is-info}
 
-### Disable "cmd" "run" and "powershell"
 `Policies > Administrative Templates > System`
 
-> Click add and set up a new startup script.
-> --> **Script name:** Define here the Path of the program.
-> --> **Script parameters:** Define the parameters if you need them.
+> There are a little bit more settings:
+> --> **Don't run specified Windows applications**: 
+> --> Add *powershell.exe* and *cmd.exe*.
+> --> **Prevent access to the command prompt** (enabled)
 {.is-info}
 
 
