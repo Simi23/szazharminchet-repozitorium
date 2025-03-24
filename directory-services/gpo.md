@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T10:42:08.340Z
+date: 2025-03-24T10:43:50.157Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -104,9 +104,7 @@ dateCreated: 2025-03-24T08:46:54.588Z
 ### Disable regedit
 `Policies > Administrative Templates > Start Menu and Taskbar`
 
-> Click add and set up a new startup script.
-> --> **Script name:** Define here the Path of the program.
-> --> **Script parameters:** Define the parameters if you need them.
+> **Remove Run menu from Start Menu** (enabled)
 {.is-info}
 
 ### Disable "cmd" "run" and "powershell"
