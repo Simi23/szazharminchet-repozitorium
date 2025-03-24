@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T11:21:20.532Z
+date: 2025-03-24T11:23:43.903Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -103,8 +103,14 @@ NTFS Permissions for the folder:
 Share permissions:
 - Give **Full control** for **Authenticated Users**
 
+`Computer settings > Preferences > Administrative Templates > System > User Profiles`
 
-`Preferences > Windows Settings > Drive Maps`
+> **Set user home folder** (enabled)
+> --> **Path:** \\fqdn\SHARENAME
+> --> **Drive letter:** yourletter
+{.is-info}
+
+`User settings > Preferences > Windows Settings > Drive Maps`
 
 > This share will have a strange name so I recommend to change it.
 > --> **Action:** Replace
