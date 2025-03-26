@@ -2,7 +2,7 @@
 title: Playbook: Group creation, file sharing
 description: Windows File Sharing in Ansible
 published: true
-date: 2025-03-24T09:47:11.289Z
+date: 2025-03-26T11:32:22.905Z
 tags: windows, ansible
 editor: markdown
 dateCreated: 2025-03-24T08:44:56.003Z
@@ -27,58 +27,59 @@ dateCreated: 2025-03-24T08:44:56.003Z
   gather_facts: false
   vars_files:
     - inventory/group_vars
-
   tasks:
-    # | Ensure Local groups exitsts (1/2) |
-    - name: Ensure Local groups exitsts (1/2)
-      ansible.windows.win_group:
-        name: "{{ item.read }}"
+    # | Ensure AD groups exitsts (1/2) |
+    - name: Ensure AD groups exitsts (1/2)
+      microsoft.ad.group:
+        name: "{{ item.write }}"
+        scope: global
         state: present
       loop: "{{ file_shares }}"
     
-    # | Ensure Local groups exitsts (2/2) |
-    - name: Ensure Local groups exitsts (2/2)
-      ansible.windows.win_group:
-        name: "{{ item.write }}"
+    # | Ensure AD groups exitsts (2/2) |
+    - name: Ensure AD groups exitsts (2/2)
+      microsoft.ad.group:
+        name: "{{ item.read }}"
+        scope: global
         state: present
       loop: "{{ file_shares }}"
-
-    # | Create the directory for project shares |
-    - name: Create the directory for project shares
+    
+    # | Create folders |
+    - name: Create sub folders
       ansible.windows.win_file:
-        path: "C:\\project_share\\{{ item.name }}"
+        path: C:\project_share\{{ item.name }}
         state: directory
+        type: allow
       loop: "{{ file_shares }}"
 
-    # | Create Windows file shares |
-    - name: Create Windows file shares
-      ansible.windows.win_share:
-        name: "{{ item.name }}"
-        path: "C:\\project_share\\{{ item.name }}"
-        full: Everyone
-        state: present
-      loop: "{{ file_shares }}"
-
-    # | Set NTFS read permissions |
-    - name: Set NTFS read permissions
+    # | Change Read NTFS permissions |
+    - name: Change Read NTFS permissions
       ansible.windows.win_acl:
-        path: "C:\\project_share\\{{ item.name }}"
+        path: C:\project_share\{{ item.name }}
         user: "{{ item.read }}"
         rights: ReadAndExecute
         type: allow
-        state: present
+      when: item.read != item.write 
       loop: "{{ file_shares }}"
 
-    # | Set NTFS write permissions |
-    - name: Set NTFS write permissions
+    # | Change Write NTFS permissions |
+    - name: Change Write NTFS permissions
       ansible.windows.win_acl:
-        path: "C:\\project_share\\{{ item.name }}"
+        path: C:\project_share\{{ item.name }}
         user: "{{ item.write }}"
         rights: Modify
         type: allow
-        state: present
       loop: "{{ file_shares }}"
 
+    # | Create shares |
+    - name: Create shares
+      ansible.windows.win_share:
+        name: "{{ item.name }}"
+        path: C:\project_share\{{ item.name }}
+        read: "{{ item.read }}"
+        full: "{{ item.write }}"
+      loop: "{{ file_shares }}"
+   
 ```
 
 # Inventory
