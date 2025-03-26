@@ -2,7 +2,7 @@
 title: Internet Information Services
 description: Windows IIS configurations
 published: true
-date: 2025-03-26T12:17:20.916Z
+date: 2025-03-26T12:18:30.990Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-24T11:24:29.287Z
@@ -36,17 +36,18 @@ In the desired *Site*, click on **URL Rewrite** and create an **inbound rule** (
 <configuration>
     <system.webServer>
         <rewrite>
-		<rules>
+            <rules>
                 <clear />
+                
                 <rule name="redirect" patternSyntax="Wildcard" stopProcessing="true">
                     <match url="*" />
                     <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
-			<add input="{HTTPS}" pattern="OFF" />
+                        <add input="{HTTPS}" pattern="OFF" />
                     </conditions>
                     <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" redirectType="Found" />
                 </rule>
-		</rules>
-	</rewrite>
+            </rules>
+        </rewrite>
     </system.webServer>
 </configuration>
 ```
@@ -58,18 +59,19 @@ In the desired *Site*, click on **URL Rewrite** and create an **inbound rule** (
 <configuration>
     <system.webServer>
         <rewrite>
-		<rules>
+            <rules>
                 <clear />
+                
                 <rule name="redirect" patternSyntax="Wildcard" stopProcessing="true">
                     <match url="*" />
                     <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
-			<add input="{HTTPS}" pattern="OFF" />
+                        <add input="{HTTPS}" pattern="OFF" />
                         <add input="{HTTP_HOST}" pattern="www.paris.local" />
                         <add input="{HTTP_HOST}" pattern="help.paris.local" />
                     </conditions>
-                    <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}"redirectType="Found" />
+                    <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" redirectType="Found" />
                 </rule>
-
+                
                 <rule name="Serve Internal Page" stopProcessing="true">
                     <match url=".*" />
                     <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
@@ -93,11 +95,10 @@ In the desired *Site*, click on **URL Rewrite** and create an **inbound rule** (
                     </conditions>
                     <action type="Rewrite" url="external.html" />
                 </rule>
-		</rules>
-	</rewrite>
+            </rules>
+        </rewrite>
     </system.webServer>
 </configuration>
-
 ```
 
 # Reverse proxy configuration
