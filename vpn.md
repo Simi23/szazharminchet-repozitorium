@@ -2,7 +2,7 @@
 title: VPN
 description: VPN Guides
 published: true
-date: 2025-03-10T09:29:35.312Z
+date: 2025-03-26T11:06:42.027Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:43:56.838Z
@@ -22,6 +22,7 @@ dateCreated: 2025-03-03T10:43:56.838Z
  - **Strongswan**-**RRAS** with **certificate** authentication
    - [`swanctl` config](/vpn/linux-windows-strongswan-cert-new)
    - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-cert)
+ - **[RRAS-RRAS](/vpn/rras-s2s-cert)** with **certificate** authentication
 
 ## Remote Access VPN
 
