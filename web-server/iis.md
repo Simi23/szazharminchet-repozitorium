@@ -2,7 +2,7 @@
 title: Internet Information Services
 description: Windows IIS configurations
 published: true
-date: 2025-03-26T12:18:30.990Z
+date: 2025-03-26T12:19:16.243Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-24T11:24:29.287Z
@@ -53,6 +53,10 @@ In the desired *Site*, click on **URL Rewrite** and create an **inbound rule** (
 ```
 
 # Use more html files from one directory
+
+To configure HTTPS scheme redirection, you will need an additional module called [rewrite_amd64_en-US.msi](https://www.iis.net/downloads/microsoft/url-rewrite).
+
+Install the module. You can have to create these as inbound rules if you want to use GUI!
 
 ```cfg
 <?xml version="1.0" encoding="UTF-8"?>
