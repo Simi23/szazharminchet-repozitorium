@@ -2,7 +2,7 @@
 title: Internet Information Services
 description: Windows IIS configurations
 published: true
-date: 2025-03-24T11:24:29.287Z
+date: 2025-03-26T12:17:20.916Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-24T11:24:29.287Z
@@ -30,6 +30,75 @@ In the desired *Site*, click on **URL Rewrite** and create an **inbound rule** (
  - **Redirect type:** *Found (302)*
 
 **Apply the rule.** Now when you navigate to this site in the browser with the *http://* scheme, you should be redirected to the *https://* scheme.
+
+```cfg
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+		<rules>
+                <clear />
+                <rule name="redirect" patternSyntax="Wildcard" stopProcessing="true">
+                    <match url="*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+			<add input="{HTTPS}" pattern="OFF" />
+                    </conditions>
+                    <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" redirectType="Found" />
+                </rule>
+		</rules>
+	</rewrite>
+    </system.webServer>
+</configuration>
+```
+
+# Use more html files from one directory
+
+```cfg
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+		<rules>
+                <clear />
+                <rule name="redirect" patternSyntax="Wildcard" stopProcessing="true">
+                    <match url="*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+			<add input="{HTTPS}" pattern="OFF" />
+                        <add input="{HTTP_HOST}" pattern="www.paris.local" />
+                        <add input="{HTTP_HOST}" pattern="help.paris.local" />
+                    </conditions>
+                    <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}"redirectType="Found" />
+                </rule>
+
+                <rule name="Serve Internal Page" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^www\.paris\.local$" />
+                    </conditions>
+                    <action type="Rewrite" url="internal.html" />
+                </rule>
+                
+                <rule name="Serve Help Page" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^help\.paris\.local$" />
+                    </conditions>
+                    <action type="Rewrite" url="help.html" />
+                </rule>
+                
+                <rule name="Serve External Page" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{HTTP_HOST}" pattern="^external\.paris\.local$" />
+                    </conditions>
+                    <action type="Rewrite" url="external.html" />
+                </rule>
+		</rules>
+	</rewrite>
+    </system.webServer>
+</configuration>
+
+```
 
 # Reverse proxy configuration
 
