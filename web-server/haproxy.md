@@ -2,7 +2,7 @@
 title: HAProxy
 description: HAProxy configuratinon with high availibilty and FHRP
 published: true
-date: 2025-03-11T08:24:00.220Z
+date: 2025-04-09T11:28:57.786Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T09:43:05.489Z
@@ -22,11 +22,11 @@ Edit the configuration in `/etc/haproxy/haproxy.cfg`. Add these lines to the end
 ...
 
 frontend http-in
-	bind *80,:::80 v6only
+	bind :::80 v6only
 	redirect scheme https if !{ ssl_fc }
   
 frontend https-in
-	bind *443,:::443 v6only ssl crt /cert/web.pem
+	bind :::443 v6only ssl crt /cert/web.pem
 	option forwardfor
 	http-response add-header via-proxy %[hostname]
 	default_backend web_servers
