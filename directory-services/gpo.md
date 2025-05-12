@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-03-24T14:05:19.636Z
+date: 2025-05-12T13:58:29.531Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -121,6 +121,12 @@ Share permissions:
 > --> **Drive Letter:** **Use:** yourletter
 {.is-info}
 
+### Kerberos Hardening
+
+`Policies > Administrative Templates > System > Kerberos`
+
+> Set **Kerberos client support for claims, compound authentication and Kerberos armoring** to enabled.
+{.is-info}
 
 ## User settings
 
