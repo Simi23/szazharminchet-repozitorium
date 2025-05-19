@@ -2,7 +2,7 @@
 title: Dual-Hub, Dual-Stack Phase 3 DMVPN with IKEv2 PSK
 description: Dual-Hub, Dual-Stack Phase 3 DMVPN with IKEv2 PSK
 published: true
-date: 2025-05-19T13:11:49.817Z
+date: 2025-05-19T13:15:13.650Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-05-19T13:11:49.817Z
@@ -14,7 +14,7 @@ dateCreated: 2025-05-19T13:11:49.817Z
 ## HUB1 
 > Information about routers
 > Link-to internet: IPv4: 4.4.4.4/24, IPV6: 2001:DB8:4:4:4::4/64
-> VPN link: IPv4: 10.100.100.1/24 IPv6: 2001:DB8:100:100::1/64
+> VPN link: IPv4: 10.100.100.1/24 IPv6: 2001:DB<span>8:10</span>0<span>:10</span>0::1/64
 {.is-info}
 
 ### Crypto config
