@@ -2,7 +2,7 @@
 title: VPN
 description: VPN Guides
 published: true
-date: 2025-05-19T13:02:02.072Z
+date: 2025-05-19T13:02:24.617Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:43:56.838Z
@@ -11,7 +11,7 @@ dateCreated: 2025-03-03T10:43:56.838Z
 # Cisco guides
 
 - [Site-to-site VPN with IKEv2 PSK](/vpn/cisco-ikev2-psk)
-- [Dual-Hub, Dual-Stack Phase 3 DMVPN with IKEv2 PSK](//cisco-dmvpn-dual-psk)
+- [Dual-Hub, Dual-Stack Phase 3 DMVPN with IKEv2 PSK](/vpn/cisco-dmvpn-dual-psk)
 
 # Server guides
 
