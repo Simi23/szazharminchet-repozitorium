@@ -2,7 +2,7 @@
 title:  Home
 description: 
 published: true
-date: 2025-03-11T14:41:00.645Z
+date: 2025-05-20T09:50:23.080Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-11T09:45:23.641Z
@@ -34,7 +34,7 @@ Guides related to creating and managing certification authorities, creating cert
 
 ---
 
-[**File sharing**](/fileshare)
+[**Files**](/files)
 
 ---
 
