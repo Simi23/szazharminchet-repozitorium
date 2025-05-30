@@ -2,7 +2,7 @@
 title: Icinga2 send email alert
 description: Email alerting with postfix relay
 published: true
-date: 2025-05-30T14:10:16.591Z
+date: 2025-05-30T14:10:28.268Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-30T14:08:22.465Z
@@ -19,7 +19,7 @@ apt install postfix mailutils
 
 ## Setting up configurations
 
-Add a new user to `/etc/icinga2/conf.d/users.conf`. Make sure it has an email and the enable_notification variable.
+Add a new user to `/etc/icinga2/conf.d/users.conf`. Make sure it has an **email** and the **enable_notification** variable.
 
 ```
 object User "egon.lange" {
