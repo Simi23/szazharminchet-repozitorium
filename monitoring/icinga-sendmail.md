@@ -2,7 +2,7 @@
 title: Icinga2 send email alert
 description: Email alerting with postfix relay
 published: true
-date: 2025-05-30T14:10:28.268Z
+date: 2025-05-30T14:11:24.887Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-30T14:08:22.465Z
@@ -32,10 +32,22 @@ object User "egon.lange" {
 
   email = "egon.lange@billund.lego.dk"
 }
-
 ```
 
-`/etc/icinga2/conf.d/templates.conf`
+Edit the mail templates, edit the outcommented part, as you want in`/etc/icinga2/conf.d/templates.conf`.
+
+```
+...
+
+  vars += {
+    notification_icingaweb2url = "http://icinga.billund.lego.dk/icingaweb2"
+    notification_from = "Icinga 2 Service Monitoring <icinga-service@billund.lego.dk>"
+    notification_logtosyslog = false
+  }
+
+
+...
+```
 
 `/etc/icinga2/conf.d/hosts.conf`
 
