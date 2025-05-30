@@ -2,7 +2,7 @@
 title: Monitoring Guides
 description: 
 published: true
-date: 2025-05-29T09:45:11.542Z
+date: 2025-05-30T14:04:45.130Z
 tags: 
 editor: markdown
 dateCreated: 2025-05-28T18:07:17.068Z
@@ -11,6 +11,7 @@ dateCreated: 2025-05-28T18:07:17.068Z
 # Icinga2
 
 - [Setup Guide](/monitoring/icinga-setup)
+- [Send email alert](/monitoring/icinga-sendmail)
 
 # Zabbix
 
