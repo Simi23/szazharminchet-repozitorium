@@ -2,7 +2,7 @@
 title: Zabbix Setup
 description: 
 published: true
-date: 2025-05-28T18:35:50.133Z
+date: 2025-05-30T13:36:04.362Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-28T18:35:50.133Z
@@ -27,8 +27,16 @@ apt install \
 
 Installing the package `zabbix-server-mysql` will install a **MariaDB** instance. This will need to be set up in order to be used by Zabbix. This includes importing the schema and initial data.
 
-> Check if there is a working script for this in `/usr/share/zabbix`...
-{.is-danger}
+> There is a file `/usr/share/doc/zabbix-server-mysql/README.Debian` get rid off the unneccessary lines, add a shebang to the start of the file and give it execute permission, after that you can run it as a script.
+{.is-info}
+
+```
+nano /usr/share/doc/zabbix-server-mysql/README.Debian
+chmod +x /usr/share/doc/zabbix-server-mysql/README.Debian
+/usr/share/doc/zabbix-server-mysql/README.Debian
+```
+
+### OR
 
 **Enter** the MariaDB server.
 
