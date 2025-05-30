@@ -2,7 +2,7 @@
 title: SMTP/IMAP (Single server)
 description: E-mail server setup on Linux with Dovecot and Postfix
 published: true
-date: 2025-05-30T14:18:48.504Z
+date: 2025-05-30T16:35:44.714Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-30T14:18:48.504Z
@@ -10,7 +10,7 @@ dateCreated: 2025-05-30T14:18:48.504Z
 
 # Introduction
 
-This guide will show the installation of a simple email setup. **Postfix** and **Dovecot** will be installed on the same server, and the authentication backend will be LDAP. Postfix will still use Dovecot as its authentication mechanism.
+This guide will show the installation of a simple email setup. **Postfix** and **Dovecot** will be installed on the same server, and the authentication backend will be LDAP. Postfix will still use Dovecot as its authentication mechanism. Postfix will use the virtual delivery mechanism with virtual domains.
 
 Using SQL for aliases is covered in [this](/mail/smtp-imap) guide.
 
@@ -45,83 +45,24 @@ uidNumber: 3001
 gidNumber: 3001
 ```
 
-# SQL Setup
-
-This guide will use MariaDB. Install required packages:
-
-```bash
-apt install mariadb-server
-```
-
-Set up access to the MariaDB instance following this wizard:
-
-```bash
-mysql_secure_installation
-```
-
-Log in to MariaDB as root:
-
-```bash
-mysql -u root -p
-```
-
-Run the following queries to create a database, a user, and assign permissions:
-
-```sql
-CREATE DATABASE postfix;
-CREATE USER 'postfix_user'@'127.0.0.1' IDENTIFIED BY 'Passw0rd';
-GRANT SELECT ON postfix.* TO 'postfix_user'@'127.0.0.1';
-FLUSH PRIVILEGES;
-```
-
-Next, switch to the new database and create the schema. The `alias` field will be indexed to speed up queries.
-
-```sql
-USE postfix;
-CREATE TABLE postfix_aliases (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    alias VARCHAR(255) NOT NULL,
-    destination VARCHAR(255) NOT NULL,
-    active BOOLEAN DEFAULT 1,
-    INDEX (alias)
-);
-```
-
-Fill the table with rows. This example creates an alias for each user with their full name, and also a group address. When you send an email to the group address, all of the returned rows will be combined, and all of the recipients will get the mail.
-
-```sql
-INSERT INTO postfix_aliases (alias, destination, active) VALUES
-	('johan.bak@lego.dk', 'johan@lego.dk', 1),
-	('magnus.holm@lego.dk', 'magnus@lego.dk', 1),
-	('noah.klausen@lego.dk', 'noah@lego.dk', 1),
-	('group@lego.dk', 'noah@lego.dk', 1),
-	('group@lego.dk', 'johan@lego.dk', 1),
-	('group@lego.dk', 'magnus@lego.dk', 1);
-```
-
-Exit MariaDB.
-
-```sql
-EXIT;
-```
-
 # Postfix Setup
 
 Install the required packages:
 
 ```bash
-apt install postfix postfix-ldap postfix-mysql
+apt install postfix postfix-ldap
 ```
 
 Select *Internet Site* during install.
 
-Set *System mail name* to domain only.
+Set *System mail name* to the domain name (In this case, `company.com`).
 
 ## Postfix LDAP related config
 
 Create the directory `/etc/postfix/ldap`. This contains the files which are used to query the LDAP server for information.
 
-Create `/etc/postfix/ldap/smtpd_sender_login_maps`
+This directory will contain the files needed for LDAP queries. All of these files will have the following, common beginning:
+
 ```
 server_host = ldap://int-srv.company.com
 version = 3
@@ -132,39 +73,53 @@ bind_pw = Passw0rd
 
 search_base = ou=people,dc=company,dc=com
 scope = sub
+```
 
-query_filter = (|(mail=%s)(uid=%s))
-result_attribute = mail
+This contains all basic settings for an LDAP query.
+
+Now, create the following files with the following queries:
+
+<kbd>/etc/postfix/ldap/virtual_mailbox_maps</kbd>
+
+```
+<common part>
+
+query_filter = (|(uid=%s)(mail=%s))
+result_attribute = uid
+result_format = /mailboxes/%s/
+```
+
+
+<kbd>/etc/postfix/ldap/virtual_uid_maps</kbd>
+
+```
+<common part>
+
+query_filter = (|(uid=%s)(mail=%s))
+result_attribute = uidNumber
+```
+
+
+<kbd>/etc/postfix/ldap/virtual_gid_maps</kbd>
+
+```
+<common part>
+
+query_filter = (|(uid=%s)(mail=%s))
+result_attribute = gidNumber
 ```
 
 You can test the connection with the `postmap` command:
 
 ```bash
-postmap -q mark@company.com ldap:/etc/postfix/ldap/smtpd_sender_login_maps
-# mark@company.com
-```
+postmap -q mark@company.com ldap:/etc/postfix/ldap/virtual_mailbox_maps
+# /mailboxes/egon.lange/
 
-## Postfix SQL related config
+postmap -q mark@company.com ldap:/etc/postfix/ldap/virtual_uid_maps
+# 3001
 
-Create the directory `/etc/postfix/sql`. This contains the files which are used to query the MariaDB server for information.
-
-Create `/etc/postfix/sql/virtual_alias_maps`
-```
-user = postfix_user
-password = Passw0rd
-hosts = 127.0.0.1
-dbname = postfix
-query = SELECT destination FROM postfix_aliases WHERE alias='%s' AND active=1
-```
-
-You can test the connection with the `postmap` command:
-
-```bash
-postmap -q johan.bak@lego.dk ldap:/etc/postfix/sql/virtual_alias_maps
-# johan@lego.dk
-
-postmap -q group@lego.dk ldap:/etc/postfix/sql/virtual_alias_maps
-# noah@lego.dk,johan@lego.dk,magnus@lego.dk
+postmap -q mark@company.com ldap:/etc/postfix/ldap/virtual_gid_maps
+# 3001
 ```
 
 ## Postfix main.cf
@@ -199,28 +154,25 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-mydestination = localhost, localhost.localdomain
+mydestination = localhost
 relayhost =
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 10.0.0.0/8 [2001:db8:1001::]/48
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 inet_protocols = all
 
 myorigin = company.com
-mydomain = company.com
 myhostname = mail.company.com
 
-virtual_mailbox_domains = $mydomain
-
-# Use this line to transfer all mails to Dovecot
-virtual_transport = lmtp:inet:dovecot.company.com
-
-virtual_alias_maps = mysql:/etc/postfix/sql/virtual_alias_maps
-smtpd_sender_login_maps = ldap:/etc/postfix/ldap/smtpd_sender_login_maps
+virtual_mailbox_domains = company.com
+virtual_mailbox_base = /
+virtual_mailbox_maps = ldap:/etc/postfix/virtual_mailbox_maps
+virtual_uid_maps = ldap:/etc/postfix/virtual_uid_maps
+virtual_gid_maps = ldap:/etc/postfix/virtual_gid_maps
 
 smtpd_sasl_type = dovecot
-smtpd_sasl_path = inet:dovecot.company.com:12345
+smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
 
@@ -294,13 +246,13 @@ tcp   LISTEN 0      100             [::]:587          [::]:*    users:(("master"
 Install required packages:
 
 ```bash
-apt install dovecot-core dovecot-imapd dovecot-ldap dovecot-lmtpd
+apt install dovecot-core dovecot-imapd dovecot-ldap
 ```
 
 Set the Maildir location in `/etc/dovecot/conf.d/10-mail.conf`:
 
 ```
-mail_location = maildir:/mailboxes/%u
+mail_location = maildir:/mailboxes/%n
 ```
 
 This sets the location where the mails will be stored. Create this directory and make sure it is writable:
@@ -358,12 +310,12 @@ scope = subtree
 # Attributes to return
 user_attrs = homeDirectory=home,uidNumber=uid,gidNumber=gid
 # Attributes to filter for
-user_filter = (&(objectClass=posixAccount)(mail=%u))
+user_filter = (&(objectClass=posixAccount)(uid=%n))
 
 # Password checking attributes
-pass_attrs = mail=user,userPassword=password
+pass_attrs = uid=user,userPassword=password
 # Entry filtering
-pass_filter = (&(objectClass=posixAccount)(mail=%u))
+pass_filter = (&(objectClass=posixAccount)(uid=%n))
 ```
 
 The next file is `/etc/dovecot/10-master.conf`.
@@ -374,20 +326,13 @@ Two things will be configured:
  - Postfix was configured to authenticate through Dovecot via TCP, the listener needs to be enabled.
 
 ```bash
-service lmtp {
-  ..
-
-  inet_listener lmtp {
-    address = 10.0.0.102
-    port = 24
-  }
-}
-
 service auth {
   ..
 
-  inet_listener {
-    port = 12345
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+    user = postfix
+    group = postfix
   }
 }
 ```
@@ -395,7 +340,7 @@ service auth {
 The above mentioned LMTP daemon needs to be enabled in `/etc/dovecot/dovecot.conf`:
 
 ```bash
-protocols = imap lmtp
+protocols = imap
 ```
 
 Finally, restart Dovecot:
@@ -433,7 +378,7 @@ By serving these records, clients can automatically configure themselves.
 
 The mail client should automatically work with the DNS settings.
 
-Enter your email address and password.
+For logging in, use only the username (without domain) and password.
 
 # Testing
 
