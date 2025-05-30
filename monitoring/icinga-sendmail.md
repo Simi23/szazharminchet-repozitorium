@@ -2,7 +2,7 @@
 title: Icinga2 send email alert
 description: Email alerting with postfix relay
 published: true
-date: 2025-05-30T14:12:18.461Z
+date: 2025-05-30T14:13:06.491Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-30T14:08:22.465Z
@@ -74,4 +74,5 @@ object Host "MONITOR-HA-LIN-1" {
 }
 ```
 
+And you're done, if something goes down or up, you get an email to your mailbox!
 
