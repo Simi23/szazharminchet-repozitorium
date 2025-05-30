@@ -2,7 +2,7 @@
 title: isc-dhcp-server
 description: Isc-dhcp-server configuration. DDNS, high availability included.
 published: true
-date: 2025-02-17T10:58:18.606Z
+date: 2025-05-30T14:04:10.165Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-15T10:02:40.962Z
@@ -105,7 +105,10 @@ systemctl restart isc-dhcp-server
 
 ## DDNS
 
-You can configure DDNS in isc-dhcp-server. You have to do the configurations in the DNS config too, for [Bind9](/DNS/Bind9) in this tutorial you will find what you have to do. You will have to use the same key on DNS and DHCP side on both server.
+You can configure *dynamic domain name updates* in **isc-dhcp-server**. You have to do the configurations in the DNS config too, for [Bind9](/DNS/Bind9) in this tutorial you will find what you have to do. You will have to use the same key on DNS and DHCP side on both server.
+
+> Do not rename the key you have generated!
+{.is-warning}
 
 Add these lines to `/etc/dhcp/dhcpd.conf`
 
@@ -114,15 +117,7 @@ Add these lines to `/etc/dhcp/dhcpd.conf`
 
 include "/etc/bind/DHCP.key";
 
-zone company.com. {
-  primary 10.0.0.1;
-  key dhcp-key;
-}
-
-zone db.10.0.0. {
-  primary 10.0.0.1;
-  key dhcp-key;
-}
+ddns-update-style standard;
 
 ...
 
@@ -130,9 +125,25 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
   ...
   
   ddns-domainname "company.com";
-  ddns-rev-domainname "10.0.0";
+  
+  zone company.com {
+    primary 10.0.0.1;
+    key "dhcp-key";
+  }
+
+  zone 10.in-addr.arpa {
+    primary 10.0.0.1;
+    key "dhcp-key";
+  }
 }
 ```
+
+> **Check the following:**
+> - The usage of strings with and without quotation marks (`"`) should be consistent with the config above.
+> - The zone definitions should match the ones you have on your DNS server. (e.g. the reverse zone has to match exactly too, it cannot be a subset of the DNS zone)
+> 
+> Checking these things is crucial otherwise the daemon will not start or won't work correctly.
+{.is-warning}
 
 Restart the daemon.
 
