@@ -2,7 +2,7 @@
 title: Icinga2 send email alert
 description: Email alerting with postfix relay
 published: true
-date: 2025-05-30T14:11:24.887Z
+date: 2025-05-30T14:12:18.461Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-30T14:08:22.465Z
@@ -49,6 +49,29 @@ Edit the mail templates, edit the outcommented part, as you want in`/etc/icinga2
 ...
 ```
 
-`/etc/icinga2/conf.d/hosts.conf`
+Add your nodes, make sure to add the **vars.notification.mail** attributes to `/etc/icinga2/conf.d/hosts.conf`!
+```
+object Host "MONITOR-HA-LIN-1" {
+  import "generic-host"
+
+  address = "10.100.0.10"
+  address6 = "2001:db8:10:100::10"
+
+  vars.os = "Linux"
+
+  vars.http_vhosts["http"] = {
+    http_uri = "/"
+  }
+  vars.disks["disk"] = {
+  }
+  vars.disks["disk /"] = {
+    disk_partitions = "/"
+  }
+
+  vars.notification["mail"] = {
+    groups = [ "icingaadmins" ]
+  }
+}
+```
 
 
