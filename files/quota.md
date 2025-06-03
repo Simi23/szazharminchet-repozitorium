@@ -2,7 +2,7 @@
 title: Quota
 description: Quota
 published: true
-date: 2025-06-03T12:45:14.983Z
+date: 2025-06-03T12:45:32.318Z
 tags: 
 editor: markdown
 dateCreated: 2025-06-03T12:45:14.983Z
@@ -10,7 +10,7 @@ dateCreated: 2025-06-03T12:45:14.983Z
 
 # Quota
 
-Install the following package `apt install quota.
+Install the following package `apt install quota'.
 
 > Edit /etc/fstab and write this to the 'option' part of the specific filesystem:
 {.is-info}
