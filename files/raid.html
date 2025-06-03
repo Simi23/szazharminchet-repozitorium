@@ -2,10 +2,29 @@
 title: RAID
 description: Software RAID
 published: true
-date: 2025-06-03T12:25:07.751Z
+date: 2025-06-03T12:25:14.494Z
 tags: linux
 editor: ckeditor
 dateCreated: 2025-06-03T12:24:19.740Z
 -->
 
-<p>a</p>
+<h1>RAID</h1>
+<p>&nbsp;</p>
+<p>Install the following package <code>apt install mdadm</code>.</p>
+<p>&nbsp;</p>
+<p>Create a new raid block:</p>
+<pre><code class="language-plaintext">mdam --create /dev/md0 --level=x --raid-devices=2 /dev/sda /dev/sdb
+mdam --detail --scan &gt;&gt; /etc/mdadm/mdadm.conf
+update-initramfs -u</code></pre>
+<p>&nbsp;</p>
+<p>Create the files system and create a directory for the raid block:</p>
+<pre><code class="language-plaintext">mkfs.ext4 /dev/md0
+mkdir -p /mnt/md0</code></pre>
+<p>&nbsp;</p>
+<p>Edit <code>/etc/fstab</code> &nbsp;to mount the raid block automatically. You can get the uuid with (and add to the eof) <code>lsblk -i name,uuid | grep /dev/md0 &gt;&gt; /etc/fstab&nbsp;</code></p>
+<pre><code class="language-plaintext">UUID="(Piped part)" /mnt/md0 auto defaults,nofail,discard 0 0</code></pre>
+<p>&nbsp;</p>
+<p>Try to mount everything from <code>/etc/fstab</code>, to see the raid block can be mounted and working.</p>
+<pre><code class="language-plaintext">mount -a
+systemctl daemon-reload</code></pre>
+<p>&nbsp;</p>
