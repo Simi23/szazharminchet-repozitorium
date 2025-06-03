@@ -2,7 +2,7 @@
 title: ZFS
 description: 
 published: true
-date: 2025-05-20T12:54:23.739Z
+date: 2025-06-03T12:39:52.035Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-20T12:54:23.739Z
@@ -155,4 +155,37 @@ zpool status
 
 # Get the usage of a certain volume/dataset
 zfs get all pool1/volume1 | grep used
+```
+
+# ZFS encryption
+
+You can create encrypted ZFS pools or datasets.
+
+The easiest way is to use a passphrase for the encryption.
+
+Use the following command to create an encrypted pool:
+
+```bash
+zpool create \
+  -O encryption=aes-256-gcm \
+  -O keyformat=passphrase \
+  <pool-name> \
+  <vdev> ...
+```
+
+> For the encryption type, you can use any of `aes-{128,192,256}-{ccm,gcm}`, or even `on`, which uses the default `aes-128-ccm`.
+> 
+> The format of **\<vdev>** can be found in the guide above.
+{.is-info}
+
+After creating the pool, you can create a dataset on it, and it will be automatically encrypted:
+
+```bash
+zfs create <pool-name>/<dataset-name>
+```
+
+Check encryption with:
+
+```bash
+zfs get encryption <pool-name>/<dataset-name>
 ```
