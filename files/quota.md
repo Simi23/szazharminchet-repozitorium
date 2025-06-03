@@ -2,7 +2,7 @@
 title: Quota
 description: Quota
 published: true
-date: 2025-06-03T12:45:32.318Z
+date: 2025-06-03T12:46:37.114Z
 tags: 
 editor: markdown
 dateCreated: 2025-06-03T12:45:14.983Z
@@ -79,9 +79,8 @@ repquota <mount point>
 ```bash
 quotaoff <mount point>
 ```
-> Sending a mail in case of exceeding the soft limit, or expiry of grace time:
+> Sending a mail in case of exceeding the soft limit, or expiry of grace time. Its parameters are in /etc/warnquota.conf
 {.is-info}
-Its parameters are in /etc/warnquota.conf
 ```bash
 warnquota
 ```
