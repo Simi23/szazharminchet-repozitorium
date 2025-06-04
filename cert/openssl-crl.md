@@ -2,7 +2,7 @@
 title: OpenSSL Certificate Revocation
 description: Creating Certificate Revocation Lists (CRL) and publishing them via CRL Distribution Points (CDP)
 published: true
-date: 2025-06-04T13:54:55.954Z
+date: 2025-06-04T14:02:01.458Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-04T13:54:55.954Z
@@ -85,9 +85,6 @@ This assumes you have a web server running with the `lego_crl.pem` file present,
 {.is-warning}
 
 # Revoking certificates
-
-> This is untested
-{.is-danger}
 
 To revoke a certificate, you need the file itself. In this example, the certificate to be revoked will be `client.crt`.
 
