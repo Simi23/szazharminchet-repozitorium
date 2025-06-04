@@ -1,8 +1,8 @@
 ---
-title: Certification Authority
+title: OpenSSL Certification Authority
 description: x509 Certification Authority setup with openssl
 published: true
-date: 2025-03-06T11:13:54.958Z
+date: 2025-06-04T13:25:26.236Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-11T11:13:16.841Z
