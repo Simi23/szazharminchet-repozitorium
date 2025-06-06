@@ -2,7 +2,7 @@
 title: LDAP login and automount
 description: 
 published: true
-date: 2025-06-06T13:37:38.501Z
+date: 2025-06-06T13:38:34.887Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T13:33:41.709Z
@@ -43,6 +43,10 @@ Enable auto home directory creation
 ```bash
 pam-auth-update --enable mkhomedir
 ```
+
+> This setup uses **StartTLS** to authenticate with the provider so make sure that you trust the root certificate for your LDAP provider!
+{.is-warning}
+
 
 ## Automount homedir
 
