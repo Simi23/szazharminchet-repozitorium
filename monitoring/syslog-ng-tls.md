@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T08:03:48.346Z
+date: 2025-06-06T08:04:53.211Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -176,5 +176,10 @@ log {
 	source(s_src);
   filter(f_dhcp);
   destination(d_dhcp);
+  
+  # ( or if you want to send everything except your filter)
+  # filter { 
+  #	  not filter(f_dhcp)
+  # };
 };
 ```
