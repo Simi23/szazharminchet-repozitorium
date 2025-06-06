@@ -2,7 +2,7 @@
 title: Monitoring Guides
 description: 
 published: true
-date: 2025-05-30T14:12:31.872Z
+date: 2025-06-06T07:22:35.182Z
 tags: 
 editor: markdown
 dateCreated: 2025-05-28T18:07:17.068Z
@@ -16,3 +16,7 @@ dateCreated: 2025-05-28T18:07:17.068Z
 # Zabbix
 
 - [Setup Guide](/monitoring/zabbix-setup)
+
+# Syslog-NG
+
+- [TLS log collection](/monitoring/syslog-ng-tls)
