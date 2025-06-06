@@ -2,15 +2,13 @@
 title: Apache2
 description: Apache2 general configs, mods
 published: true
-date: 2025-03-10T10:21:44.007Z
+date: 2025-06-06T07:20:28.102Z
 tags: linux
 editor: markdown
 dateCreated: 2025-03-10T10:13:08.895Z
 ---
 
-# Apache2
-
-## Install
+# Install
 
 Install apache2 packages
 
@@ -18,7 +16,7 @@ Install apache2 packages
 apt install apache2
 ```
 
-## Mods
+# Mods
 
 You can enable mods using the following command.
 ```
@@ -38,10 +36,10 @@ ssl
 userdir
 > {.is-info}
 
-## Sites
+# Sites
 The sites are located under `/etc/apache2/sites-available`. If you add here a .conf file, you can enable it using `a2ensite sitename`. It creates a link into `/etc/apache2/sites-enabled`. You can user `a2dissite sitename` to disable a site.
 
-## Virtual hosting (configs)
+# Virtual hosting (configs)
 
 > Virtual host for http.
 > {.is-info}
@@ -100,4 +98,11 @@ The sites are located under `/etc/apache2/sites-available`. If you add here a .c
 </VirtualHost>
 ```
 
+# Signature removal
 
+To remove all signatures to avoid exposing Apache version and unnecessary headers, extend <kbd>/etc/apache2/apache2.conf</kbd> with the following lines:
+
+```
+ServerSignature	Off
+ServerTokens	Prod
+```
