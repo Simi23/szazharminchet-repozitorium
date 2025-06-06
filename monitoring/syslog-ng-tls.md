@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T07:44:00.799Z
+date: 2025-06-06T07:54:37.989Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -55,6 +55,31 @@ destination d_name {
 };
 ```
 
+### Log
+> If you want a new log into your server, than you have to use the `log` keyword. In a `log` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
+{.is-info}
+
+#### Syntax
+```
+log{
+	source(s_name);
+  filter(f_name); # Optional
+  destination(d_name);
+};
+```
+
+### IETF
+> One protocol from the two with you can send and receive syslogs. You have to use the `syslog` keyword to use this. In a `syslog` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
+{.is-info}
+
+#### Syntax
+```
+syslog{
+	source(s_name);
+  filter(f_name); # Optional
+  destination(d_name);
+};
+```
 ### IETF
 > One protocol from the two with you can send and receive syslogs. You have to use the `syslog` keyword to use this. In a `syslog` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
 {.is-info}
@@ -68,6 +93,7 @@ syslog{
 };
 ```
 
+
 ### BSD
 > One protocol from the two with you can send and receive syslogs. You have to use the `network` keyword to use this. In a `network` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
 {.is-info}
@@ -80,3 +106,17 @@ network{
   destination(d_name);
 };
 ```
+
+## Transport over TLS
+> You have to generate [x509 certificates](/cert/openssl). I recommend to create chains from certificates.
+> After the creation make the devices trust the CA certificate, and start to configure your devices.
+> [HERE](https://syslog-ng.github.io/admin-guide/100_TLS-encrypted_message_transfer/004_TLS_options) you can check every TLS option.
+{.is-info}
+
+### Server side configuration
+
+```
+
+```
+
+### Client side configuration
