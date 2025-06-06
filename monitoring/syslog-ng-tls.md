@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T07:41:36.586Z
+date: 2025-06-06T07:41:59.574Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -65,8 +65,17 @@ syslog{
   filter(f_name); # Optional
   destination(d_name);
 };
-
-
 ```
 
 ### BSD
+> One protocol from the two with you can send and receive syslogs. You have to use the `network` keyword to use this. In a `network` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
+{.is-info}
+
+#### Syntax
+```
+network{
+	source(s_name);
+  filter(f_name); # Optional
+  destination(d_name);
+};
+```
