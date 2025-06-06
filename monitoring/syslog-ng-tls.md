@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T07:54:37.989Z
+date: 2025-06-06T07:58:33.420Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -116,7 +116,20 @@ network{
 ### Server side configuration
 
 ```
-
+source s_dhcp {
+	syslog(
+  	ip-protocol(4) # If you define 6 it wil listen on IPv6 and IPv4 too.
+    port(6514) # Number between 1-65536
+    transport("tls") # udp,tcp,tls
+    tls (
+    	cert-file("/ca/SRV.pem")
+      key-file("/ca/SRV.key")
+      ca-file("/ca/CA.crt")
+      ca-dir("/ca/")
+      # peer-verify(optional-untrusted); # You can define this, there will be a table under this what will provide which option do what.
+    )
+  );
+};
 ```
 
 ### Client side configuration
