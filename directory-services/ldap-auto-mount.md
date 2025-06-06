@@ -2,7 +2,7 @@
 title: LDAP login and automount
 description: 
 published: true
-date: 2025-06-06T13:38:34.887Z
+date: 2025-06-06T13:43:50.357Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T13:33:41.709Z
@@ -44,7 +44,7 @@ Enable auto home directory creation
 pam-auth-update --enable mkhomedir
 ```
 
-> This setup uses **StartTLS** to authenticate with the provider so make sure that you trust the root certificate for your LDAP provider!
+> This setup uses **StartTLS** to authenticate with the provider so make sure that you trust the root certificate for your LDAP provider! `(/usr/local/share/ca-certificates)`
 {.is-warning}
 
 
@@ -53,6 +53,31 @@ pam-auth-update --enable mkhomedir
 Install neccessary services.
 ```bash
 apt install libpam-mount cifs-utils
+```
+
+Get rid off the comment on this line in `/etc/security/pam_mount.conf.xml`
+```xml
+...
+<lusersconf name=".pam_mount.conf.xml" />
+...
+```
+
+
+Add this part to `/etc/security/pam_mount.conf.xml` to automount user folders.
+```xml
+...
+<pam_mount>
+<debug_enable="0">
+  <volume
+    			options="nodev,nosuid,nofail"
+          uid="%(USER)"
+          path="%(USER)"
+          mount_point="/home/%(USER)"
+          server="HQ-DC.billund.lego.dk"
+          fstype="cifs"
+  />
+</pam_mount>
+...
 ```
 
 
