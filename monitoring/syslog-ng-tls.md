@@ -2,13 +2,13 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T08:12:41.921Z
+date: 2025-06-06T08:13:45.107Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
 ---
 
-# Syslog-NG with TLS
+# Syslog-NG
 
 ## Basics
 
@@ -67,6 +67,8 @@ log{
   destination(d_name);
 };
 ```
+
+## Sending logs over network
 
 ### IETF
 > One protocol from the two with you can send and receive syslogs. You have to use the `syslog` keyword to use this. In a `syslog` field you will use one or more (or zero) predefined **source**, **filter** and **destination**. You have to define this in a source or a destination.
