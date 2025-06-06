@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T08:10:55.449Z
+date: 2025-06-06T08:11:05.637Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
