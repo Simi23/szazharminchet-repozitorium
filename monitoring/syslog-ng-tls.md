@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T07:41:59.574Z
+date: 2025-06-06T07:44:00.799Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -14,6 +14,7 @@ dateCreated: 2025-06-06T07:26:45.502Z
 
 > You have to install `syslog-ng` package to use the daemon.
 > There are some predefined **sources**, **filters** and **destinations** in `/etc/syslog-ng/syslog-ng.conf` file.
+> For modularity and seperation, if you create a new config, then please place it under `/etc/syslog-ng/conf.d` directory and name it `*.conf`, because the main configuartion file will include these config files.
 {.is-info}
 
 ### Source
