@@ -2,7 +2,7 @@
 title: Monitoring Guides
 description: 
 published: true
-date: 2025-06-06T07:27:39.645Z
+date: 2025-06-06T08:14:08.639Z
 tags: 
 editor: markdown
 dateCreated: 2025-05-28T18:07:17.068Z
@@ -19,4 +19,4 @@ dateCreated: 2025-05-28T18:07:17.068Z
 
 # Syslog-NG
 
-- [TLS log collection](/monitoring/syslog-ng-tls)
+- [Syslog-NG logging](/monitoring/syslog-ng-tls)
