@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T08:11:05.637Z
+date: 2025-06-06T08:12:41.921Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -124,7 +124,7 @@ network{
 {.is-info}
 
 | Option             | No cert             | Invalid cert        | Valid cert              |
-| ------------------ | ------------------- | -------------       | -----------            |
+| :----------------- | :-----------------: | :-----------:       | :---------:            |
 | optional-untrusted | TLS-encryption      | TLS-encryption      | TLS-encryption |
 | optional-trusted   | TLS-encryption      | rejected connection | TLS-encryption |
 | require-untrusted  | rejected connection | TLS-encryption      | TLS-encryption |
