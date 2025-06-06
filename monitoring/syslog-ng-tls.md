@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T07:58:33.420Z
+date: 2025-06-06T08:01:13.311Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -69,15 +69,21 @@ log{
 ```
 
 ### IETF
-> One protocol from the two with you can send and receive syslogs. You have to use the `syslog` keyword to use this. In a `syslog` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
+> One protocol from the two with you can send and receive syslogs. You have to use the `syslog` keyword to use this. In a `syslog` field you will use one or more (or zero) predefined **source**, **filter** and **destination**. You have to define this in a source or a destination.
 {.is-info}
 
 #### Syntax
 ```
 syslog{
-	source(s_name);
-  filter(f_name); # Optional
-  destination(d_name);
+	ip-protocol(4) # If you define 6 it wil listen on IPv6 and IPv4 too.
+    port(6514) # Number between 1-65536
+    transport("tls") # udp,tcp,tls
+    tls (
+    	cert-file("/ca/SRV.pem")
+      key-file("/ca/SRV.key")
+      ca-file("/ca/CA.crt")
+      ca-dir("/ca/")
+      # peer-verify(optional-untrusted); # You can define this, there will be a table under this what will provide which option do what.
 };
 ```
 ### IETF
@@ -95,15 +101,21 @@ syslog{
 
 
 ### BSD
-> One protocol from the two with you can send and receive syslogs. You have to use the `network` keyword to use this. In a `network` field you will use one or more (or zero) predefined **source**, **filter** and **destination**
+> One protocol from the two with you can send and receive syslogs. You have to use the `network` keyword to use this. In a `network` field you will use one or more (or zero) predefined **source**, **filter** and **destination**. You have to define this in a source or a destination.
 {.is-info}
 
 #### Syntax
 ```
 network{
-	source(s_name);
-  filter(f_name); # Optional
-  destination(d_name);
+	ip-protocol(4) # If you define 6 it wil listen on IPv6 and IPv4 too.
+    port(6514) # Number between 1-65536
+    transport("tls") # udp,tcp,tls
+    tls (
+    	cert-file("/ca/SRV.pem")
+      key-file("/ca/SRV.key")
+      ca-file("/ca/CA.crt")
+      ca-dir("/ca/")
+      # peer-verify(optional-untrusted); # You can define this, there will be a table under this what will provide which option do what.
 };
 ```
 
@@ -118,17 +130,25 @@ network{
 ```
 source s_dhcp {
 	syslog(
-  	ip-protocol(4) # If you define 6 it wil listen on IPv6 and IPv4 too.
-    port(6514) # Number between 1-65536
-    transport("tls") # udp,tcp,tls
+  	ip-protocol(4)
+    port(6514)
+    transport("tls")
     tls (
     	cert-file("/ca/SRV.pem")
       key-file("/ca/SRV.key")
       ca-file("/ca/CA.crt")
       ca-dir("/ca/")
-      # peer-verify(optional-untrusted); # You can define this, there will be a table under this what will provide which option do what.
     )
   );
+};
+
+destination d_dhcp {
+	file("/log/dhcp.log");
+};
+
+log{
+	source(s_dhcp);
+  destination(d_dhcp);
 };
 ```
 
