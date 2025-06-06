@@ -2,7 +2,7 @@
 title: ZFS
 description: 
 published: true
-date: 2025-06-03T12:39:52.035Z
+date: 2025-06-06T08:32:13.947Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-20T12:54:23.739Z
@@ -189,3 +189,43 @@ Check encryption with:
 ```bash
 zfs get encryption <pool-name>/<dataset-name>
 ```
+
+## Mount after restart
+
+To mount encrypted ZFS pools after a restart, the keys need to be loaded first. In this example, the pool was encrypted, so the keys for that need to be loaded.
+
+```bash
+zfs load-key <pool-name>
+```
+
+Now you can mount all file systems:
+
+```bash
+zfs mount -a
+```
+
+### Auto-mount
+
+To automatically mount the share after a restart, write the encryption passhprase into <kbd>/etc/passphrase</kbd>:
+
+```bash
+echo '<passphrase>' > /etc/passphrase
+chown root:root /etc/passphrase
+chmod 600 /etc/passphrase
+```
+
+Create <kbd>/etc/rc.local</kbd> and edit it:
+
+```bash
+#!/bin/bash
+zfs mount -l -a < /etc/passphrase
+```
+
+Make the file executable:
+
+```bash
+chmod +x /etc/passphrase
+```
+
+> This setup is not recommended, but it works if you want to automatically mount ZFS filesystems.
+{.is-warning}
