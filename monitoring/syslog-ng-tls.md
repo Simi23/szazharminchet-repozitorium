@@ -2,7 +2,7 @@
 title: Syslog-NG with TLS
 description: Gathering, and placing logs from remote servers to one place with Syslog-NG (secured)
 published: true
-date: 2025-06-06T08:01:13.311Z
+date: 2025-06-06T08:03:48.346Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:26:45.502Z
@@ -153,3 +153,28 @@ log{
 ```
 
 ### Client side configuration
+
+```
+destination d_dhcp{
+	syslog(
+  	"SRV.lego.dk"
+    	port(6514)
+      transport("tls")
+      tls(
+      	cert-file("/ca/CLT.pem")
+        key-file("/ca/CLT.key")
+        ca-file("/ca/CA.crt")
+      )
+  );
+};
+
+filter f_dhcp{
+	program("dhcpd") or program("dhclient");
+};
+
+log {
+	source(s_src);
+  filter(f_dhcp);
+  destination(d_dhcp);
+};
+```
