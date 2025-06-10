@@ -2,7 +2,7 @@
 title: Strongswan S2S VPN with redirection on tunnel failure
 description: NFTables DNAT traffic redirection on tunnel failure to access other site's public services
 published: true
-date: 2025-06-06T13:49:51.457Z
+date: 2025-06-10T07:07:16.119Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T13:49:51.456Z
@@ -82,7 +82,7 @@ connections {
 }
 ```
 
-Now create the updown script at /fw/updown.sh:
+Now create the updown script at <kbd>/fw/updown.sh</kbd>:
 
 ```bash
 #!/bin/bash
