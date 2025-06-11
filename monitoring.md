@@ -2,7 +2,7 @@
 title: Monitoring Guides
 description: 
 published: true
-date: 2025-06-06T08:14:08.639Z
+date: 2025-06-11T13:09:19.416Z
 tags: 
 editor: markdown
 dateCreated: 2025-05-28T18:07:17.068Z
@@ -16,6 +16,9 @@ dateCreated: 2025-05-28T18:07:17.068Z
 # Zabbix
 
 - [Setup Guide](/monitoring/zabbix-setup)
+- [Send notification to user](/monitoring/zabbix-notification)
+- [Monitor web reachability](/monitoring/zabbix-web-reach)
+- [Monitor Linux troough SNMP](/monitoring/zabbix-lin-snmp)
 
 # Syslog-NG
 
