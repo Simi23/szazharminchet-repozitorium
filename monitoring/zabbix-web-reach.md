@@ -2,7 +2,7 @@
 title: Zabbix monitor web reachability
 description: Zabbix monitor web reachability
 published: true
-date: 2025-06-11T14:06:34.724Z
+date: 2025-06-11T14:06:57.689Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:52:58.454Z
@@ -14,20 +14,20 @@ dateCreated: 2025-06-11T13:52:58.454Z
 {.is-info}
 
 
-<kbd>ScenarioM</kbd>
+<kbd>Scenario:</kbd>
 - **Name**: An unique name
 - **Update interval**: set in interval 30s, 1m, 1h ...
 - **Attempts**: 1 
 - **Agent**: Zabbix
 
-<kbd>Steps</kbd>
+<kbd>Steps:</kbd>
 - Add 
  - **Name**: An unique name
  - **URL**: http://fqdn
  - **Timeout**: 15s
  - **Require status codes**: 200
  
-<kbd>Authentication</kbd>
+<kbd>Authentication:</kbd>
 - If you use anything set it!
   
 > I recommend you to edit Trigger, because if you use proxy, than your website is reachable, just your proxy don't and it will go down, set up a trigger to *HTTP response code*.
