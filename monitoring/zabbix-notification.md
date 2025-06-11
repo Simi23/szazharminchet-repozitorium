@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:31:43.614Z
+date: 2025-06-11T13:36:50.418Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -59,3 +59,15 @@ You can add parameters to your script what will pass them to it. And write a des
 
 >You can manage when to send email under `Configuration\Actions\Trigger actions`. Create a new action or edit and enable the default.
 {.is-info}
+
+### Action page
+
+- **Name**: You can set up the name
+- **Conditions**: You can set up conditions when to do the opeartions. If you want you can set up more, and after you have at least two conditions, you can set the **Type of calculation** how to handle these conditions.
+- **Enabled**: You can enable or disable it.
+
+
+### Operations page
+
+- **Default operation step duration**: default 1h
+- **Operations**: There are 3 operations, you can set who, or which group to send the notificaiton, and with which media type to send the notification.
