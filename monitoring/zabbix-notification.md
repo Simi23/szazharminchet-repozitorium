@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:29:00.553Z
+date: 2025-06-11T13:31:43.614Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -41,6 +41,9 @@ When you have some services and hosts you're monitoring, it's better when you ge
 You can add parameters to your script what will pass them to it. And write a description so if you see this one week later, know what you have done here with it!
 {.is-info}
 
+> Don't forget to add **Message template** otherwise the message body will be empty!
+{.is-warning}
+
 
 ## User medias
 
@@ -54,5 +57,5 @@ You can add parameters to your script what will pass them to it. And write a des
 
 ## Action trigger
 
-> 
+>You can manage when to send email under `Configuration\Actions\Trigger actions`. Create a new action or edit and enable the default.
 {.is-info}
