@@ -2,7 +2,7 @@
 title: Linux SNMP monitoring
 description: How to set up Linux SNMP monitoring.
 published: true
-date: 2025-06-11T13:49:34.354Z
+date: 2025-06-11T13:51:39.750Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:38:43.399Z
@@ -31,3 +31,15 @@ dateCreated: 2025-06-11T13:38:43.399Z
 | Privay password | *User privacy password* |
 
 ## SNMPD
+> Install `snmp`, and `snmpd` packages, edit the `/etc/snmp/snmpd.conf` file.
+
+```conf
+sysLocation YOURSYSTEMLOCATION
+sysContact NAME <email@address>
+
+agentaddress 0.0.0.0, [::]
+
+createuser Administrator MD5 "Passw0rd!" AES256C "Passw0rd!"
+rouser Administrator authpriv
+```
+
