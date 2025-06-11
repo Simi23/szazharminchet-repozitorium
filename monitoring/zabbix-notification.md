@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:24:44.824Z
+date: 2025-06-11T13:28:49.921Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -41,4 +41,17 @@ When you have some services and hosts you're monitoring, it's better when you ge
 You can add parameters to your script what will pass them to it. And write a description so if you see this one week later, know what you have done here with it!
 {.is-info}
 
+
 ## User medias
+
+> After you created or found and configured your media type, than you can add these to an user, with locations, where to send this information.
+{.is-info}
+
+- Go to `Administration\Users` tab.
+- Choose or create a user for notifications.
+- On **Media** tab at user configuration page, add the media types, that you will use. Set **Send to**, where you want to send it, and when to send it and which severity to send.
+- After you have done that **CLICK the Update** button!
+
+## Action trigger
+
+> After you created or, found and configured your media type, than you can add 
