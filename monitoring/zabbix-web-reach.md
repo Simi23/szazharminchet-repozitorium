@@ -2,7 +2,7 @@
 title: Zabbix monitor web reachability
 description: Zabbix monitor web reachability
 published: true
-date: 2025-06-11T14:06:20.180Z
+date: 2025-06-11T14:06:34.724Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:52:58.454Z
@@ -26,6 +26,7 @@ dateCreated: 2025-06-11T13:52:58.454Z
  - **URL**: http://fqdn
  - **Timeout**: 15s
  - **Require status codes**: 200
+ 
 <kbd>Authentication</kbd>
 - If you use anything set it!
   
