@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:20:49.548Z
+date: 2025-06-11T13:24:38.102Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -37,5 +37,7 @@ When you have some services and hosts you're monitoring, it's better when you ge
 
 ### Custom script
 
+> If you don't see the option that would fit your logging don't worry! There is a way to do anything you want. On the `Media types` page choose **Create media type** in the top right corner. Give it a unique **name**, and choose **Type: Script**. In the field  **Script name** you will have to write the name of the script that you will create later into `/etc/zabbix/alert.d` directory. So if it will be *a.sh* then use here *a.sh* too!
+You can add parameters to your script what will pass them to it. And write a description so if you see this one week later, know what you have done here with it!
 
 ## User medias
