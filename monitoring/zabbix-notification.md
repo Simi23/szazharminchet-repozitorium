@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:28:49.921Z
+date: 2025-06-11T13:29:00.553Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -54,4 +54,5 @@ You can add parameters to your script what will pass them to it. And write a des
 
 ## Action trigger
 
-> After you created or, found and configured your media type, than you can add 
+> 
+{.is-info}
