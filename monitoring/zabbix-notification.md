@@ -2,7 +2,7 @@
 title: Zabbix send notification
 description: How to configure notification send.
 published: true
-date: 2025-06-11T13:19:10.718Z
+date: 2025-06-11T13:20:49.548Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:12:14.264Z
@@ -31,7 +31,8 @@ When you have some services and hosts you're monitoring, it's better when you ge
 > CLICK UPDATE!!
 {.is-warning}
 
-
+> If you want to edit the body of the text that the email will send then change to tab `Message templates` and assing values and email body as you want!
+{.is-info}
 
 
 ### Custom script
