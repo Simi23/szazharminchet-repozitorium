@@ -2,7 +2,7 @@
 title: VPN
 description: VPN Guides
 published: true
-date: 2025-06-06T13:52:32.878Z
+date: 2025-06-18T09:26:26.192Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:43:56.838Z
@@ -25,6 +25,7 @@ dateCreated: 2025-03-03T10:43:56.838Z
    - [`ipsec.conf` config](/vpn/s2s-strongswan-rras-old-cert)
  - **[RRAS-RRAS](/vpn/rras-s2s-cert)** with **certificate** authentication
  - [**Strongswan**](/vpn/strongswan-tunnel-down-redirection) DNAT-based redirection (NFTables) on tunnel failure
+ - [**Route-based VPN**](/vpn/strongswan-route-based) with Strongswan
 
 ## Remote Access VPN
 
