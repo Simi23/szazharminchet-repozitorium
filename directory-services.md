@@ -2,7 +2,7 @@
 title: Directory Services
 description: Directory Service Guides
 published: true
-date: 2025-06-18T13:36:43.401Z
+date: 2025-06-18T13:40:52.686Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:41:07.674Z
@@ -17,6 +17,7 @@ dateCreated: 2025-03-03T10:41:07.674Z
 - [OpenLDAP](/directory-services/openldap) with TLS and replication
 - [GPO](/directory-services/gpo) settings for AD
 - [User creation](/directory-services/user-add-ps) PowerShell script
+- [User import](/directory-services/user-add-ps-csv) from CSV
 - [LDAP login, and automount](/directory-services/ldap-auto-mount)
 # Samba guides
 
