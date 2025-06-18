@@ -2,11 +2,15 @@
 title: Directory Services
 description: Directory Service Guides
 published: true
-date: 2025-06-06T13:33:47.691Z
+date: 2025-06-18T13:36:43.401Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:41:07.674Z
 ---
+
+# Authentication Services
+
+- [Windows AD FS](/directory-services/adfs-setup) setup
 
 # Directory Service Guides
 
