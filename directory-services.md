@@ -2,7 +2,7 @@
 title: Directory Services
 description: Directory Service Guides
 published: true
-date: 2025-06-18T13:41:49.330Z
+date: 2025-06-18T13:43:05.181Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:41:07.674Z
@@ -18,6 +18,7 @@ dateCreated: 2025-03-03T10:41:07.674Z
 - [GPO](/directory-services/gpo) settings for AD
 - [User creation](/directory-services/user-add-ps) PowerShell script
 - [User import and export](/directory-services/user-add-ps-csv) from and to CSV
+- [Backup](/directory-services/backup-adds) ADDS
 - [LDAP login, and automount](/directory-services/ldap-auto-mount)
 # Samba guides
 
