@@ -2,7 +2,7 @@
 title: Icinga2 install
 description: 
 published: true
-date: 2025-05-30T14:15:57.527Z
+date: 2025-06-18T07:24:43.218Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-29T09:44:50.187Z
@@ -15,7 +15,7 @@ dateCreated: 2025-05-29T09:44:50.187Z
 {.is-info}
 
 ```
-apt install apache2 libapache2-mod-php icinga2 icingadb icingadb-web redis-server monitoring-plugins mariadb-server icingaweb2 icingacli
+apt install apache2 libapache2-mod-php icinga2 icingadb icingadb-web redis-server monitoring-plugins mariadb-server icingaweb2
 ```
 
 > Enable following services
