@@ -2,7 +2,7 @@
 title: Icinga2 install
 description: 
 published: true
-date: 2025-06-18T07:24:43.218Z
+date: 2025-06-18T07:49:34.289Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-29T09:44:50.187Z
@@ -20,7 +20,6 @@ apt install apache2 libapache2-mod-php icinga2 icingadb icingadb-web redis-serve
 
 > Enable following services
 {.is-info}
-
 ```
 systemctl enable icingadb redis-server
 ```
@@ -30,6 +29,7 @@ systemctl enable icingadb redis-server
 
 ```
 icinga2 api setup
+icinga2 feature enable icingadb
 ```
 
 > Enter mySQL cli, and create database, and following settings:
