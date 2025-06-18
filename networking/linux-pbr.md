@@ -2,7 +2,7 @@
 title: Policy-based Routing in Linux
 description: 
 published: true
-date: 2025-06-18T09:37:08.804Z
+date: 2025-06-18T09:37:40.402Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-18T09:36:55.818Z
@@ -18,20 +18,20 @@ You can see and manage these rules with the `ip rule` command.
 
 # Examples
 
-- Match HTTP(S) traffic and route it using route table 80
+- Match **HTTP(S) traffic** and route it using route table 80
 
 ```bash
 ip rule add dport 80 table 80
 ip rule add dport 443 table 80
 ```
 
-- Match packets by source address
+- Match packets by **source address**
 
 ```c
 ip rule add from 1.1.1.0/24 table 100
 ```
 
-- Match by incoming interface
+- Match by **incoming interface**
 
 ```c
 ip rule add iif ens224 table 250
