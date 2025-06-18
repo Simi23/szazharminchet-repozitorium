@@ -2,7 +2,7 @@
 title: Policy-based Routing in Linux
 description: 
 published: true
-date: 2025-06-18T09:36:55.818Z
+date: 2025-06-18T09:37:08.804Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-18T09:36:55.818Z
@@ -12,7 +12,7 @@ dateCreated: 2025-06-18T09:36:55.818Z
 
 **Policy-based routing** on Linux allows influencing the routing decision depending on a number of things, including but not limited to the packets source address or source/destination port, the ingress interface the packet has been received on, the user who originated the packet, or an fwmark value and thereby anything that can be matched by netfilter.
 
-PBR works by specifying rules, which will be evaluated, and route the packets based on different routing tables.
+**PBR works by specifying rules, which will be evaluated, and route the packets based on different routing tables.**
 
 You can see and manage these rules with the `ip rule` command.
 
