@@ -2,7 +2,7 @@
 title: PowerShell NTFS ACLs
 description: 
 published: true
-date: 2025-06-20T08:28:25.205Z
+date: 2025-06-20T08:30:49.570Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-06-20T08:28:25.205Z
