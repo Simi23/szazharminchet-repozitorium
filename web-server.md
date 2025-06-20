@@ -2,7 +2,7 @@
 title: Web Server
 description: Web Server Guides
 published: true
-date: 2025-06-18T14:23:42.449Z
+date: 2025-06-20T07:18:28.377Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-10T09:01:10.116Z
@@ -19,4 +19,4 @@ dateCreated: 2025-03-10T09:01:10.116Z
 - [General config](/web-server/iis)
 - [Remote management](/web-server/iis-remote-mgmt) setup
 - [ASP.NET SAML](/web-server/aspnet-saml) app configuration
-- [RRAS Web Application proxy](/web-server/rras-wap)
+- [RRAS Web Application Proxy](/web-server/rras-wap)
