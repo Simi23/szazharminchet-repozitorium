@@ -2,7 +2,7 @@
 title: Windows PKI
 description: Two-tiered AD CS PKI with CDP and AIA
 published: true
-date: 2025-04-22T20:06:32.021Z
+date: 2025-06-20T08:42:47.851Z
 tags: windows
 editor: markdown
 dateCreated: 2025-04-22T20:06:32.021Z
@@ -125,6 +125,9 @@ After the Certification Authority service has started, right click on the CA and
   - With this location selected, **check**:
     - *Publish CRLs to this location.*
     - *Publish Delta CRLs to this location.*
+
+> To publish the CRL to a **remote location**, you can use the `file:\\server-name\share-name\...` format after creating the share and granting write access for the **Cert Publishers** group.
+{.is-info}
 
 **With the AIA extension selected:**
 
