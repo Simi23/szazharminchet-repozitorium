@@ -2,23 +2,23 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-06-20T08:50:02.628Z
+date: 2025-06-20T09:48:05.021Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
 ---
 
-# GPO
-## Computer settings
+# Computer settings
 
-### Password policies
+## Password policies
+
 `Policies > Windows settings > Account Policies > Password Policy`
 
 > If you want to set the minimum password length more than 14 characters, you have to enable ***Relax minimum password length limits***.
 {.is-info}
 
+## Disable local Administrator
 
-### Disable local Administrator
 `Preferences > Control Panel settings > Local Users and Groups` <-- This one works
 
 > Add Administrator with following settings
@@ -32,62 +32,62 @@ dateCreated: 2025-03-24T08:46:54.588Z
 > **Accounts:** Administrator account status (disabled)
 {.is-info}
 
-### Disable CTRL+ALT+DEL
+## Disable CTRL+ALT+DEL
+
 `Policies > Security Settings > Local Policies > User Rights Assignment`
 
 > **Interactive logon:** Do not require CTRL+ALT+DEL (enabled)
 {.is-info}
 
-### Login banner
+## Login banner
+
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
  
 > **Interactive logon:** Message text for users attempting to log on
 {.is-info}
 
+## Prevent LM hash from being stored locally in the SAM Database and Active Directory
 
-### Prevent LM hash from being stored locally in the SAM Database and Active Directory
 `Policies > Windows Settings > Security settings > Local Policies > Security Options`
 
 > **Network security:** Do not store LAN Manager hash value oin next password change
 {.is-info}
 
+## Enable users log in to DC
 
-
-### Enable users log in to DC
 `Policies > Windows Settings > Security Settings > Local Policies > User Rights Assignment`
 
 > **Allow log on locally** and define the users/groups who you want to have permission to log in to DC
 {.is-info}
 
-
-### Set envriotment variables
+## Set environment variables
 `Preferences > Windows settings > Environment Variables`
 
 > Click add and set the variables you need!
 {.is-info}
 
 
-### Disable first login animation
+## Disable first login animation
 `Policies > Administrative Templates > System > Logon`
 
 > **Show first sign-in animation** (disabled)
 {.is-info}
 
-### Turn off file history
+## Turn off file history
 `Policies > Administrative Templates > Windows components > File history`
 
 > **Turn off File History** (enabled)
 {.is-info}
 
-### Check for Windows updates
+## Check for Windows updates
 `Policies > Administrative Templates > Windows components > Windows Update`
 
 > Set up everything you want.
 {.is-info}
 
-### Automatic mapping
+## Automatic mapping
 
-#### Home directory
+### Home directory
 
 Set up a directory for users home directory.
 
@@ -121,14 +121,14 @@ Share permissions:
 > --> **Drive Letter:** **Use:** yourletter
 {.is-info}
 
-### Kerberos Hardening
+## Kerberos Hardening
 
 `Policies > Administrative Templates > System > Kerberos`
 
 > Set **Kerberos client support for claims, compound authentication and Kerberos armoring** to enabled.
 {.is-info}
 
-### Allow multiple remote desktop sessions from the same user
+## Allow multiple remote desktop sessions from the same user
 
 `Policies -> Administrative Templates -> Windows Components -> Remote Desktop Services -> Remote Desktop Session Host -> Connections
 `
@@ -138,10 +138,10 @@ Share permissions:
 > You can also raise the **Limit number of connections** attribute, but the connection limit will **still be two** until you install the **RD Session Host** role on the server and **add licensing**.
 {.is-info}
 
-## User settings
+# User settings
 
+## Automatic program start
 
-### Automatic program start
 `Policies > Windows Settings > Scripts > Logon`
 
 > Click add and set up a new startup script.
@@ -149,20 +149,23 @@ Share permissions:
 > --> **Script parameters:** Define the parameters if you need them.
 {.is-info}
 
-### Force Wallpapers
+## Force Wallpapers
+
 `Policies > Administrative Templates > Desktop > Desktop`
 
 > **Desktop Wallpaper** (create a share for domain wide setup)
 {.is-info}
 
-### Disable regedit
+## Disable regedit
+
 `Policies > Administrative Templates > System`
 
 > --> **Don't run specified Windows applications** add *regedit.exe*
 > --> **Prevent access to registry editing tools** (enabled)
 {.is-info}
 
-### Disable cmd, run and powershell
+## Disable cmd, run and powershell
+
 `Policies > Administrative Templates > Start Menu and Taskbar`
 
 > **Remove Run menu from Start Menu** (enabled)
@@ -176,7 +179,8 @@ Share permissions:
 > --> **Prevent access to the command prompt** (enabled)
 {.is-info}
 
-### Disable portable drives
+## Disable portable drives
+
 `Preferences > Control Panel Settings > Devices`
 
 > The device that you want to disable have to connect to your domain controller
@@ -189,7 +193,8 @@ Share permissions:
 > --> Press apply and add a new one!
 {.is-info}
 
-### Create shortcut for users
+## Create shortcut for users
+
 `Preferences > Windows Settings > Shortcuts`
 
 > Add a new shortcut with the following configuration:
@@ -200,9 +205,10 @@ Share permissions:
 > You can set some extra things with the .ink.
 {.is-info}
 
-### Automatic mapping
+## Automatic mapping
 
-#### Default map
+### Default map
+
 `Preferences > Windows Settings > Drive Maps`
 
 > Add a new Drive with the letter you want from the network location you want. Check reconnect, and set up a name for the network drive.
