@@ -2,7 +2,7 @@
 title: PowerShell NTFS ACLs
 description: 
 published: true
-date: 2025-06-20T08:30:49.570Z
+date: 2025-06-20T10:01:03.762Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-06-20T08:28:25.205Z
@@ -120,3 +120,36 @@ $acl.SetAccessRuleProtection($true, $false)
 
 $acl | Set-Acl .\location
 ```
+
+# Removing all access rules for a certain Identity
+
+To remove all access rules referencing a certain Identity, use the `ObjectSecurity.PurgeAccessRules` method.
+
+```powershell
+$acl = Get-Acl .\location
+
+$acl.PurgeAccessRules("MYDOMAIN\Domain Admins")
+
+$acl | Set-Acl .\location
+```
+
+# Looping over access rules
+
+You can utilise PowerShell loops to iterate through access rules and remove them based on certain criteria, like the identity reference.
+
+For example, this script removes all ACEs which reference the Domain Admins group:
+
+```powershell
+$acl = Get-Acl .\location
+
+foreach ($rule in $acl.Access) {
+  if ($rule.IdentityReference -eq "MYDOMAIN\Domain Admins") {
+    $acl.RemoveAccessRule($rule)
+  }
+}
+
+$acl | Set-Acl .\location
+```
+
+> Note that this example does the same thing that can be done with `PurgeAccessRules`, but this way you can match by any criteria/combinations of criteria you want.
+{.is-info}
