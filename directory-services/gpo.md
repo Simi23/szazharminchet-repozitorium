@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-05-12T13:58:29.531Z
+date: 2025-06-20T08:49:05.853Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -126,6 +126,16 @@ Share permissions:
 `Policies > Administrative Templates > System > Kerberos`
 
 > Set **Kerberos client support for claims, compound authentication and Kerberos armoring** to enabled.
+{.is-info}
+
+### Allow multiple remote desktop sessions from the same user
+
+`Policies -> Administrative Templates -> Windows Components -> Remote Desktop Services -> Remote Desktop Session Host -> Connections
+`
+
+> **Restrict Remote Desktop Services users to a single Remote Desktop Services:** disabled
+> 
+> You can also raise the **Limit number of connections** attribute, but the connection limit will **still be two** until you install the **RD Session Host** role on the server and **add licensing**.
 {.is-info}
 
 ## User settings
