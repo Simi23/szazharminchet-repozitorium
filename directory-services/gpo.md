@@ -2,7 +2,7 @@
 title: GPO
 description: GPO settings for Windows
 published: true
-date: 2025-06-20T08:49:05.853Z
+date: 2025-06-20T08:50:02.628Z
 tags: windows, powershell
 editor: markdown
 dateCreated: 2025-03-24T08:46:54.588Z
@@ -189,7 +189,7 @@ Share permissions:
 > --> Press apply and add a new one!
 {.is-info}
 
-### Create shortcut for usres
+### Create shortcut for users
 `Preferences > Windows Settings > Shortcuts`
 
 > Add a new shortcut with the following configuration:
