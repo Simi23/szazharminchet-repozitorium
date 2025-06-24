@@ -2,7 +2,7 @@
 title: OCSP Responder for ADCS
 description: ADCS OCSP Responder with custom URL endpoint
 published: true
-date: 2025-06-18T13:09:14.110Z
+date: 2025-06-24T07:53:36.103Z
 tags: windows
 editor: markdown
 dateCreated: 2025-06-18T13:09:14.110Z
@@ -58,6 +58,7 @@ After finishing the wizard you should see a green checkmark meaning that OCSP is
 To move the OCSP responder to a custom URL, in this case, `ocsp.company.com`, open **IIS Management** console and create a new site with the following settings:
 
 - **Name:** ocsp
+- **Application Pool:** OCSPISAPIAppPool
 - **Physical path:** `C:\Windows\SystemData\ocsp`
 - **HTTP binding:** ocsp<span>.company.</span>com
 
