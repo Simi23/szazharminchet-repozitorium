@@ -2,7 +2,7 @@
 title: E$-2S
 description: 1st solve
 published: true
-date: 2025-06-25T07:42:29.681Z
+date: 2025-06-25T07:43:06.703Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-06-25T07:36:06.033Z
@@ -454,7 +454,225 @@ end
 <summary>CORE-PE</summary>
     
   ```
-  
+  Building configuration...
+
+Current configuration : 4926 bytes
+!
+! Last configuration change at 14:45:55 UTC Tue Jun 17 2025
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname CORE-PE
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition herningco
+rd 8654:100
+!
+address-family ipv4
+exit-address-family
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name isp.denmark
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username Administrator privilege 15 secret 9 $9$t8paqjmbTflfo9$fFXgCgWcjnYV3oALNMzZA4HsH9oK4cDuEdg21Rn7B0I
+!
+redundancy
+!
+!
+!
+!
+crypto ikev2 proposal IKE-PROP
+encryption aes-cbc-256
+integrity sha256
+group 14
+!
+crypto ikev2 policy IKE-POL
+match fvrf any
+match address local 10.10.10.10
+proposal IKE-PROP
+!
+crypto ikev2 keyring IKE-KEY
+peer VPN
+address 0.0.0.0 0.0.0.0
+pre-shared-key Passw0rd!
+!
+!
+!
+crypto ikev2 profile IKE-PROF
+match fvrf any
+match identity remote any
+authentication remote pre-share
+authentication local pre-share
+keyring local IKE-KEY
+!
+!
+!
+crypto ipsec transform-set IPSEC-TRANS esp-aes 256 esp-sha256-hmac
+mode tunnel
+!
+crypto ipsec profile IPSEC-PROF
+set transform-set IPSEC-TRANS
+set ikev2-profile IKE-PROF
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ip address 10.10.10.10 255.255.255.255
+!
+interface Tunnel100
+vrf forwarding herningco
+ip address 10.0.0.1 255.255.255.0
+no ip redirects
+ip nhrp authentication Passw0rd
+ip nhrp network-id 100
+ip ospf network broadcast
+tunnel source Loopback0
+tunnel mode gre multipoint
+tunnel key 100
+tunnel protection ipsec profile IPSEC-PROF
+!
+interface GigabitEthernet0/0
+no ip address
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/0.10
+encapsulation dot1Q 10
+vrf forwarding herningco
+ip address 192.168.255.1 255.255.255.252
+!
+interface GigabitEthernet0/0.100
+encapsulation dot1Q 100
+ip address 8.8.8.254 255.255.255.0
+!
+interface GigabitEthernet0/1
+ip address 10.252.0.1 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/2
+ip address 10.252.0.5 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/3
+no ip address
+shutdown
+duplex auto
+speed auto
+media-type rj45
+!
+router ospf 10 vrf herningco
+network 10.0.0.0 0.0.0.255 area 0
+network 192.168.255.0 0.0.0.3 area 0
+!
+router bgp 8654
+bgp log-neighbor-changes
+network 0.0.0.0
+network 8.8.8.0 mask 255.255.255.0
+neighbor 10.252.0.2 remote-as 8654
+neighbor 10.252.0.2 route-reflector-client
+neighbor 10.252.0.6 remote-as 8654
+neighbor 10.252.0.6 route-reflector-client
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 8.8.8.8
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+exec-timeout 0 0
+logging synchronous
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+no scheduler allocate
+!
+end
   
   ```
 </details>
@@ -463,7 +681,176 @@ end
 <summary>PE-01</summary>
     
   ```
-  
+  Building configuration...
+
+
+Current configuration : 3913 bytes
+!
+! Last configuration change at 14:45:55 UTC Tue Jun 17 2025
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname PE-01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name isp.denmark
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username Administrator privilege 15 secret 9 $9$Uaoy/UDeOFPMmP$DXyRa/T.zB5gwvCqaCCHDfcED39r35HsJzGNNuBlURY
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ip address 20.20.20.20 255.255.255.255
+!
+interface GigabitEthernet0/0
+ip address 10.252.0.2 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/1
+ip address 80.200.200.1 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/2
+ip address 80.200.200.5 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/3
+no ip address
+shutdown
+duplex auto
+speed auto
+media-type rj45
+!
+router bgp 8654
+bgp log-neighbor-changes
+network 20.20.20.20 mask 255.255.255.255
+network 80.200.200.0 mask 255.255.255.252
+network 80.200.200.4 mask 255.255.255.252
+neighbor EBGP peer-group
+neighbor EBGP password Passw0rd!
+neighbor EBGP route-map DEFAULT out
+neighbor 10.252.0.1 remote-as 8654
+neighbor 80.200.200.2 remote-as 65002
+neighbor 80.200.200.2 peer-group EBGP
+neighbor 80.200.200.6 remote-as 65001
+neighbor 80.200.200.6 peer-group EBGP
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh version 2
+!
+!
+ip prefix-list DEFAULT seq 5 permit 0.0.0.0/0
+ipv6 ioam timestamp
+!
+route-map DEFAULT permit 10
+match ip address prefix-list DEFAULT
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+exec-timeout 0 0
+logging synchronous
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+no scheduler allocate
+!
+end
   
   ```
 </details>
