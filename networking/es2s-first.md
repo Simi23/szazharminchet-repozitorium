@@ -2,7 +2,7 @@
 title: E$-2S
 description: 1st solve
 published: true
-date: 2025-06-25T07:36:06.033Z
+date: 2025-06-25T07:41:00.005Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-06-25T07:36:06.033Z
@@ -12,8 +12,9 @@ dateCreated: 2025-06-25T07:36:06.033Z
 
 <details>
 <summary>CLOUDFW</summary>
-	```cisco
- : Saved
+  
+  ```
+: Saved
 
 :
 : Serial Number: 9AJLXAFPGV3
@@ -307,75 +308,1305 @@ call-home
   subscribe-to-alert-group telemetry periodic daily
 Cryptochecksum:93b02cfe49ea75f545e5b4d61e545b76
 : end
-	```
+	
+  ```
 </details>
 
 <details>
 <summary>CLOUDSW</summary>
   
+  ```
+  Building configuration...
+
+Current configuration : 3091 bytes
+!
+! Last configuration change at 14:45:55 UTC Tue Jun 17 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname CLOUDSW
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username Administrator privilege 15 secret 5 $1$lGJl$pY5MXHGto16URdiLWOQMJ.
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+ip domain-name isp.denmark
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+negotiation auto
+!
+interface GigabitEthernet0/1
+switchport access vlan 100
+switchport mode access
+negotiation auto
+!
+interface GigabitEthernet0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+negotiation auto
+!
+interface GigabitEthernet0/3
+negotiation auto
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+exec-timeout 0 0
+logging synchronous
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+!
+end
+  
+  ```
 </details>
 
 <details>
 <summary>CORE-PE</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>PE-01</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>PE-02</summary>
+    
+  ```
+  Building configuration...
+
+Current configuration : 3919 bytes
+!
+! Last configuration change at 14:45:55 UTC Tue Jun 17 2025
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname PE-02
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name isp.denmark
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username Administrator privilege 15 secret 9 $9$xa3g0B9XoQGX8P$trYkr2jrR0bN0w.TEl5/aQRVCiBXaPEN/Iwat1eG3to
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ip address 30.30.30.30 255.255.255.255
+!
+interface GigabitEthernet0/0
+ip address 10.252.0.6 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/1
+ip address 80.200.200.13 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/2
+ip address 80.200.200.9 255.255.255.252
+duplex auto
+speed auto
+media-type rj45
+!
+interface GigabitEthernet0/3
+no ip address
+shutdown
+duplex auto
+speed auto
+media-type rj45
+!
+router bgp 8654
+bgp log-neighbor-changes
+network 30.30.30.30 mask 255.255.255.255
+network 80.200.200.8 mask 255.255.255.252
+network 80.200.200.12 mask 255.255.255.252
+neighbor EBGP peer-group
+neighbor EBGP password Passw0rd!
+neighbor EBGP route-map DEFAULT out
+neighbor 10.252.0.5 remote-as 8654
+neighbor 80.200.200.10 remote-as 65001
+neighbor 80.200.200.10 peer-group EBGP
+neighbor 80.200.200.14 remote-as 65003
+neighbor 80.200.200.14 peer-group EBGP
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh version 2
+!
+!
+ip prefix-list DEFAULT seq 5 permit 0.0.0.0/0
+ipv6 ioam timestamp
+!
+route-map DEFAULT permit 10
+match ip address prefix-list DEFAULT
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+exec-timeout 0 0
+logging synchronous
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+no scheduler allocate
+!
+end
   
+  ```
 </details>
 
 <details>
 <summary>CPE-01</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>CPE-02</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>CPE-04</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>CPE-05</summary>
+    
+  ```
   
+  
+  ```
 </details>
 
 <details>
 <summary>DSW1</summary>
+    
+  ```
+  Building configuration...
+
+Current configuration : 3988 bytes
+!
+! Last configuration change at 14:45:55 UTC Tue Jun 17 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname DSW1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username Administrator privilege 15 secret 5 $1$N4jW$2ORQVKu.Wykbcjz.nNzSD/
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name isp.denmark
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+!
+spanning-tree mst configuration
+name HQ-REGION
+revision 1
+instance 1 vlan 100
+instance 2 vlan 10
+!
+spanning-tree mst 1 priority 24576
+spanning-tree mst 2 priority 28672
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+switchport access vlan 200
+switchport mode access
+negotiation auto
+!
+interface GigabitEthernet0/1
+switchport access vlan 200
+switchport mode access
+negotiation auto
+!
+interface GigabitEthernet0/2
+switchport trunk allowed vlan 10,99,100
+switchport trunk encapsulation dot1q
+switchport trunk native vlan 99
+switchport mode trunk
+negotiation auto
+!
+interface GigabitEthernet0/3
+switchport trunk allowed vlan 10,99,100
+switchport trunk encapsulation dot1q
+switchport trunk native vlan 99
+switchport mode trunk
+negotiation auto
+!
+interface Vlan10
+ip address 172.16.10.252 255.255.255.0
+standby 10 ip 172.16.10.254
+standby 10 priority 150
+standby 10 preempt
+standby 10 authentication md5 key-string Passw0rd!
+!
+interface Vlan100
+ip address 172.16.100.252 255.255.255.0
+standby 100 ip 172.16.100.254
+standby 100 priority 150
+standby 100 preempt
+standby 100 authentication md5 key-string Passw0rd!
+!
+interface Vlan200
+ip address 172.16.32.1 255.255.255.248
+!
+router ospf 10
+network 172.16.10.0 0.0.0.255 area 0
+network 172.16.32.0 0.0.0.7 area 0
+network 172.16.100.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+exec-timeout 0 0
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+!
+end
   
+  ```
 </details>
 
 <details>
 <summary>DSW2</summary>
   
+  ```
+  Building configuration...
+
+    Current configuration : 3896 bytes
+    !
+    ! Last configuration change at 14:46:05 UTC Tue Jun 17 2025
+    !
+    version 15.2
+    service timestamps debug datetime msec
+    service timestamps log datetime msec
+    no service password-encryption
+    service compress-config
+    !
+    hostname DSW2
+    !
+    boot-start-marker
+    boot-end-marker
+    !
+    !
+    no logging console
+    !
+    username Administrator privilege 15 secret 5 $1$NDfc$MHj2E9sgWO1YcZvKmY38k/
+    no aaa new-model
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    ip domain-name isp.denmark
+    ip cef
+    no ipv6 cef
+    !
+    !
+    !
+    spanning-tree mode mst
+    spanning-tree extend system-id
+    !
+    spanning-tree mst configuration
+    name HQ-REGION
+    revision 1
+    instance 1 vlan 100
+    instance 2 vlan 10
+    !
+    spanning-tree mst 1 priority 28672
+    spanning-tree mst 2 priority 24576
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    !
+    interface GigabitEthernet0/0
+    switchport access vlan 201
+    switchport mode access
+    negotiation auto
+    !
+    interface GigabitEthernet0/1
+    switchport access vlan 201
+    switchport mode access
+    negotiation auto
+    !
+    interface GigabitEthernet0/2
+    switchport trunk allowed vlan 10,99,100
+    switchport trunk encapsulation dot1q
+    switchport trunk native vlan 99
+    switchport mode trunk
+    negotiation auto
+    !
+    interface GigabitEthernet0/3
+    switchport trunk allowed vlan 10,99,100
+    switchport trunk encapsulation dot1q
+    switchport trunk native vlan 99
+    switchport mode trunk
+    negotiation auto
+    !
+    interface Vlan10
+    ip address 172.16.10.253 255.255.255.0
+    standby 10 ip 172.16.10.254
+    standby 10 authentication md5 key-string Passw0rd!
+    !
+    interface Vlan100
+    ip address 172.16.100.253 255.255.255.0
+    standby 100 ip 172.16.100.254
+    standby 100 authentication md5 key-string Passw0rd!
+    !
+    interface Vlan201
+    ip address 172.16.33.1 255.255.255.248
+    !
+    router ospf 10
+    network 172.16.10.0 0.0.0.255 area 0
+    network 172.16.33.0 0.0.0.7 area 0
+    network 172.16.100.0 0.0.0.255 area 0
+    !
+    ip forward-protocol nd
+    !
+    ip http server
+    ip http secure-server
+    !
+    ip ssh version 2
+    ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+    ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+    !
+    !
+    !
+    !
+    !
+    !
+    control-plane
+    !
+    banner exec ^C
+    IOSv - Cisco Systems Confidential -
+
+    Supplemental End User License Restrictions
+
+    This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+    By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+    ^C
+    banner incoming ^C
+    IOSv - Cisco Systems Confidential -
+
+    Supplemental End User License Restrictions
+
+    This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+    By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+    ^C
+    banner login ^C
+    IOSv - Cisco Systems Confidential -
+
+    Supplemental End User License Restrictions
+
+    This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+    By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+    ^C
+    !
+    line con 0
+    exec-timeout 0 0
+    line aux 0
+    line vty 0 4
+    exec-timeout 0 0
+    login local
+    transport input ssh
+    line vty 5 15
+    login local
+    transport input ssh
+    !
+    !
+end
+  
+  ```
 </details>
 
 <details>
 <summary>ASW1</summary>
+    
+  ```
+  Building configuration...
+
+          Current configuration : 3807 bytes
+          !
+          ! Last configuration change at 14:46:06 UTC Tue Jun 17 2025
+          !
+          version 15.2
+          service timestamps debug datetime msec
+          service timestamps log datetime msec
+          no service password-encryption
+          service compress-config
+          !
+          hostname ASW1
+          !
+          boot-start-marker
+          boot-end-marker
+          !
+          !
+          no logging console
+          !
+          username Administrator password 0 Passw0rd!
+          no aaa new-model
+          !
+          !
+          !
+          !
+          !
+          ip arp inspection vlan 10,100
+          ip arp inspection filter ACL vlan  100
+          !
+          !
+          !
+          ip domain-name isp.denmark
+          ip cef
+          no ipv6 cef
+          !
+          !
+          !
+          spanning-tree mode mst
+          spanning-tree portfast edge default
+          spanning-tree extend system-id
+          !
+          spanning-tree mst configuration
+           name HQ-REGION
+           revision 1
+           instance 1 vlan 100
+           instance 2 vlan 10
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          !
+          interface GigabitEthernet0/0
+           switchport trunk allowed vlan 10,99,100
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 99
+           switchport mode trunk
+           ip arp inspection trust
+           negotiation auto
+           spanning-tree portfast disable
+          !
+          interface GigabitEthernet0/1
+           switchport trunk allowed vlan 10,99,100
+           switchport trunk encapsulation dot1q
+           switchport trunk native vlan 99
+           switchport mode trunk
+           ip arp inspection trust
+           negotiation auto
+           spanning-tree portfast disable
+          !
+          interface GigabitEthernet0/2
+           switchport access vlan 100
+           switchport mode access
+           switchport port-security violation restrict
+           switchport port-security
+           negotiation auto
+           spanning-tree bpduguard enable
+          !
+          interface GigabitEthernet0/3
+           switchport access vlan 999
+           switchport mode access
+           shutdown
+           negotiation auto
+          !
+          ip forward-protocol nd
+          !
+          ip http server
+          ip http secure-server
+          !
+          ip ssh version 2
+          ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+          ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+          !
+          !
+          ip source binding 5254.000E.9E83 vlan 100 172.16.100.100 interface Gi0/2
+          !
+          arp access-list ACL
+           permit ip host 172.16.100.100 mac any
+          !
+          !
+          !
+          !
+          control-plane
+          !
+          banner exec ^C
+          IOSv - Cisco Systems Confidential -
+
+          Supplemental End User License Restrictions
+
+          This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+          By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+          ^C
+          banner incoming ^C
+          IOSv - Cisco Systems Confidential -
+
+          Supplemental End User License Restrictions
+
+          This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+          By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+          ^C
+          banner login ^C
+          IOSv - Cisco Systems Confidential -
+
+          Supplemental End User License Restrictions
+
+          This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+          By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+          ^C
+          !
+          line con 0
+           exec-timeout 0 0
+           logging synchronous
+          line aux 0
+          line vty 0 4
+           exec-timeout 0 0
+           login local
+           transport input ssh
+          line vty 5 15
+           login local
+           transport input ssh
+          !
+          !
+          end
   
+  ```
 </details>
 
 <details>
 <summary>ASW2</summary>
+    
+  ```
+  Building configuration...
+
+Current configuration : 3710 bytes
+!
+! Last configuration change at 14:46:08 UTC Tue Jun 17 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname ASW2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username Administrator password 0 Passw0rd!
+no aaa new-model
+!
+!
+!
+!
+!
+ip arp inspection vlan 10,100
+ip arp inspection filter ACL vlan  10
+!
+!
+!
+ip domain-name isp.denmark
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode mst
+spanning-tree portfast edge default
+spanning-tree extend system-id
+!
+spanning-tree mst configuration
+name HQ-REGION
+revision 1
+instance 1 vlan 100
+instance 2 vlan 10
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+switchport trunk allowed vlan 10,99,100
+switchport trunk encapsulation dot1q
+switchport trunk native vlan 99
+switchport mode trunk
+ip arp inspection trust
+negotiation auto
+spanning-tree portfast disable
+!
+interface GigabitEthernet0/1
+switchport trunk allowed vlan 10,99,100
+switchport trunk encapsulation dot1q
+switchport trunk native vlan 99
+switchport mode trunk
+ip arp inspection trust
+negotiation auto
+spanning-tree portfast disable
+!
+interface GigabitEthernet0/2
+switchport access vlan 10
+switchport mode access
+switchport port-security violation restrict
+switchport port-security
+negotiation auto
+spanning-tree bpduguard enable
+!
+interface GigabitEthernet0/3
+switchport access vlan 999
+switchport mode access
+shutdown
+negotiation auto
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+arp access-list ACL
+permit ip host 172.16.10.100 mac any
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+exec-timeout 0 0
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+!
+end
   
+  ```
 </details>
 
 <details>
 <summary>BR1-SW</summary>
+    
+  ```
+  Building configuration...
+
+Current configuration : 2875 bytes
+!
+! Last configuration change at 14:46:08 UTC Tue Jun 17 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BR1-SW
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username Administrator privilege 15 secret 5 $1$G19y$jsDcYPAqWDSGxd1sQprvc.
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name isp.denmark
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+negotiation auto
+!
+interface GigabitEthernet0/1
+negotiation auto
+!
+interface GigabitEthernet0/2
+negotiation auto
+!
+interface GigabitEthernet0/3
+negotiation auto
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+exec-timeout 0 0
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+!
+end
   
+  ```
 </details>
 
 <details>
 <summary>BR2-SW</summary>
+    
+  ```
+  Building configuration...
+
+Current configuration : 2875 bytes
+!
+! Last configuration change at 14:46:09 UTC Tue Jun 17 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BR2-SW
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username Administrator privilege 15 secret 5 $1$vytC$S3ir69587s2xxn0UXS8EJ/
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name isp.denmark
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+negotiation auto
+!
+interface GigabitEthernet0/1
+negotiation auto
+!
+interface GigabitEthernet0/2
+negotiation auto
+!
+interface GigabitEthernet0/3
+negotiation auto
+!
+ip forward-protocol nd
+!
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner incoming ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+banner login ^C
+IOSv - Cisco Systems Confidential -
+
+Supplemental End User License Restrictions
+
+This IOSv software is provided AS-IS without warranty of any kind. Under no circumstances may this software be used separate from the Cisco Modeling Labs Software that this software was provided with, or deployed or used as part of a production environment.
+
+By using the software, you agree to abide by the terms and conditions of the Cisco End User License Agreement at http://www.cisco.com/go/eula. Unauthorized use or distribution of this software is expressly prohibited.
+^C
+!
+line con 0
+exec-timeout 0 0
+line aux 0
+line vty 0 4
+exec-timeout 0 0
+login local
+transport input ssh
+line vty 5 15
+login local
+transport input ssh
+!
+!
+end
   
+  ```
 </details>
