@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:08:49.792Z
+date: 2025-06-26T09:09:09.447Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -81,6 +81,13 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (iSCSI)
 <details>
 <summary>iSCSI</summary>
+  
+</details>
+
+
+[//]: <> (Firewall)
+<details>
+<summary>Firewall</summary>
   
 </details>
 
