@@ -2,7 +2,7 @@
 title: ES25 Windows solutions
 description: ES25 Windows solutions
 published: true
-date: 2025-06-26T08:11:47.402Z
+date: 2025-06-26T08:12:40.542Z
 tags: es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T07:53:20.472Z
@@ -10,8 +10,10 @@ dateCreated: 2025-06-26T07:53:20.472Z
 
 # ES25 Windows
 
+![modb-tasks.jpg](/solutions/assets/modb-tasks.jpg)
+
 ## TP C-90
-- **[First solutins](/solutions/windows/win-1st-sol)**
+- **[First solutions](/solutions/windows/win-1st-sol)**
 
 ## TP 30%
 - **[30% solutions](/solutions/windows/win-30-sol)**
