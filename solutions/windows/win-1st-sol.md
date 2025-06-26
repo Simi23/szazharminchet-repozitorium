@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:21:30.961Z
+date: 2025-06-26T09:22:05.804Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -30,12 +30,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <details>
 <summary>AD DS</summary>
   
-  DC settings
+  **DC settings**
   - `Install-WindowsFeature -Name Ad-Domain-Services, DNS -IncludeManagementTools`
   - `$password = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!"`
   - `Install-ADDSForest -DomainName skillsnet.dk -SafeModePassword $password`
   
-  RODC settings
+  **RODC settings**
   - DNS settings
   - `Add-Computer -Name skillsnet.dk`
   - `Restart-Computer`
@@ -43,7 +43,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   - `Install-WindowsFeature -Name Ad-Domain-Services, DNS -IncludeManagementTools`
   - `Install-ADDSDomainController -DomainName skillsnet.dk -SiteName Default-First-Site -SafeModePassword $password`
   
-  CLIENT settings
+  **CLIENT settings**
   - DNS settings
   - `Add-Computer -Name skillsnet.dk`
   - `Restart-Computer`
@@ -59,7 +59,9 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (AD Sites)
 <details>
 <summary>AD Sites</summary>
-  
+
+>   DO IT LAST AND DON'T FORGET IT
+{.is-warning}
 </details>
 
 
