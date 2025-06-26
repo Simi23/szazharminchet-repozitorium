@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:22:53.923Z
+date: 2025-06-26T09:22:59.090Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -68,7 +68,8 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (Ansible)
 <details>
 <summary>Ansible</summary>
-  > CREATE AND USE THE JSON
+  
+> CREATE AND USE THE JSON
 {.is-warning}
 </details>
 
