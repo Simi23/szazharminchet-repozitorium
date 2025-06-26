@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:05:14.240Z
+date: 2025-06-26T09:05:31.448Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -37,6 +37,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (DNS)
 <details>
 <summary>DNS</summary>
+  
+</details>
+
+[//]: <> (IIS)
+<details>
+<summary>IIS</summary>
   
 </details>
 
