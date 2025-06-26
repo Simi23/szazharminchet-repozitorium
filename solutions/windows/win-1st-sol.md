@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:26:57.767Z
+date: 2025-06-26T09:31:48.862Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -37,7 +37,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
   **RODC settings**
   - DNS settings
-  - `Add-Computer -Name skillsnet.dk`
+  - `Add-Computer -DomainName skillsnet.dk`
   - `Restart-Computer`
   - `$password = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!"`
   - `Install-WindowsFeature -Name Ad-Domain-Services, DNS -IncludeManagementTools`
@@ -45,7 +45,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
   **CLIENT settings**
   - DNS settings
-  - `Add-Computer -Name skillsnet.dk`
+  - `Add-Computer -DomainName skillsnet.dk`
   - `Restart-Computer`
   
 </details>
@@ -175,6 +175,7 @@ try {
 <details>
 <summary>DFS + FSRM</summary>
   
+  `Intall-WindowsFeature FS-Resource-Manager, -IncludeManagementTools
 </details>
 
 
