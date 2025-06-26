@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:07:36.486Z
+date: 2025-06-26T09:08:49.792Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -37,6 +37,13 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (AD Sites)
 <details>
 <summary>AD Sites</summary>
+  
+</details>
+
+
+[//]: <> (Ansible)
+<details>
+<summary>Ansible</summary>
   
 </details>
 
@@ -83,6 +90,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
 </details>
 
+[//]: <> (HA DHCP)
+<details>
+<summary>HA DHCP</summary>
+  
+</details>
+
 [//]: <> (PS)
 <details>
 <summary>PS</summary>
@@ -98,6 +111,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (S2S - Cert)
 <details>
 <summary>S2S (Cert)</summary>
+  
+</details>
+
+[//]: <> (SMB)
+<details>
+<summary>SMB</summary>
   
 </details>
 
