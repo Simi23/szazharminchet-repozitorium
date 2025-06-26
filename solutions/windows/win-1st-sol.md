@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:03:28.237Z
+date: 2025-06-26T09:03:41.688Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -10,6 +10,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 
 # ES25 - ModB - 1st Solution
 
+[//]: <> (General)
 <details>
 <summary>General</summary>
   
