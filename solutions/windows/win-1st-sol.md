@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:43:53.667Z
+date: 2025-06-26T09:44:09.511Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -250,6 +250,8 @@ try {
 <details>
 <summary>PS</summary>
   
+    > CREATE THE JSON FOR OU STRUCTURE
+{.is-warning}
   ```ps
   
   ```
