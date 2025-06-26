@@ -1,0 +1,119 @@
+---
+title: ES25 - ModC - final Solution
+description: ES25 - ModC - final Solution
+published: true
+date: 2025-06-26T08:58:45.487Z
+tags: cisco, es25-cisco, es25
+editor: markdown
+dateCreated: 2025-06-26T08:58:45.487Z
+---
+
+# ES25 Final solution
+
+<details>
+<summary>CLOUDFW</summary>
+  
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CLOUDSW</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CORE-PE</summary>
+  
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>PE-01</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>PE-02</summary>
+    
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CPE-01</summary>
+  
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CPE-02</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CPE-04</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>CPE-05</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>DSW1</summary>
+  
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>DSW2</summary>
+   
+  ```
+Config comes here
+	
+  ```
+</details>
+
+<details>
+<summary>ASW2</summary>
+  
+  ```
+Config comes here
+	
+  ```
+</details>
