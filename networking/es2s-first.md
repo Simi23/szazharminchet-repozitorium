@@ -2,13 +2,13 @@
 title: E$-2S
 description: 1st solve
 published: true
-date: 2025-06-25T07:43:06.703Z
+date: 2025-06-26T07:55:17.793Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-06-25T07:36:06.033Z
 ---
 
-# E$-2S 1st solve
+# ES25 1st solution
 
 <details>
 <summary>CLOUDFW</summary>
