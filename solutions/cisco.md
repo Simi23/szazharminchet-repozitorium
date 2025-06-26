@@ -1,9 +1,9 @@
 ---
-title: Cisco solutions
-description: Cisco solutions ES25
+title: ES25 Cisco solutions
+description: ES25 Cisco solutions
 published: true
-date: 2025-06-26T07:51:50.354Z
-tags: es25-cisco
+date: 2025-06-26T07:53:39.509Z
+tags: es25-cisco, es25
 editor: markdown
 dateCreated: 2025-06-26T07:51:50.354Z
 ---
