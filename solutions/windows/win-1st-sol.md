@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:14:32.084Z
+date: 2025-06-26T09:14:52.771Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -15,7 +15,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <summary>General</summary>
 
 - Hostname (`Rename-Computer -Name HOSTNAME`)
-- IPv4 settings (`netsh int ipv4 set add Ethernet0 static add mask gateway `)
+- IPv4 settings (`netsh int ipv4 set add Ethernet0 static add mask gateway`)
 - IPv6 settings (`netsh int ipv6 set add Ethernet0 add/mask`)
   
 </details>
