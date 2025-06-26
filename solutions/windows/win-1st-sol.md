@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:05:31.448Z
+date: 2025-06-26T09:05:50.103Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -31,6 +31,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (AD FS)
 <details>
 <summary>AD FS</summary>
+  
+</details>
+
+[//]: <> (Backup)
+<details>
+<summary>Backup</summary>
   
 </details>
 
