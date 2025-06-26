@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T10:03:41.250Z
+date: 2025-06-26T10:04:10.304Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -79,7 +79,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
 > USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
-  ```ps
+  ```powershell
   # Variables
 # Emails settings
 $smtpServer = "mail.nordicbackup.net"
@@ -252,7 +252,7 @@ try {
   
 > CREATE THE JSON FOR OU STRUCTURE
 {.is-warning}
-  ```ps
+  ```powershell
   $json_path = "C:\Resources\OUs.json"
 $json = Get-Content -Raw $json_path | ConvertFrom-Json 
 
