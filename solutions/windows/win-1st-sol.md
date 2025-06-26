@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T10:01:18.869Z
+date: 2025-06-26T10:03:41.250Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -253,7 +253,84 @@ try {
 > CREATE THE JSON FOR OU STRUCTURE
 {.is-warning}
   ```ps
-  
+  $json_path = "C:\Resources\OUs.json"
+$json = Get-Content -Raw $json_path | ConvertFrom-Json 
+
+Write-Host "============= Creating OUs ============="  -BackgroundColor Black -ForeGroundColor White
+foreach ($ou in $json) {
+    $newPath = "OU=$($ou.Name),$($ou.Path)DC=skillsnet,DC=dk"
+   
+    if (Get-ADOrganizationalUnit -Filter { distinguishedName -eq $newPath }) {
+        Write-Host "$($ou.Name) OU already exists!" -ForeGroundColor Green -BackgroundColor Black
+    } else {
+        New-ADOrganizationalUnit -Name $ou.Name -Path "$($ou.Path)DC=skillsnet,DC=dk" -Description $ou.Description -ProtectedFromAccidentalDeletion $false -ErrorAction SilentlyContinue | Out-Null
+        Write-Host "$($ou.Name) OU has been created successfully!" -ForeGroundColor Green -BackgroundColor Black
+    }
+}
+
+$csv_path = "C:\Resources\ES2025_TP39_ModuleB_Users_Skillsnet.csv"
+$csv = Import-Csv $csv_path
+$password = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!Passw0rd!!!!"
+$i = 1
+$groups = $csv | Select-Object -ExpandProperty Department | Sort-Object -Unique
+
+Write-Host "`r`n`r`n============= Creating Groups ============="  -BackgroundColor Black -ForeGroundColor White
+
+foreach ( $group in $groups ) {
+	$exGroup = Get-ADGroup -Filter { Name -eq $group } -SearchBase "OU=Groups,OU=Skills,DC=skillsnet,dc=dk" -ErrorAction SilentlyContinue
+
+    if (!$exGroup) {
+        New-ADGroup -Name $group -Path "OU=Groups,OU=Skills,DC=skillsnet,dc=dk" -GroupScope Global
+	    Write-Host "$group group has been created successfully!" -ForeGroundColor Green -BackgroundColor Black
+    } else {
+        Write-Host "$group group already exists!" -ForeGroundColor Green -BackgroundColor Black
+    }
+}
+
+
+Write-Host "`r`n`r`n============= Creating Users ============="	 -BackgroundColor Black -ForeGroundColor White
+# FirstName,LastName,samAccountName,UserPrincipalName,Email,JobTitle,City,Company,Department
+# Kell siminek Display-name (funame)
+foreach ($user in $csv) {
+    $finame = $user.FirstName
+    $laname = $user.LastName
+    $funame = $user.FirstName + " " + $user.LastName
+    $sam = $user.Firstname + "." + $user.LastName
+    $upname = $user.UserPrincipalName
+    $mail = $user.Email
+    $title = $user.JobTitle
+    $city = $user.City
+    $company = $user.Company
+    $group = $user.Department
+
+    $exUser = Get-ADUser -Filter { SamAccountName -eq $sam } -ErrorAction SilentlyContinue
+
+    if ($exUser) {
+        Write-Host "$i. The $sam user exists." -ForeGroundColor Green -BackgroundColor Black
+    } else {
+        New-ADUser -Path "OU=$group,OU=Users,OU=Skills,DC=skillsnet,DC=dk" `
+            -Name $funame `
+            -Enabled $true `
+            -AccountPassword $password `
+            -GivenName $laname `
+            -SurName $laname `
+            -DisplayName $funame `
+            -UserPrincipalName $upname `
+            -SamAccountName $sam `
+            -EmailAddress $mail `
+            -Title $title `
+            -City $city `
+            -Company $company `
+            -Department $group
+            
+    
+        Add-ADGroupMember -Identity $group -Members $sam
+        Write-Host "$i. User $sam has been created and added to $group group!" -ForeGroundColor Green -BackgroundColor Black
+    }
+
+    $i++
+}
+Write-Host "============= Users and groups have been created! =============" -BackgroundColor Black -ForeGroundColor White
   ```
 </details>
 
