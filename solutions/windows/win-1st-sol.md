@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:25:30.416Z
+date: 2025-06-26T09:26:57.767Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -163,7 +163,12 @@ try {
 [//]: <> (Bitlocker)
 <details>
 <summary>Bitlocker</summary>
-  
+ 
+- `Install-WindowsFeature Bitlocker -IncludeManagementTools`
+- `Enable-Bitlocker -TpmProtection "D:\"`
+> Bitlocker TPM encryption doesn't work in anything else than system drive
+{.is-danger}
+
 </details>
 
 [//]: <> (DFS + FSRM)
