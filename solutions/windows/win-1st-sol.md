@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:05:50.103Z
+date: 2025-06-26T09:06:06.113Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -79,6 +79,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (S2S - Cert)
 <details>
 <summary>S2S (Cert)</summary>
+  
+</details>
+
+[//]: <> (WAP)
+<details>
+<summary>WAP</summary>
   
 </details>
 
