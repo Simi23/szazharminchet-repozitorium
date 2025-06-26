@@ -2,7 +2,7 @@
 title: ES25 Cisco solutions
 description: ES25 Cisco solutions
 published: true
-date: 2025-06-26T07:54:22.873Z
+date: 2025-06-26T07:54:28.927Z
 tags: es25-cisco, es25
 editor: markdown
 dateCreated: 2025-06-26T07:51:50.354Z
@@ -14,7 +14,5 @@ First TP solutins
 # TP 30%
 30% solutions
 
-> # TP Final
-{.is-warning}
-
+# TP Final
 Final TP solutions
