@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:37:52.575Z
+date: 2025-06-26T09:38:07.230Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -195,7 +195,8 @@ try {
 <summary>DNS</summary>
 
   > **+ CNAME Records to add**
-  > DC.skillsnet.dk: **sso.skillsnet.dk**, **ocsp.skillsnet.dk**
+  > DC.skillsnet.dk: **sso**, **ocsp**
+  > DC.skillsnet.dk: **sso.skillsnet.dk**, **ocsp**
   {.is-info}
 
 </details>
