@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:14:52.771Z
+date: 2025-06-26T09:19:06.346Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -29,6 +29,23 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (AD DS)
 <details>
 <summary>AD DS</summary>
+  
+  DC settings
+  - `Install-WindowsFeature -Name Ad-Domain-Services, DNS -IncludeManagementTools`
+  - `$password = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!"`
+  - `Install-ADDSForest -DomainName skillsnet.dk -SafeModePassword $password`
+  
+  RODC settings
+  - DNS settings
+  - `Add-Computer -Name skillsnet.dk`
+  - `Restart-Computer`
+  - `Install-WindowsFeature -Name Ad-Domain-Services, DNS -IncludeManagementTools`
+  - ``
+  
+  CLIENT settings
+  - DNS settings
+  - `Add-Computer -Name skillsnet.dk`
+  - `Restart-Computer`
   
 </details>
 
