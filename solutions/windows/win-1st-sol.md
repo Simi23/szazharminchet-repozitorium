@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:22:59.090Z
+date: 2025-06-26T09:23:13.555Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -77,6 +77,9 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <details>
 <summary>Backup</summary>
   
+  ```ps
+  
+  ```
 </details>
 
 [//]: <> (Bitlocker)
