@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:57:28.413Z
+date: 2025-06-26T09:58:52.575Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -286,28 +286,31 @@ try {
 <summary>WEF</summary>
 
   > **GPO**
-  > Computer > Policies > Windows > Security > Restrict Groups > Event Log Readers==> NETWORK SERVICE
-  > Computer > Policies > Windows > Security > System Services > WinRM (AutoStart)
-  > Computer > Policies > ADMX > Windows Components > Event Forwarding > Subscription Manager (Server=https://SRV2.skillsnet.dk:5986/wsman/SubscriptionManager/WEC,Refresh=60)
-  > Computer > Policies > ADMX > Windows Components > Event Log Service > Security > Configure Log Access (`O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-20)(A;;0x1;;;S-1-5-32-573)`)
+  > - Computer > Policies > Windows > Security > Restrict Groups > Event Log Readers==> NETWORK SERVICE
+  > 
+  > - Computer > Policies > Windows > Security > System Services > WinRM (AutoStart)
+  > 
+  > - Computer > Policies > ADMX > Windows Components > Event Forwarding > Subscription Manager (Server=https://SRV2.skillsnet.dk:5986/wsman/SubscriptionManager/WEC,Refresh=60)
+  > 
+  > - Computer > Policies > ADMX > Windows Components > Event Log Service > Security > Configure Log Access (`O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-20)(A;;0x1;;;S-1-5-32-573)`)
 {.is-info}
 
 > **SUBSCRIPTION**
-> Start an **Event Viewer**, create a new Subscription
-> `wecutil gs "Subscription Name" /f:xml
-> **Copy** the output, **transfer** it to the CORE computer
-> Disable **wecsvc**!
+> - Start an **Event Viewer**, create a new Subscription
+> - `wecutil gs "Subscription Name" /f:xml
+> - **Copy** the output, **transfer** it to the CORE computer
+> - Disable **wecsvc**!
 {.is-info}
 
   
 > **SRV2**
-> `gpupdate /force` (Get the computer auto-enrollment Certificate)
-> `winrm qc -transport:https`
-> `wecutil qc`
-> `wecutil cs ./log.xml` (the file you transferred)
-> `Start-Service wecsvc`
-> `Set-Service wecsvc -StartupType Automatic`
-> `Enable-NetFirwallRule -DisplayGroup Remote Event Log Management`
+> - `gpupdate /force` (Get the computer auto-enrollment Certificate)
+> - `winrm qc -transport:https`
+> - `wecutil qc`
+> - `wecutil cs ./log.xml` (the file you transferred)
+> - `Start-Service wecsvc`
+> - `Set-Service wecsvc -StartupType Automatic`
+> - `Enable-NetFirwallRule -DisplayGroup Remote Event Log Management`
 {.is-info}
 
 </details>
