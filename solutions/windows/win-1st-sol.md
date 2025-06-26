@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:44:13.743Z
+date: 2025-06-26T09:52:21.062Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -272,7 +272,7 @@ try {
 [//]: <> (SMB)
 <details>
 <summary>SMB</summary>
-  
+  `Set-SmbServerConfiguration -EncryptData $true -RejectUnencryptedAccess $true`
 </details>
 
 [//]: <> (WAP)
@@ -284,7 +284,18 @@ try {
 [//]: <> (WEF)
 <details>
 <summary>WEF</summary>
+
+  > **GPO**
+  > Computer > Policies > Windows > Security > Restrict Groups > Event Log Readers==> NETWORK SERVICE
+  > Computer > Policies > Windows > Security > System Services > WinRM (AutoStart)
+  > Computer > Policies > ADMX > Windows Components > Event Forwarding > Subscription Manager (Server=https://SRV2.skillsnet.dk:5986/wsman/SubscriptionManager/WEC,Refresh=60)
+  > Computer > Policies > ADMX > Windows Components > Event Log Service > Security > Configure Log Access (`O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-20)(A;;0x1;;;S-1-5-32-573)`)
+{.is-info}
+
   
+>   **SRV2**
+{.is-info}
+
 </details>
 
 
