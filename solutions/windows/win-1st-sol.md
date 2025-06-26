@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:42:59.591Z
+date: 2025-06-26T09:43:53.667Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -234,7 +234,10 @@ try {
 [//]: <> (GPO)
 <details>
 <summary>GPO</summary>
-  
+
+  > DO THE PASSWORD POLICICES
+{.is-warning}
+
 </details>
 
 [//]: <> (HA DHCP)
@@ -247,6 +250,9 @@ try {
 <details>
 <summary>PS</summary>
   
+  ```ps
+  
+  ```
 </details>
 
 [//]: <> (S2S - PSK)
