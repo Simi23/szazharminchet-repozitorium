@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:54:42.133Z
+date: 2025-06-26T09:57:28.413Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -300,7 +300,14 @@ try {
 {.is-info}
 
   
->   **SRV2**
+> **SRV2**
+> `gpupdate /force` (Get the computer auto-enrollment Certificate)
+> `winrm qc -transport:https`
+> `wecutil qc`
+> `wecutil cs ./log.xml` (the file you transferred)
+> `Start-Service wecsvc`
+> `Set-Service wecsvc -StartupType Automatic`
+> `Enable-NetFirwallRule -DisplayGroup Remote Event Log Management`
 {.is-info}
 
 </details>
