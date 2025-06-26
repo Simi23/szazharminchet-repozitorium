@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:31:48.862Z
+date: 2025-06-26T09:35:59.282Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -175,7 +175,18 @@ try {
 <details>
 <summary>DFS + FSRM</summary>
   
-  `Intall-WindowsFeature FS-Resource-Manager, -IncludeManagementTools
+  `Install-WindowsFeature FS-Resource-Manager, FS-DFS-Namespace, FS-DFS-Replication -IncludeManagementTools`
+  `Enable-NetFirewallRule -DisplayGroup "Remote File Server Resource Manager Management"`
+
+> **DFS**
+> Create the NAMESPACE and it will configure the Replication for you
+{.is-info}
+
+  
+> **FSRM**
+> Do it from Management console, it will be faster.
+{.is-info}
+
 </details>
 
 
