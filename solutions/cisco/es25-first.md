@@ -1,8 +1,8 @@
 ---
-title: E$-2S
-description: 1st solve
+title: ES25 - ModC - 1st Solution
+description: 
 published: true
-date: 2025-06-26T07:55:17.793Z
+date: 2025-06-26T07:56:03.738Z
 tags: cisco
 editor: markdown
 dateCreated: 2025-06-25T07:36:06.033Z
