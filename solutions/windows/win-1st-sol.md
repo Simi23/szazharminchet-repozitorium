@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:58:52.575Z
+date: 2025-06-26T10:00:52.370Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -293,6 +293,8 @@ try {
   > - Computer > Policies > ADMX > Windows Components > Event Forwarding > Subscription Manager (Server=https://SRV2.skillsnet.dk:5986/wsman/SubscriptionManager/WEC,Refresh=60)
   > 
   > - Computer > Policies > ADMX > Windows Components > Event Log Service > Security > Configure Log Access (`O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-20)(A;;0x1;;;S-1-5-32-573)`)
+ >
+ > _
 {.is-info}
 
 > **SUBSCRIPTION**
@@ -300,6 +302,8 @@ try {
 > - `wecutil gs "Subscription Name" /f:xml
 > - **Copy** the output, **transfer** it to the CORE computer
 > - Disable **wecsvc**!
+>
+> _
 {.is-info}
 
   
@@ -311,6 +315,8 @@ try {
 > - `Start-Service wecsvc`
 > - `Set-Service wecsvc -StartupType Automatic`
 > - `Enable-NetFirwallRule -DisplayGroup Remote Event Log Management`
+>
+> _
 {.is-info}
 
 </details>
