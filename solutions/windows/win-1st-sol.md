@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:06:06.113Z
+date: 2025-06-26T09:07:36.486Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -34,11 +34,30 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
 </details>
 
+[//]: <> (AD Sites)
+<details>
+<summary>AD Sites</summary>
+  
+</details>
+
 [//]: <> (Backup)
 <details>
 <summary>Backup</summary>
   
 </details>
+
+[//]: <> (Bitlocker)
+<details>
+<summary>Bitlocker</summary>
+  
+</details>
+
+[//]: <> (DFS + FSRM)
+<details>
+<summary>DFS + FSRM</summary>
+  
+</details>
+
 
 [//]: <> (DNS)
 <details>
