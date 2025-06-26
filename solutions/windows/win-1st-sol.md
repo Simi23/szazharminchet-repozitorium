@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:25:12.217Z
+date: 2025-06-26T09:25:30.416Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -77,7 +77,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <details>
 <summary>Backup</summary>
   
-> USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT
+> USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
   ```ps
   # Variables
