@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T09:39:55.835Z
+date: 2025-06-26T09:42:36.960Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -211,6 +211,13 @@ try {
 <details>
 <summary>iSCSI</summary>
   
+  **Target**
+  - Add from server manager and get done everyting with the server manager
+  - After done with settings Restart **WinTarget** and set it's *startup type* to *automatic*
+  
+  **Initiator**
+  - -Start **MSiSCSI** and set it's *startup type* to *automatic*
+  - Connect from iSCSI Initiatior management console (from tools)
 </details>
 
 
