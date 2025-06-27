@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-26T10:04:10.304Z
+date: 2025-06-27T17:43:29.750Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -214,6 +214,7 @@ try {
 >   **Target**
 >   - Add from server manager and get done everyting with the server manager
 >   - After done with settings Restart **WinTarget** and set it's *startup type* to *automatic*
+>   - Start **MSiSCSI** and set it's *startup type* to *automatic* 
 {.is-info}
 
   
