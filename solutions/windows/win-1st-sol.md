@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-27T17:43:29.750Z
+date: 2025-06-27T17:45:05.656Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -396,6 +396,9 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 >
 > _
 {.is-info}
+
+> DON'T MESS UP THE GPOS, BECAUSE CACHE REAMINS, AND YOUR 100% WILL STEP OUT!
+{.is-danger}
 
 </details>
 
