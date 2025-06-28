@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:33:27.160Z
+date: 2025-06-28T08:45:15.665Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -28,7 +28,35 @@ dateCreated: 2025-06-28T08:18:12.032Z
 
 1. SSH Key distrib + General config
 2. Syslog over TLS (Pregenerate cert - create record for this in DNS too)
+  ```
+destination d_dest{
+  syslog(
+    "SRV.lego.dk"
+      port(6514)
+      transport("tls")
+      tls(
+        cert-file("/ca/CLT.pem")
+        key-file("/ca/CLT.key")
+        ca-file("/ca/CA.crt")
+      )
+  );
+};
+
+log {
+  source(s_src);
+  destination(d_dest);
+};
+  ```
 3. SNMP oid for CPU load avarage `1.3.6.1.4.1.2021.10.1.3.1`
+```
+sysLocation YOURSYSTEMLOCATION
+sysContact NAME email@address
+
+agentaddress 0.0.0.0, [::]
+
+createuser Administrator MD5 "Passw0rd!" AES256C "Passw0rd!"
+rouser Administrator authpriv  
+```  
 4. Ldap login as on CLT
 5. SMB Share automount
 6. Default webserver (TLS)
