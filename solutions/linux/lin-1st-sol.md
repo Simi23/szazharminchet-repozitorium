@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:47:42.124Z
+date: 2025-06-28T08:52:51.428Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
