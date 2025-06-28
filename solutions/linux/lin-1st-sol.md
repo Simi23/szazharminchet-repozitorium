@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:27:03.448Z
+date: 2025-06-28T08:29:43.304Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -26,6 +26,12 @@ dateCreated: 2025-06-28T08:18:12.032Z
 <details>
 <summary>Ansible</summary>
 
+1. SSH Key distrib + General config
+2. Syslog over TLS (Pregenerate cert - create record for this in DNS too)
+3. SNMP oid for CPU load avarage`1.3.6.1.4.1.2021.10.1.3.10`
+4.
+5.
+6.
   
 </details>
 
