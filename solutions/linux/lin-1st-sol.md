@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:24:38.733Z
+date: 2025-06-28T08:26:56.836Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -15,8 +15,9 @@ dateCreated: 2025-06-28T08:18:12.032Z
 <summary>General</summary>
 
 - Hostname (`Rename-Computer -Name HOSTNAME`)
-- IPv4 settings (`netsh int ipv4 set add Ethernet0 static add mask gateway`)
-- IPv6 settings (`netsh int ipv6 set add Ethernet0 add/mask`)
+- Network configuration
+- Time Zone
+- Keyboard layout
   
 </details>
 
