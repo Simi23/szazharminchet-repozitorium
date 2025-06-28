@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:45:15.665Z
+date: 2025-06-28T08:47:42.124Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -43,8 +43,8 @@ destination d_dest{
 };
 
 log {
-  source(s_src);
-  destination(d_dest);
+	source(s_src);
+	destination(d_dest);
 };
   ```
 3. SNMP oid for CPU load avarage `1.3.6.1.4.1.2021.10.1.3.1`
@@ -169,6 +169,47 @@ rouser Administrator authpriv
 <details>
 <summary>Syslog</summary>
 
+  ```
+source s_dhcp {
+  syslog(
+    ip-protocol(4)
+    port(6514)
+    transport("tls")
+    tls (
+      cert-file("/ca/SRV.pem")
+      key-file("/ca/SRV.key")
+      ca-file("/ca/CA.crt")
+      ca-dir("/ca/")
+    )
+  );
+};
+
+destination d_dhcp {
+    file("/log/dhcp.log");
+};
+  
+destination d_else {
+    file("/log/dump.log");
+};
+
+filter f_dhcp{
+  program("dhcpd") or program("dhclient");
+};
+  
+log{
+  source(s_dhcp);
+  filter(f_dhcp);
+  destination(d_dhcp);
+};
+  
+log{
+  source(s_dhcp);
+  filter {
+     not filter(f_dhcp)
+  };
+  destination(d_else);
+};
+  ```
   
 </details>
 
