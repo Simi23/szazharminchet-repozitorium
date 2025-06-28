@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:20:18.219Z
+date: 2025-06-28T08:22:45.739Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -66,3 +66,97 @@ dateCreated: 2025-06-28T08:18:12.032Z
   
 </details>
 
+[//]: <> (Zabbix)
+<details>
+<summary>Zabbix</summary>
+
+  
+</details>
+
+
+[//]: <> (DHCP)
+<details>
+<summary>DHCP</summary>
+
+  
+</details>
+
+
+[//]: <> (Firewall)
+<details>
+<summary>Firewall</summary>
+
+  
+</details>
+
+[//]: <> (LDAP)
+<details>
+<summary>LDAP</summary>
+
+  
+</details>
+
+
+[//]: <> (Web)
+<details>
+<summary>Web</summary>
+
+  
+</details>
+
+
+[//]: <> (Syslog)
+<details>
+<summary>Syslog</summary>
+
+  
+</details>
+
+[//]: <> (RA VPN)
+<details>
+<summary>RA VPN</summary>
+
+  
+</details>
+
+[//]: <> (Samba)
+<details>
+<summary>Samba</summary>
+
+  
+</details>
+
+[//]: <> (Email + DKIM)
+<details>
+<summary>Email + DKIM</summary>
+
+  
+</details>
+
+[//]: <> (CRL)
+<details>
+<summary>CRL</summary>
+
+  
+</details>
+
+[//]: <> (Ansible)
+<details>
+<summary>Ansible</summary>
+
+  
+</details>
+
+[//]: <> (Backup)
+<details>
+<summary>Backup</summary>
+
+  
+</details>
+
+[//]: <> (CLT)
+<details>
+<summary>CLT</summary>
+
+  
+</details>
