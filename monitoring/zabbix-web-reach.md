@@ -2,7 +2,7 @@
 title: Zabbix monitor web reachability
 description: Zabbix monitor web reachability
 published: true
-date: 2025-06-11T14:06:57.689Z
+date: 2025-06-28T08:39:31.417Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-11T13:52:58.454Z
@@ -34,5 +34,5 @@ dateCreated: 2025-06-11T13:52:58.454Z
 {.is-warning}
 
 - Clone the one that exists
-- Edit the expression: `last(/www.billund.lego.dk/web.test.rspcode[Availibility of www.billund.lego.dk,Site availibility])<>200`
+- Add this expression to the end after an OR statement: `last(/www.billund.lego.dk/web.test.rspcode[Availibility of www.billund.lego.dk,Site availibility])<>200`
 - Don't forget to enable it
