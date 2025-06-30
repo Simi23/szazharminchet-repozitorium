@@ -2,7 +2,7 @@
 title: Samba LDAP Authentication
 description: Configure a Samba file server with LDAP authentication backend
 published: true
-date: 2025-06-06T07:51:29.716Z
+date: 2025-06-30T12:43:47.295Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T07:51:29.716Z
@@ -107,7 +107,7 @@ systemctl restart sssd
 Restart Samba services:
 
 ```bash
-systemctl restart smbd nmbd
+systemctl restart smbd nmbd sssd
 ```
 
 To test the setup, see if `getent` can list Samba groups:
