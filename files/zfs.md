@@ -2,7 +2,7 @@
 title: ZFS
 description: 
 published: true
-date: 2025-06-06T08:32:13.947Z
+date: 2025-06-30T10:44:05.978Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-20T12:54:23.739Z
@@ -224,7 +224,7 @@ zfs mount -l -a < /etc/passphrase
 Make the file executable:
 
 ```bash
-chmod +x /etc/passphrase
+chmod +x /etc/rc.local
 ```
 
 > This setup is not recommended, but it works if you want to automatically mount ZFS filesystems.
