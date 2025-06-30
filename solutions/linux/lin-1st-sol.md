@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-30T08:16:37.449Z
+date: 2025-06-30T08:18:00.950Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -19,6 +19,7 @@ dateCreated: 2025-06-28T08:18:12.032Z
 - Time Zone
 - Keyboard layout
 - NTP
+- SSH Root login
   
 </details>
 
