@@ -2,19 +2,19 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-28T08:52:51.428Z
+date: 2025-06-30T08:16:37.449Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
 ---
 
-# ES25 - ModB - 1st Solution
+# ES25 - ModA - 1st Solution
 
 [//]: <> (General)
 <details>
 <summary>General</summary>
 
-- Hostname (`Rename-Computer -Name HOSTNAME`)
+- Hostname
 - Network configuration
 - Time Zone
 - Keyboard layout
