@@ -2,7 +2,7 @@
 title: LDAP login and automount
 description: 
 published: true
-date: 2025-06-06T13:44:14.689Z
+date: 2025-07-01T09:20:03.781Z
 tags: linux
 editor: markdown
 dateCreated: 2025-06-06T13:33:41.709Z
@@ -72,7 +72,7 @@ Add this part to `/etc/security/pam_mount.conf.xml` to automount user folders.
     			options="nodev,nosuid,nofail"
           uid="%(USER)"
           path="%(USER)"
-          mount_point="/home/%(USER)"
+          mountpoint="/home/%(USER)"
           server="HQ-DC.billund.lego.dk"
           fstype="cifs"
   />
