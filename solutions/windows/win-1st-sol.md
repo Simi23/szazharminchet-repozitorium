@@ -2,13 +2,14 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-06-27T17:45:21.366Z
+date: 2025-07-07T11:44:23.981Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
 ---
 
 # ES25 - ModB - 1st Solution
+![modb-tasks.jpg](/solutions/assets/modb-tasks.jpg)
 
 [//]: <> (General)
 <details>
