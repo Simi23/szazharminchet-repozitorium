@@ -2,7 +2,7 @@
 title: ZFS
 description: 
 published: true
-date: 2025-06-30T10:44:05.978Z
+date: 2025-07-08T17:55:31.698Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-20T12:54:23.739Z
@@ -32,6 +32,9 @@ Install ZFS by installing the following packages:
 apt install linux-headers-amd64
 apt install zfsutils-linux
 ```
+
+> Note that on some Debian versions, the package `zfsutils-linux` might not be available by default. You need to add the `contrib` package list to your Debian sources list.
+{.is-info}
 
 # Configuring ZFS
 
