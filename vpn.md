@@ -2,7 +2,7 @@
 title: VPN
 description: VPN Guides
 published: true
-date: 2025-06-18T09:26:26.192Z
+date: 2025-07-11T11:53:31.751Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-03T10:43:56.838Z
@@ -36,3 +36,4 @@ dateCreated: 2025-03-03T10:43:56.838Z
    - [`swanctl` config](/vpn/strongswan-srv-windows-client-cert)
    - [`ipsec.conf` config](/vpn/win-clt-strong-srv-cert-legacy)
  - [**Wireguard**](/vpn/wireguard) with **public key** and **pre-shared key** authentication
+ - [**Strongswan**](/vpn/strongswan-ra-eap-tls) with **EAP-TLS** authentication
