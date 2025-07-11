@@ -2,7 +2,7 @@
 title: Strongswan Remote Access VPN (EAP-TLS)
 description: Strongswan remote access VPN with EAP-TLS authentication and vIP assignment
 published: true
-date: 2025-07-11T12:12:49.205Z
+date: 2025-07-11T12:14:46.266Z
 tags: linux
 editor: markdown
 dateCreated: 2025-07-11T12:12:49.205Z
@@ -167,3 +167,6 @@ service strongswan restart
 journalctl -fxeu strongswan
 ```
 
+# Verification
+
+The client should be able to reach the network `10.1.1.0/24`, specified in the traffic selector. When the client reaches that network, the source address of those packets should be one assigned from the pool on the server.
