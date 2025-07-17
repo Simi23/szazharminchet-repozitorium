@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-17T09:02:05.698Z
+date: 2025-07-17T09:03:57.627Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -70,11 +70,12 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <details>
 <summary>Ansible</summary>
   <kbd>1-hostname.yaml</kbd>
+  
   ```yaml
   ---
 - name: Hostname
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks:
     # | Change hostname | 
     - name: Change hostname
@@ -92,6 +93,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
   
   <kbd>2-adds.yaml</kbd>
+  
   ```yaml
   ---
 - name: ADDS
@@ -117,7 +119,8 @@ dateCreated: 2025-06-26T09:03:28.237Z
   ```
   
   <kbd>3-users.yaml</kbd>
-  ```
+  
+  ```yaml
   ---
 - name: OU and User creation
   hosts: all
@@ -185,6 +188,70 @@ dateCreated: 2025-06-26T09:03:28.237Z
         label: "{{ item.FirstName }}.{{ item.LastName }}"
   	```
   
+  <kbd>4-web.yaml</kbd>
+  
+  ```yaml
+---
+- name: IIS Configruation
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    # | Install IIS |
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+
+    # | Copy IIS Website |
+    - name: Copy IIS Website
+      ansible.windows.win_copy:
+        dest: C:\inetpub\wwwroot\iisstart.htm
+        content: "<h1>Skills Development</h1>"
+        
+    # | Create DNS record for webserver |
+    - name: Create DNS record for webserver
+      community.windows.win_dns_record:
+        name: "www"
+        type: "CNAME"
+        value: "DEV-SRV.skillsdev.dk"
+        zone: "skillsdev.dk"
+        
+  ```
+  
+  
+    <kbd>5-shares.yaml</kbd>
+  
+  ```yaml
+---
+- name: Create CIFS Shares
+  hosts: all
+  gather_facts: false
+  become: true
+  vars_files:
+    - resources/ES2025_TP39_ModuleB_Shares.yaml
+  tasks:
+    # | Create directories |
+    - name: Create directories
+      ansible.windows.win_file:
+        path: "{{ item.path }}"
+        state: directory
+      loop: "{{ shares }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    # | Create CIFS Shares |
+    - name: Create CIFS Shares
+      ansible.windows.win_share:
+        name: "{{ item.name }}"
+        path: "{{ item.path }}"
+        description: "{{ item.description }}"
+        full_access: "{{ item.full_access }}"
+        read_access: "{{ item.read_access }}"
+        state: present
+      loop: "{{ shares }}"
+      loop_control:
+        label: "{{ item.name }}"
+  ```
   
   
 > CREATE AND USE THE JSON
