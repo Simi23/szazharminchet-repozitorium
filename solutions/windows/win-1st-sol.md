@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-07T11:44:23.981Z
+date: 2025-07-17T09:02:05.698Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -69,6 +69,123 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (Ansible)
 <details>
 <summary>Ansible</summary>
+  <kbd>1-hostname.yaml</kbd>
+  ```yaml
+  ---
+- name: Hostname
+  hosts: all
+  gather_facts: true
+  tasks:
+    # | Change hostname | 
+    - name: Change hostname
+      ansible.windows.win_hostname:
+        name: "{{ hostname }}"
+      register: reg
+      notify: Reboot
+
+  handlers:
+    # | Reboot |
+    - name: Reboot
+      ansible.windows.win_reboot:
+      when: reg.reboot_required
+  ```
+  
+  
+  <kbd>2-adds.yaml</kbd>
+  ```yaml
+  ---
+- name: ADDS
+  hosts: all
+  gather_facts: false
+  vars_files:
+    - resources/vault.yml
+  tasks:
+    # | Install ADDS | 
+    - name: Install ADDS
+      ansible.windows.win_feature:
+        name: 
+          - Ad-Domain-Services
+          - DNS
+        state: present
+      
+    # | Deploy ADDS |
+    - name: Deploy ADDS
+      microsoft.ad.domain:
+        dns_domain_name: skillsdev.dk
+        safe_mode_password: "{{ secret_password }}"
+        reboot: true
+  ```
+  
+  <kbd>3-users.yaml</kbd>
+  ```
+  ---
+- name: OU and User creation
+  hosts: all
+  gather_facts: false
+  become: true
+  vars:
+    OUs: "{{ lookup('file', 'resources/OU.json') | from_json }}"
+    Users: "{{ lookup('file', 'resources/ES2025_TP39_ModuleB_Users_Skillsdev.json') | from_json }}"
+    Groups: "{{ Users | map(attribute='Department') | unique | list }}"
+  vars_files:
+    - resources/vault.yml
+  tasks:
+    # | Create OU structure |
+    - name: Create OU structure
+      microsoft.ad.ou:
+        name: "{{ item.OU }}"
+        path: "{{ item.Path }}DC=skillsdev,DC=dk"
+        description: "{{ item.Description }}"
+        state: present
+      loop: "{{ OUs }}"
+      loop_control:
+        label: "{{ item.OU }}"
+
+    # | Create groups |
+    - name: Create groups
+      microsoft.ad.group:
+        name: "{{ item }}"
+        scope: global
+        path: "OU=Groups,OU=Skills,DC=skillsdev,DC=dk"
+        state: present
+      loop: "{{ Groups }}"
+
+    # | Create users |
+    # "FirstName": "Jill",
+    # "LastName": "Santiago",
+    # "Email": "jill.santiago@skillsdev.dk",
+    # "JobTitle": "Insurance account manager",
+    # "City": "Catherineton",
+    # "Company": "Skillsdev",
+    # "Department": "Tech"
+    - name: Create users
+      microsoft.ad.user:
+        name: "{{ item.FirstName }} {{ item.LastName }}"
+        firstname: "{{ item.FirstName }}"
+        surname: "{{ item.LastName }}"
+        email: "{{ item.Email }}"
+        city: "{{ item.City }}"
+        company: "{{ item.Company }}"
+        password: "{{ secret_password }}"
+        sam_account_name: "{{ item.FirstName }}.{{ item.LastName }}"
+        upn: "{{ item.FirstName }}.{{ item.LastName }}@skillsdev.dk"
+        path: "OU={{ item.Department }},OU=Users,OU=Skills,DC=skillsdev,DC=dk"
+        update_password: on_create
+        groups:
+          set:
+            - "{{ item.Department }}"
+            - "Domain Users"
+        attributes:
+          set:
+            Title: "{{ item.JobTitle }}"
+            Department: "{{ item.Department }}"
+        state: present
+      loop: "{{ Users }}"
+      loop_control:
+        label: "{{ item.FirstName }}.{{ item.LastName }}"
+  	```
+  
+  
   
 > CREATE AND USE THE JSON
 {.is-warning}
@@ -81,7 +198,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 > USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
   ```powershell
-  # Variables
+# Variables
 # Emails settings
 $smtpServer = "mail.nordicbackup.net"
 $from = "backup@skillsnet.dk"
@@ -130,7 +247,7 @@ try {
 
     foreach ($site in $sites) {
         $siteName = $site.Name
-
+    
         $sourcePath = $site.PhysicalPath
         $sourcePath = $sourcePath.Replace('%SystemDrive%', 'C:')
         $destinationPath = "C:\Backups\Web\$siteName"
@@ -144,6 +261,10 @@ try {
         Copy-Item -Path $sourcePath\ -Destination $destinationPath -Recurse -Force -ErrorAction Stop
     }
 
+    
+    # Copy items to iSCSI disk
+    Copy-Item -Path $BackupRoot -Destination "b:\" -Recurse -Force
+    
     # Send success email
     Write-Output "Sending success email"
     $subject = "Backup Success on $env:COMPUTERNAME"
