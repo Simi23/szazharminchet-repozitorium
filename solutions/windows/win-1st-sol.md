@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-17T11:24:34.991Z
+date: 2025-07-17T11:26:43.262Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -278,87 +278,85 @@ dateCreated: 2025-06-26T09:03:28.237Z
 > USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
   ```powershell
-# Variables
-# Emails settings
-$smtpServer = "mail.nordicbackup.net"
-$from = "backup@skillsnet.dk"
-$to = "support@nordicbackup.net"
-$subject = ""
-$body = ""
-$success = $true
-
-# Backup path
-$BackupRoot = "C:\Backups"
-$usersCSV = "$backupRoot\Users.csv"
-$gpoBackup = "$backupRoot\GPOs"
-$webBackup = "$backupRoot\Web"
+$errorStatus = $false
+$errorMessage = ""
 
 try {
-    # Create backup folders
-    Write-Output "Create backup folders"
-    New-Item -Path $BackupRoot -ItemType Directory -Force | Out-Null
-    New-Item -Path $gpoBackup -ItemType Directory -Force | Out-Null
-    New-Item -Path $webBackup -ItemType Directory -Force | Out-Null
+    $iisServers = @("DC.skillsnet.dk", "SRV2.skillsnet.dk")
 
-    # Export users to CSV
-    # FirstName,LastName,samAccountName,UserPrincipalName,Email,JobTitle,City,Company,Department
-    Write-Output "Export users to CSV"
-    Get-ADUser -Filter * -Properties GivenName, Surname, SamAccountName, DistinguishedName, UserPrincipalName, EmailAddress, Title, City, Company, Department `
-        | Select-Object GivenName, Surname, SamAccountName, DistinguishedName, UserPrincipalName, EmailAddress, Title, City, Company, Department `
-        | Export-Csv -Path $usersCSV -NoTypeInformation -Encoding UTF8
-
-
-    # Export Group Policy Objects
-    Write-Output "Export Group Policy Objects"
-    $allGPO = Get-GPO -All
-    foreach ($gpo in $allGPO) {
-        $gpoName = $gpo.DisplayName
-        $gpoPath = Join-Path $gpoBackup $gpoName
-        New-Item -Path $gpoPath -ItemType Directory -Force | Out-Null
-        Backup-GPO -Name $gpoName -Path $gpoPath -ErrorAction SilentlyContinue
+    # Testing for main backup directory
+    if (!(Test-Path "C:\Backups")) {
+        New-Item -Path "C:\Backups" -ItemType Directory | Out-Null
     }
 
-    # Backup IIS web root folders
-    Write-Output "Backup IIS web root folders"
-    Import-Module WebAdministration
+    # Exporting users
+    Get-ADUser -Filter * -Properties DistinguishedName,Name,GivenName,Surname,DisplayName,UserPrincipalName,SamAccountName `
+      | Select-Object -Property DistinguishedName,Name,GivenName,Surname,DisplayName,UserPrincipalName,SamAccountName `
+      | Export-Csv -Path C:\Backups\Users.csv -NoTypeInformation `
+      | Out-Null
 
-    # Get all IIS sites
-    $sites = Get-Website
-
-    foreach ($site in $sites) {
-        $siteName = $site.Name
-    
-        $sourcePath = $site.PhysicalPath
-        $sourcePath = $sourcePath.Replace('%SystemDrive%', 'C:')
-        $destinationPath = "C:\Backups\Web\$siteName"
-
-        Write-Host "Backing up site '$siteName' from $sourcePath to $destinationPath"
-
-        # Create destination folder
-        New-Item -ItemType Directory -Path $destinationPath -Force | Out-Null
-
-        # Copy the site files
-        Copy-Item -Path $sourcePath\ -Destination $destinationPath -Recurse -Force -ErrorAction Stop
+    # Testing for GPO backup directory
+    if (!(Test-Path "C:\Backups\GPOs")) {
+        New-Item -Path "C:\Backups\GPOs" -ItemType Directory | Out-Null
     }
 
-    
-    # Copy items to iSCSI disk
-    Copy-Item -Path $BackupRoot -Destination "b:\" -Recurse -Force
-    
-    # Send success email
-    Write-Output "Sending success email"
-    $subject = "Backup Success on $env:COMPUTERNAME"
-    $body = "The backup completed successfully on $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')."
-    Send-MailMessage -From $from -To $to -Subject $subject -Body $body -SmtpServer $smtpServer
+    # Exporting GPOs
+    Remove-Item C:\Backups\GPOs\* -Force -Recurse | Out-Null
+    Get-GPO -All | Backup-GPO -Path C:\Backups\GPOs | Out-Null
+
+    # Testing for WEB backup directory
+    if (!(Test-Path "C:\Backups\Web")) {
+        New-Item -Path "C:\Backups\Web" -ItemType Directory | Out-Null
+    }
+
+    $pw = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!"
+    $credential = New-Object pscredential("SKILLSNET\Administrator", $pw)
+    foreach($iisServer in $iisServers) {
+        $sites = Invoke-Command -ComputerName $iisServer -ScriptBlock { Get-Website }
+        $session = New-PSSession -ComputerName $iisServer -Credential $credential
+
+        foreach($site in $sites) {
+            $sitepath = $site.PhysicalPath.replace("%SystemDrive%", "C:")
+            $sitepath = Join-Path -Path $sitepath -ChildPath "*"
+
+            $siteurl = $site.bindings.Collection[0].bindingInformation.Split(":") | Select-Object -Last 1
+        
+            if($siteurl.Length -eq 0) {
+                $siteurl = $site.Name
+                Write-Host "Site '$($site.name)' on $iisServer does not have a URL. Falling back to site name." -ForegroundColor Yellow
+            }
+
+            $localpath = "C:\Backups\Web\$siteurl"
+        
+            # Testing for WEB backup directory
+            if (!(Test-Path $localpath)) {
+                New-Item -Path $localpath -ItemType Directory | Out-Null
+            }
+
+            if(!(Invoke-Command -ComputerName $iisServer -ScriptBlock { Test-Path -Path $Using:sitepath})) {
+                Write-Host "Skipping '$sitepath' on $iisServer (Empty directory)" -ForegroundColor Yellow
+                continue
+            }
+
+            Write-Host "Copying from $sitepath to $localpath"
+            Copy-Item -Path $sitepath -Destination $localpath -Recurse -FromSession $session -Force
+        }
+    }
 } catch {
-    # Sending failure email
-    Write-Output "Sending failure email"
-    $succes = $false
-    $subject = "Backup FAILED on $env:COMPUTERNAME"
-    $body = "Backup failed on $(Get-Date). Error: $($_.Exception.Message)"
-    Send-MailMessage -From $from -To $to -Subject $subject -Body $body -SmtpServer $smtpServer
-    Write-Output "Backup failed on $(Get-Date). Error: $($_.Exception.Message)"
+    $errorStatus = $true
+    $errorMessage = $_.Exception.Message
 }
+
+$mailFrom = "support@nordicbackup.net"
+$mailTo = "support@nordicbackup.net"
+$smtpServer = "198.51.100.1"
+
+if ($errorStatus) {
+    Send-MailMessage -From $mailFrom -To $mailTo -SmtpServer $smtpServer -Subject "Error during backup job" -Body $errorMessage
+} else {
+    Send-MailMessage -From $mailFrom -To $mailTo -SmtpServer $smtpServer -Subject "Backup job successful" -Body "Backup script was run successfully." -Attachments "C:\Scripts\Backup.ps1"
+}
+
   ```
 </details>
 
