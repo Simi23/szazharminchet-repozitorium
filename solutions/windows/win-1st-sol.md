@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-18T07:36:50.377Z
+date: 2025-07-18T07:37:32.376Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -588,7 +588,7 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 > **SUBSCRIPTION**
 > - Start an **Event Viewer**, create a new Subscription
 > - `wecutil gs "Subscription Name" /f:xml
-> -  Add "<ConfigurationMode> Custom </ConfigurationMode>" to the first line
+> -  Add `<ConfigurationMode> Custom </ConfigurationMode>` to the first line
 > - **Copy** the output, **transfer** it to the CORE computer
 > - Disable **wecsvc**!
 >
