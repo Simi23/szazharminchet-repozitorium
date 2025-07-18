@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-18T07:31:25.163Z
+date: 2025-07-18T07:36:50.377Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -389,6 +389,7 @@ if ($errorStatus) {
   
 > **FSRM**
 > Do it from Management console, it will be faster.
+> `Enable-NetFirewallRule -DisplayGroup "Remote File Server Resource Manager Management` on CORE server.
 {.is-info}
 
 </details>
@@ -401,6 +402,7 @@ if ($errorStatus) {
   > **+ CNAME Records to add**
   > <span>DC.skillsnet.</span>dk: **sso**, **ocsp**
   > <span>SRV2.skillsnet.</span>dk: **app**, **cacerts**, **crl**, **intra**, **www**
+  > <span>DEV-SRV.skillsdev.</span>dk: **www**
   {.is-info}
 
 </details>
@@ -419,6 +421,7 @@ if ($errorStatus) {
 >   - Add from server manager and get done everyting with the server manager
 >   - After done with settings Restart **WinTarget** and set it's *startup type* to *automatic*
 >   - Start **MSiSCSI** and set it's *startup type* to *automatic* 
+>   - If it still isn't working restart both service and don't restart the computer!
 {.is-info}
 
   
@@ -555,6 +558,9 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 <details>
 <summary>SMB</summary>
   `Set-SmbServerConfiguration -EncryptData $true -RejectUnencryptedAccess $true`
+  > When creating a new share on SRV1 & SRV2 follow these scheme.
+  > {.is-info}
+  `New-SmbShare D:\Users -Name 'Users' -EncrypData $true -FullAccess 'Domain Users' -ReadAccess 'Everyone'` 
 </details>
 
 [//]: <> (WAP)
@@ -582,6 +588,7 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 > **SUBSCRIPTION**
 > - Start an **Event Viewer**, create a new Subscription
 > - `wecutil gs "Subscription Name" /f:xml
+> -  Add "<ConfigurationMode> Custom </ConfigurationMode>" to the first line
 > - **Copy** the output, **transfer** it to the CORE computer
 > - Disable **wecsvc**!
 >
@@ -596,7 +603,7 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 > - `wecutil cs ./log.xml` (the file you transferred)
 > - `Start-Service wecsvc`
 > - `Set-Service wecsvc -StartupType Automatic`
-> - `Enable-NetFirwallRule -DisplayGroup Remote Event Log Management`
+> - `Enable-NetFirwallRule -DisplayGroup 'Remote Event Log Management'`
 >
 > _
 {.is-info}
