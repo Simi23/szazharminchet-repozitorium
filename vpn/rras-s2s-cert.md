@@ -2,7 +2,7 @@
 title: RRAS Certificate site-to-site VPN
 description: RRAS Site-to-site VPN tunnel with certificate authentication
 published: true
-date: 2025-07-18T12:26:19.630Z
+date: 2025-07-18T12:33:55.895Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-26T11:03:23.288Z
