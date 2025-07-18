@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-07-18T07:37:32.376Z
+date: 2025-07-18T07:41:24.875Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -74,7 +74,10 @@ dateCreated: 2025-06-26T09:03:28.237Z
   
   ```bash
   	echo "export EDITOR=nano" >> ~/.bashrc	
-  	echo 'alias ansible-playbook="ansible-playbook --ask-vault-password"' >> ~/.bashrc	
+  	echo 'alias ansible-playbook="ansible-playbook --ask-vault-password"' >> ~/.bashrc
+  	# OR
+  	echo "Passw0rd!" > /ansible/resources/vault_pass
+  	echo 'alias ansible-playbook="ansible-playbook --vault-password-file=/ansible/resources/vault_pass"' >> ~/.bashrc	
     source ~/.bashrc
   	ansible-vault create /ansible/resources/vault.yml
   ```
