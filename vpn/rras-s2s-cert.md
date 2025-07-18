@@ -2,7 +2,7 @@
 title: RRAS Certificate site-to-site VPN
 description: RRAS Site-to-site VPN tunnel with certificate authentication
 published: true
-date: 2025-03-26T11:03:23.288Z
+date: 2025-07-18T12:26:19.630Z
 tags: windows
 editor: markdown
 dateCreated: 2025-03-26T11:03:23.288Z
@@ -54,17 +54,17 @@ Create a **new demand-dial network interface** with the following settings:
   - **Select** *IKEv2*
   - **Host:** Other endpoint's IP address
   - **Check** *Route IP packets*
-  - Add static routes to reach the other site
+  - Add static routes to reach the other site. On the client side, also add the prefix `192.0.2.0/24`. This will be important later.
 
 Now open **properties** of the interface and in **Options > Connection Type** select *Persistent connection*. Make sure **Security > Authentication** is set to *Use machine certificates* and **verification is checked**.
 
 The tunnel will need addressing. You have to select a *'server'* and a *'client'* endpoint. In this case, **PARIS-ROUTER** will be the **server** with a **static IP** and an IP pool to give out addresses to other peers.
 
-On the **server** (PARIS-ROUTER), set a **static IP on the interface** in networking. For example, set `200.0.0.1`.
+On the **server** (PARIS-ROUTER), set a **static IP on the interface** in networking. For example, set `192.0.2.1`.
 
 On the **client** (LYON-ROUTER), select *Obtain an IP address automatically* in networking.
 
-Now, **create the pool** on the server: In **RRAS** right-click on `<SERVER_NAME> (local)` and select **Properties**. In **IPv4 > IPv4 Address assignment** select *Static pool* and create pool, e.g. `200.0.0.2 - 200.0.0.100`.
+Now, **create the pool** on the server: In **RRAS** right-click on `<SERVER_NAME> (local)` and select **Properties**. In **IPv4 > IPv4 Address assignment** select *Static pool* and create pool, e.g. `192.0.2.2 - 192.0.2.100`.
 
 Now on **both machines**, in the same **Properties** window, go to **Security > Authentication methods** and check *Allow machine certificate authentication for IKEv2*.
 
