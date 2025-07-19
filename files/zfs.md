@@ -2,7 +2,7 @@
 title: ZFS
 description: 
 published: true
-date: 2025-07-08T17:55:31.698Z
+date: 2025-07-19T19:34:43.289Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-20T12:54:23.739Z
@@ -48,6 +48,11 @@ apt install zfsutils-linux
 > ```
 > You will see which path points to which drive.
 {.is-info}
+
+**To get just the part you will need use this cmdlet:**
+```
+ls -l /dev/disk/by-path/ | rev | cut -d' ' -f3 | rev
+```
 
 You can start using ZFS by first creating a pool. In the pool you already define the VDEV(s) it is based on, too. (You can add more VDEVs to the pool later.)
 
