@@ -2,7 +2,7 @@
 title: Icinga2 install
 description: 
 published: true
-date: 2025-06-18T07:51:35.062Z
+date: 2025-08-04T15:25:21.558Z
 tags: linux
 editor: markdown
 dateCreated: 2025-05-29T09:44:50.187Z
@@ -53,7 +53,7 @@ quit;
 mysql -u root -p icingadb </usr/share/icingadb/schema/mysql/schema.sql
 ```
 
-> Edit icingadb settings `/etc/icingadb/config.yml`. Change the password what you have given as mysql user password, and edit redis port to 6379. Restart the service.
+> Edit icingadb settings `/etc/icingadb/config.yml`. Change the password what you have given as mysql user password, and edit redis port to 6379. Restart the service. And edit `/etc/icinga2/features-enabled/icingadb.conf` too!
 {.is-info}
 
 ```
