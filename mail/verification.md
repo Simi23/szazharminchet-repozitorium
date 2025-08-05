@@ -2,7 +2,7 @@
 title: Email security verification
 description: Verify incoming mails via SPF, DKIM and DMARC. Put non-compliant emails into Spam folder.
 published: true
-date: 2025-08-05T13:16:52.382Z
+date: 2025-08-05T13:17:39.668Z
 tags: linux
 editor: markdown
 dateCreated: 2025-08-05T12:17:49.904Z
