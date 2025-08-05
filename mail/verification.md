@@ -2,7 +2,7 @@
 title: Email security verification
 description: Verify incoming mails via SPF, DKIM and DMARC. Put non-compliant emails into Spam folder.
 published: true
-date: 2025-08-05T12:17:49.904Z
+date: 2025-08-05T13:16:52.382Z
 tags: linux
 editor: markdown
 dateCreated: 2025-08-05T12:17:49.904Z
@@ -168,3 +168,19 @@ namespace inbox {
 ```
 
 **Restart all services.**
+
+# Alternative Sieve script
+
+```c
+require ["fileinto", "regex"];
+
+if anyof (
+  header :contains "Authentication-Results" "spf=fail",
+  header :contains "Authentication-Results" "spf=softfail",
+  header :contains "Authentication-Results" "dkim=fail",
+  header :contains "Authentication-Results" "dmarc=fail"
+) {
+  fileinto "Spam";
+  stop;
+}
+```
