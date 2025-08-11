@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:15:45.909Z
+date: 2025-08-11T09:19:05.166Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -451,12 +451,16 @@ try {
 >   - After done with settings Restart **WinTarget** and set it's *startup type* to *Manual*
 >   - Create a script that starts WinTarget, and from feladat ütemező create a new basic task that runs this script and delay it 2 minutes and it will work!
 >   - If it still isn't working restart both service and don't restart the computer!
+>
+> _
 {.is-info}
 
   
 >   **Initiator**
 >   - Start **MSiSCSI** and set it's *startup type* to *automatic*
 >   - Connect from iSCSI Initiatior management console (from tools)
+>
+> _
 {.is-info}
 
 </details>
