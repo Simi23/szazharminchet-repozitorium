@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T08:38:16.668Z
+date: 2025-08-11T08:43:48.847Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -179,6 +179,17 @@ done
 <details>
 <summary>S2S Plain</summary>
 
+  Add to <kbd>/etc/network/interfaces</kbd>
+  
+  ```
+auto ipsec0
+iface ipsec0 inet static
+  address 10.200.0.1/24
+  pre-up ip tunnel add ipsec0 mode gre local 203.0.113.2 remote 203.0.113.10
+  up ip link set ipsec0 up
+  down ip link set ipsec0 down
+  post-down ip tunnel del ipsec0
+```
   
 </details>
 
@@ -186,6 +197,16 @@ done
 <details>
 <summary>S2S IPSec</summary>
 
+  Edit <kbd>/etc/strongswan.conf</kbd>
+  
+  ```c
+charon {
+  ...
+  retransmit_tries = 3
+  retransmit_timeout = 0.6
+  retransmit_base = 1.1
+}
+```
   
 </details>
 
