@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:43:17.943Z
+date: 2025-08-11T09:45:05.459Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -307,7 +307,9 @@ log{
 [//]: <> (Web)
 <details>
 <summary>Web</summary>
-
+```bash
+apt install cowsay
+```
   
 </details>
 
