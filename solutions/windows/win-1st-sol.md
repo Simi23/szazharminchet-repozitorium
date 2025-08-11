@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T08:20:28.090Z
+date: 2025-08-11T08:21:05.880Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -408,6 +408,7 @@ try {
   
   - `Install-WindowsFeature FS-Resource-Manager, FS-DFS-Namespace, FS-DFS-Replication -IncludeManagementTools`
   - `Enable-NetFirewallRule -DisplayGroup "Remote File Server Resource Manager Management"`
+  - Restart the computer to create file screening template
 
 > **DFS**
 > Create the NAMESPACE and it will configure the Replication for you
