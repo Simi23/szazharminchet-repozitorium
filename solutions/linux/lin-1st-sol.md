@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:45:05.459Z
+date: 2025-08-11T09:49:30.913Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -299,8 +299,26 @@ log{
 [//]: <> (ZFS)
 <details>
 <summary>ZFS</summary>
+```bash
+apt install linux-headers-amd64 zfsutils-linux
+```
 
+Create a script that will create your ZFS pool:
+```
+mkdir /scripts
+touch /scripts/zfs.sh
+chmod +x /scripts/zfs.sh
+ls -l /dev/disks/by-path/ | rev | cut -d' ' -f 3 | rev >> /scripts/zfs.sh
+```
   
+Edit /scripts/zfs.sh
+```sh
+	zfspool create
+  	-O encryption="aes-256-gcm"
+  	-O keyformat="passphrase"
+  		raidz1
+  			Put here the names of disks
+```
 </details>
 
 
@@ -312,5 +330,6 @@ apt install cowsay
 ```
   
 </details>
+
 
 
