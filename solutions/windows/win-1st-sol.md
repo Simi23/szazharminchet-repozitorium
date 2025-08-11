@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T07:50:40.158Z
+date: 2025-08-11T07:50:55.424Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -18,7 +18,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 - Hostname (`Rename-Computer -Name HOSTNAME`)
 - IPv4 settings (`netsh int ipv4 set add Ethernet0 static add mask gateway`, `netsh int ipv4set dns Ethernet0 static dns`)
 - IPv6 settings (`netsh int ipv6 set add Ethernet0 add/mask`, `netsh int ipv6 add route ::/0 Ethernet0 gatewayV6`, `netsh int ipv6 set dns Ethernet0 static dnsV6`)
-  - Time related settings (`Set-TimeZone "Romance Standard Time"`, `Set-Date -Date "08/11/2025 14:35"`)
+  - Time related settings (`Get-TimeZone`, `Set-TimeZone "Romance Standard Time"`, `Set-Date -Date "08/11/2025 14:35"`)
   
 </details>
 
