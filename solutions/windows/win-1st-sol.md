@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:19:05.166Z
+date: 2025-08-11T10:05:28.005Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -25,6 +25,23 @@ dateCreated: 2025-06-26T09:03:28.237Z
 [//]: <> (AD CS)
 <details>
 <summary>AD CS</summary>
+  
+  Install **ADCS** with *Certification Authority* and *Online Responder* features.
+  Configure the features, create the CA. Open CA properties, extensions:
+- Remove all default remote paths
+- Add CDP/publishedAs, CDP/publishTo, AIA and OCSP paths
+
+  Create certificate templates:
+  
+- The ones required by the TP (Users, Endpoints, Web Servers)
+- Extra ones: _ocsp, _vpn
+  - ocsp can have default settings
+  - vpn needs extra settings
+- Don't forget to assign permissions correctly and publish them
+
+Create CertEnroll GPO, run `certutil -crl`
+  
+If ocsp path is changed, edit applicationHost.config, and remember to use OCSPISAPIPool!
   
 </details>
 
