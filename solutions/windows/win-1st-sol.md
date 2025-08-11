@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T08:29:44.172Z
+date: 2025-08-11T08:30:34.402Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -589,7 +589,7 @@ Write-Host "============= Users and groups have been created! =============" -Ba
   `Set-SmbServerConfiguration -EncryptData $true -RejectUnencryptedAccess $true`
   > When creating a new share on SRV1 & SRV2 follow these scheme.
   > {.is-info}
-  `New-SmbShare D:\Users -Name 'Users' -EncrypData $true -FullAccess 'Domain Users' -ReadAccess 'Everyone'` 
+  `New-SmbShare D:\Users -Name 'Users' ***-EncrypData $true*** -FullAccess 'Domain Users' -ReadAccess 'Everyone'` 
 </details>
 
 [//]: <> (WAP)
@@ -637,7 +637,7 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 > _
 {.is-info}
 
-> DON'T MESS UP THE GPOS, BECAUSE CACHE REAMINS, AND YOU CAN JUST IMAGINE ABOUT THE 100%!
+> DON'T MESS UP THE GPOS, BECAUSE CACHE REMAINS, AND YOU CAN JUST IMAGINE ABOUT THE 100%!
 {.is-danger}
 
 </details>
