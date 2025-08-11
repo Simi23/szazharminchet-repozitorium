@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T07:51:48.745Z
+date: 2025-08-11T07:52:37.286Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -282,84 +282,6 @@ dateCreated: 2025-06-26T09:03:28.237Z
 > USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
   ```powershell
-$errorStatus = $false
-$errorMessage = ""
-
-try {
-    $iisServers = @("DC.skillsnet.dk", "SRV2.skillsnet.dk")
-
-    # Testing for main backup directory
-    if (!(Test-Path "C:\Backups")) {
-        New-Item -Path "C:\Backups" -ItemType Directory | Out-Null
-    }
-
-    # Exporting users
-    Get-ADUser -Filter * -Properties DistinguishedName,Name,GivenName,Surname,DisplayName,UserPrincipalName,SamAccountName `
-      | Select-Object -Property DistinguishedName,Name,GivenName,Surname,DisplayName,UserPrincipalName,SamAccountName `
-      | Export-Csv -Path C:\Backups\Users.csv -NoTypeInformation `
-      | Out-Null
-
-    # Testing for GPO backup directory
-    if (!(Test-Path "C:\Backups\GPOs")) {
-        New-Item -Path "C:\Backups\GPOs" -ItemType Directory | Out-Null
-    }
-
-    # Exporting GPOs
-    Remove-Item C:\Backups\GPOs\* -Force -Recurse | Out-Null
-    Get-GPO -All | Backup-GPO -Path C:\Backups\GPOs | Out-Null
-
-    # Testing for WEB backup directory
-    if (!(Test-Path "C:\Backups\Web")) {
-        New-Item -Path "C:\Backups\Web" -ItemType Directory | Out-Null
-    }
-
-    $pw = ConvertTo-SecureString -AsPlainText -Force "Passw0rd!"
-    $credential = New-Object pscredential("SKILLSNET\Administrator", $pw)
-    foreach($iisServer in $iisServers) {
-        $sites = Invoke-Command -ComputerName $iisServer -ScriptBlock { Get-Website }
-        $session = New-PSSession -ComputerName $iisServer -Credential $credential
-
-        foreach($site in $sites) {
-            $sitepath = $site.PhysicalPath.replace("%SystemDrive%", "C:")
-            $sitepath = Join-Path -Path $sitepath -ChildPath "*"
-
-            $siteurl = $site.bindings.Collection[0].bindingInformation.Split(":") | Select-Object -Last 1
-        
-            if($siteurl.Length -eq 0) {
-                $siteurl = $site.Name
-                Write-Host "Site '$($site.name)' on $iisServer does not have a URL. Falling back to site name." -ForegroundColor Yellow
-            }
-
-            $localpath = "C:\Backups\Web\$siteurl"
-        
-            # Testing for WEB backup directory
-            if (!(Test-Path $localpath)) {
-                New-Item -Path $localpath -ItemType Directory | Out-Null
-            }
-
-            if(!(Invoke-Command -ComputerName $iisServer -ScriptBlock { Test-Path -Path $Using:sitepath})) {
-                Write-Host "Skipping '$sitepath' on $iisServer (Empty directory)" -ForegroundColor Yellow
-                continue
-            }
-
-            Write-Host "Copying from $sitepath to $localpath"
-            Copy-Item -Path $sitepath -Destination $localpath -Recurse -FromSession $session -Force
-        }
-    }
-} catch {
-    $errorStatus = $true
-    $errorMessage = $_.Exception.Message
-}
-
-$mailFrom = "support@nordicbackup.net"
-$mailTo = "support@nordicbackup.net"
-$smtpServer = "198.51.100.1"
-
-if ($errorStatus) {
-    Send-MailMessage -From $mailFrom -To $mailTo -SmtpServer $smtpServer -Subject "Error during backup job" -Body $errorMessage
-} else {
-    Send-MailMessage -From $mailFrom -To $mailTo -SmtpServer $smtpServer -Subject "Backup job successful" -Body "Backup script was run successfully." -Attachments "C:\Scripts\Backup.ps1"
-}
 
   ```
 </details>
