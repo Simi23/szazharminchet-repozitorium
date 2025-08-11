@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T07:52:37.286Z
+date: 2025-08-11T08:20:28.090Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -282,7 +282,108 @@ dateCreated: 2025-06-26T09:03:28.237Z
 > USE COMMENTS AND ADD COMMENTS TO YOUR OUTPUT TOO
 {.is-warning}
   ```powershell
+# Directory creator script
+function Directory-Create($folder) {
+    # Test if $folder path exists
+    Write-Host "Test if '$($folder)' folder exists."
+    if(!(Test-Item -Path $folder)) {
+        New-Item $folder -ItemType Directory | Out-Null
+        Write-Host -ForegroundColor Green "'$($folder)' has been created."
+    } else {
+        Write-Host -ForegroundColor Yellow "'$($folder)' already exists."
+    }
+}
 
+# Backup-Start string
+function Backup-Start($backupString) {
+        Write-Host "`r`n================= Backing up $($backupString) =================" -BackgroundColor Black
+}
+
+# User backup script
+# FirstName, LastName, samAccountName, UserPrincipalName, Email, JobTitle, City, Company, Department, DisplayName, DistinguishedName, HomeDirectory
+function User-Backup {
+    Backup-Start("Users")
+
+    # Variables
+    $csvFile = Join-Path $backupRoot -ChildPath "Users.csv"
+
+    # Logic
+    Get-ADUser -Filter * -Properties FirstName, LastName, samAccountName, UserPrincipalName, Email, JobTitle, City, Company, Department, DisplayName, DistinguishedName, HomeDirectory `
+    | Select-Object FirstName, LastName, samAccountName, UserPrincipalName, Email, JobTitle, City, Company, Department, DisplayName, DistinguishedName, HomeDirectory `
+    | Export-Csv -Path $csvFile -NoTypeInformation -Encoding UTF8
+
+    Write-Host "User Backup DONE!" -ForegroundColor Green
+}
+
+# GPO backup script
+function GPO-Backup {
+    Backup-Start("GPOs")
+
+    # Variables
+    $gpoPath = Join-Path $backupRoot -ChildPath "GPO"
+    $gpoDeletePath = Join-Path $gpoPath -ChildPath "*"
+
+    # Logic
+    Directory-Create($gpoPath)
+    Remove-Item $gpoDeletePath -Recurse -Force | Out-Null
+
+    Backup-GPO -All -Path $gpoPath | Out-Null
+    
+    Write-Host "GPO Backup DONE!" -ForegroundColor Green
+}
+
+# IIS webroot backup script
+function IIS-Backup {
+    Backup-Start("IIS Webroots")
+
+    # Variables
+    $iisPath = Join-Path $backupRoot -ChildPath "Web"
+    $iisServers = @("SRV2.skillsnet.dk", "DC.skillsnet.dk")
+    $password = ConvertTo-SecureString "Passw0rd!" -AsPlainText -Force
+    $credentials = New-Object pscredential("SKILLSNET\Administrator", $password)
+    
+    # Logic
+    foreach ($iisServer in $iisServers) {
+        Write-Host "Connecting to host $($iisServer)"
+        $session = New-PSSession -ComputerName $iisServer -Credential $credentials
+        $sites = Invoke-Command -ComputerName $iisServer -Credential $credentials -ScriptBlock { "Get-WebSite" }
+
+        foreach ($site in $sites) {
+            $siteName = $site.Name
+            $sitePath = $site.PhysicalPath.Replace("%SystemDrive%", "C:")
+            $sitePath = Join-Path $sitePath -ChildPath "*"
+            $localPath = Join-Path $iisPath -ChildPath $siteName
+
+            Write-Host "Backing up '$($siteName)' webroot."
+
+            Copy-Item -Path $sitePath -Destination $localPath -FromSession $session -Recurse -Force | Out-Null
+
+            Write-Host "DONE!" -ForegroundColor Green
+        }
+    }
+
+    Write-Host "IIS WebRoot Backup DONE!" -ForegroundColor Green
+}
+
+
+# Variables
+$backupRoot = "C:\Backups"
+
+# Running functions
+try {
+    Directory-Create($backupRoot)
+    User-Backup
+    GPO-Backup
+    IIS-Backup
+    $subject = "Backup success"
+    $body = "Backup successfully ran on $($env:COMPUTERNAME).skillsnet.dk at $(Get-Date)." 
+    Send-MailMessage -SmtpServer "mail.nordicbackup.net" -To "support@nordicbackup.net" -From "backup@skillsnet.dk" -Body $body -Subject $subject
+} catch {
+    Write-Host "ERROR: $($_.error.message)" -ForegroundColor Red
+    $subject = "Backup failure"
+    $body = "Backup failure on $($env:COMPUTERNAME).skillsnet.dk at $(Get-Date).`r`nERROR: $($_.error.message)" 
+    Send-MailMessage -SmtpServer "mail.nordicbackup.net" -To "support@nordicbackup.net" -From "backup@skillsnet.dk" -Body $body -Subject $subject
+}
   ```
 </details>
 
