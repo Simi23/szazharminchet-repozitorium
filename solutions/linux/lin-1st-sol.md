@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:28:23.224Z
+date: 2025-08-11T09:28:44.667Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -66,6 +66,7 @@ services=nss, pam
 ```
 5. SMB Share automount
 6. Default webserver (TLS)
+  DON'T FORGET PAGE CONTENT
   
 </details>
 
