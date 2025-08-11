@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:53:09.935Z
+date: 2025-08-11T10:00:05.506Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -292,8 +292,27 @@ log{
 [//]: <> (Zabbix)
 <details>
 <summary>Zabbix</summary>
-
+Install following packages
+```bash
+apt install \
+  apache2 libapache2-mod-php php-mysql \
+  zabbix-server-mysql zabbix-frontend-php zabbix-agent zabbix-web-service \
+  snmp
+```
   
+- Edit configuration file, include database password!
+- Create a copy of /usr/share/doc/zabbix-mysql/README.debian, make it executeable and get rid off not neccessary lines.
+- Run the script
+- Create /etc/zabbix/alert.d/log.sh and give it execute permission 
+```bash
+#!/bin/bash
+date=$(date '+%Y-%m-%d_%H:%M:%S')
+echo "[$date] - $1 - $2" >> $3
+```
+  
+Enable Zabbix, and make the replace the Alias with docuemnt root in the config file.
+  
+Restart apache2 and zabbix-server services.
 </details>
 
 [//]: <> (ZFS)
