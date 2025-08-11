@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:39:59.119Z
+date: 2025-08-11T09:41:11.272Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -157,7 +157,8 @@ echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 Create all views! Don't forget to create every record and don't forget to add SPF and DKIM
 SPF: @ IN TXT "v=spf1 a mx -all"
 DMARC: _dmarc IN TXT "v=DMARC1,p=quarantine"
-SRV: _submission.tcp.mail.lego.dk 587 10 0 0 255
+SRV: _submission._tcp.mail.lego.dk SRV 10 0 587 mail.lego.dk
+SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 </details>
 
 [//]: <> (Email + DKIM)
