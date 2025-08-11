@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:31:07.382Z
+date: 2025-08-11T09:32:06.123Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -76,15 +76,17 @@ services=nss, pam
 ```bash
 #!/bin/bash
 
+# Variables
 date=$(date '+%Y-%m-%d_%H:%M:%S')
 backupPath="/tmp/$date.tar.gz"
 
+# Logic
 tar -cvzf $backupPath /share/users
-
 scp $backupPath root@HQ-SAM-2:/backup/users
-  
 rm $backupPath
 ```
+  
+Add cronjob that runs every five minute and place all output to /dev/null
 </details>
 
 [//]: <> (CA)
