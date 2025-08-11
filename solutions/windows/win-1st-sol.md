@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T08:21:33.121Z
+date: 2025-08-11T08:29:44.172Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -431,6 +431,7 @@ try {
   > <span>DC.skillsnet.</span>dk: **sso**, **ocsp**
   > <span>SRV2.skillsnet.</span>dk: **app**, **cacerts**, **crl**, **intra**, **www**
   > <span>DEV-SRV.skillsdev.</span>dk: **www**
+  > CREATE A and AAAA records for the two routers!
   {.is-info}
 
 </details>
@@ -526,7 +527,7 @@ foreach ( $group in $groups ) {
 
 Write-Host "`r`n`r`n============= Creating Users ============="	 -BackgroundColor Black -ForeGroundColor White
 # FirstName,LastName,samAccountName,UserPrincipalName,Email,JobTitle,City,Company,Department
-# Kell siminek Display-name (funame)
+# Kell siminek Display-name (funame) + HomeDirectory is
 foreach ($user in $csv) {
     $finame = $user.FirstName
     $laname = $user.LastName
