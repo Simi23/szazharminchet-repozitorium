@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T10:00:05.506Z
+date: 2025-08-11T10:06:55.278Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -146,8 +146,25 @@ echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 [//]: <> (DHCP)
 <details>
 <summary>DHCP</summary>
-
+- Generate a key on DNS server and copy it to /etc/dhcp/
+- Edit /etc/default/isc-dhcp-server add the interface to IPv4
+- Copy the content of key to the end of /etc/dhcp/dhcpd.conf
+- Create a failover peer:
+```cfg
+failover peer "fail" {
+	  primary;
+  	address 10.1.10.21;
+  	peer address 10.1.10.22;
+  	mclt 3600;
+  	split 128;
+  	load balance max seconds 3;
+}
+```
+- Edit the configuration for your needs.
+- Copy the files to HQ-SAM-2 and BR-SRV. Adjust failover settings on HQ-SAM-2, and adjust scope settings on BR-SRV!
   
+Install **isc-dhcp-relay** role to **R-BR** and **R-HQ**.
+Make sure the delimiter is a space in the config! Not ',' or ';'
 </details>
 
 
