@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T08:43:48.847Z
+date: 2025-08-11T09:28:23.224Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -50,15 +50,20 @@ log {
   ```
 3. SNMP oid for CPU load avarage `1.3.6.1.4.1.2021.10.1.3.1`
 ```
-sysLocation YOURSYSTEMLOCATION
-sysContact NAME email@address
-
 agentaddress 0.0.0.0, [::]
 
 createuser Administrator MD5 "Passw0rd!" AES256C "Passw0rd!"
 rouser Administrator authpriv  
 ```  
 4. Ldap login as on CLT
+Edit <kbd>/etc/sssd/sssd.conf</kbd>, add:
+```
+services=nss, pam
+```
+  Enable auto home directory creation with this command:
+```bash
+	pam-auth-update --enable mkhomedir
+```
 5. SMB Share automount
 6. Default webserver (TLS)
   
