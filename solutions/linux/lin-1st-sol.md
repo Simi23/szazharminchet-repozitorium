@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-06-30T08:18:00.950Z
+date: 2025-08-11T08:38:16.668Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -75,6 +75,29 @@ rouser Administrator authpriv
 <details>
 <summary>CA</summary>
 
+  ```bash
+#!/bin/bash
+
+cd /ca
+
+hostnames=("HQ-DC" "HQ-DMZ-1" "HQ-DMZ-2" "R-HQ" "HOME" "R-BR" "BR-SRV" "BR-CL")
+domains=(".billund" ".billund" ".billund" ".billund" "" ".herning" ".herning" ".herning")
+ips=("10.1.10.11" "10.1.20.11" "10.1.20.12" "10.1.10.1" "10.1.10.1" "10.200.0.2" "10.2.10.11" "10.2.10.11")
+
+for i in {0..7}; do
+        name="${hostnames[$i]}"
+        fullname="${hostnames[$i]}${domains[$1]}.lego.dk"
+        filename="$name/$name"
+        ip="${ips[$i]}"
+
+        openssl req -new -nodes -newkey rsa:4096 -keyout $filename.key -out $filename.csr -subj "/C=DK/O=Lego APS/CN=$fullname"
+        openssl x509 -req -CA SUBCA.crt -CAkey SUBCA.key -CAcreateserial -in $filename.csr -out $filename.crt -days 365 -sha256 -extfile $name/base.v3.ext
+
+        sshpass -p "Passw0rd!" ssh-copy-id $ip
+
+        scp CA.crt SUBCA.crt $filename.crt $filename.key $ip:/ca/
+done
+```
   
 </details>
 
