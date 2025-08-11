@@ -2,7 +2,7 @@
 title: Files
 description: 
 published: true
-date: 2025-06-20T08:28:34.144Z
+date: 2025-08-11T08:46:44.105Z
 tags: 
 editor: markdown
 dateCreated: 2025-03-06T11:32:14.265Z
@@ -16,3 +16,4 @@ dateCreated: 2025-03-06T11:32:14.265Z
 - [Lsyncd](/files/lsyncd-file-sync) one-way file syncing
 - [Bitlocker](/files/bitlocker)
 - [Setting file permissions with PowerShell](/files/pshell-acl)
+- [Windows user directories](/files/win-user-dir)
