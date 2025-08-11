@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:42:41.028Z
+date: 2025-08-11T09:43:17.943Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -201,7 +201,7 @@ SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 <details>
 <summary>SFTP</summary>
 Install **FileZilla**
-Add a new host where you enter the credentials of *carl*, the destination as *BR-SRV.herning.lego.dk*, and the main directory too wwwroot so: */var/www/html*
+Add a new host where you enter the credentials of *carl*, the destination as *BR-SRV.herning.lego.dk*, and the main directory too wwwroot so use */var/www/html*
   
 </details>
 
