@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:32:06.123Z
+date: 2025-08-11T09:35:16.524Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -123,7 +123,17 @@ done
 [//]: <> (CLT)
 <details>
 <summary>CLT</summary>
+```bash
+apt install -y gnome, thunderbird, filezilla
+```
+After the installation done restart the computer and use these commands to be able to configure it using Ansible
+  
+```bash
+adduser ansible # You will have some dialog, give it password and spam ENTER
+  
+echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+```
   
 </details>
 
