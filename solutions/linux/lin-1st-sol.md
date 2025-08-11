@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-11T09:49:30.913Z
+date: 2025-08-11T09:53:09.935Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -313,12 +313,29 @@ ls -l /dev/disks/by-path/ | rev | cut -d' ' -f 3 | rev >> /scripts/zfs.sh
   
 Edit /scripts/zfs.sh
 ```sh
-	zfspool create
-  	-O encryption="aes-256-gcm"
-  	-O keyformat="passphrase"
-  		raidz1
+	zpool create pool \
+  	-O encryption="aes-256-gcm" \
+  	-O keyformat="passphrase" \
+  		raidz1 \
   			Put here the names of disks
 ```
+  
+Create a pool
+```bash
+mkdir /share
+zfs create -o mountpoint=/share pool/share
+mkdir /share/users
+```
+  
+Make it auto mountable
+```bash
+echo "Passw0rd!" > /etc/passphrase
+chown root:root /etc/passphrase
+chmod 600 /etc/passphrase
+echo "#!/bin/bash" > /etc/rc.local
+echo "zfs mount -l -la < /etc/passphrase" >> /etc/rc.local
+chmod +x /etc/rc.local
+  
 </details>
 
 
