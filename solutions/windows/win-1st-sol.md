@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T07:50:55.424Z
+date: 2025-08-11T07:51:48.745Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -94,7 +94,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
     # | Change hostname | 
     - name: Change hostname
       ansible.windows.win_hostname:
-        name: "{{ hostname }}"
+        name: SRV
       register: reg
       notify: Reboot
 
@@ -143,7 +143,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   vars:
     OUs: "{{ lookup('file', 'resources/OU.json') | from_json }}"
     Users: "{{ lookup('file', 'resources/ES2025_TP39_ModuleB_Users_Skillsdev.json') | from_json }}"
-    Groups: "{{ Users | map(attribute='Department') | unique | list }}"
+    yGroups: "{{ Users | map(attribute='Department') | unique | list }}"
   vars_files:
     - resources/vault.yml
   tasks:
@@ -165,7 +165,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
         scope: global
         path: "OU=Groups,OU=Skills,DC=skillsdev,DC=dk"
         state: present
-      loop: "{{ Groups }}"
+      loop: "{{ yGroups }}"
 
     # | Create users |
     # "FirstName": "Jill",
