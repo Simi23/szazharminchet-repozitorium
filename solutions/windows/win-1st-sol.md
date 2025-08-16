@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-11T10:05:28.005Z
+date: 2025-08-16T09:43:14.665Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -29,7 +29,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
   Install **ADCS** with *Certification Authority* and *Online Responder* features.
   Configure the features, create the CA. Open CA properties, extensions:
 - Remove all default remote paths
-- Add CDP/publishedAs, CDP/publishTo, AIA and OCSP paths
+- Add CDP (2), AIA and OCSP paths
 
   Create certificate templates:
   
@@ -73,6 +73,24 @@ If ocsp path is changed, edit applicationHost.config, and remember to use OCSPIS
 <details>
 <summary>AD FS</summary>
   
+  Create a cert for ADFS, include the following SANs to fully satisfy requirements:
+  - `DC.skillsnet.dk` (FQDN)
+  - `sso.skillsnet.dk`
+  - `certauth.sso.skillsnet.dk`
+  - `enterpriseregistration.skillsnet.dk`
+  
+  Before starting the wizard, issue:
+  
+  ```powershell
+Add-KdsRootKey -EffectiveTime (Get-Date).AddHours(-10)
+  ```
+  
+  Go through config wizard, then in the console add a relying party trust, write https://app.skillsnet.dk/ everywhere.
+  
+  You have to wait a bit before it will work, or you will get errors in the browser ('*sent X requests in last Y seconds*'). If it still doesn't work, recreate the endpoint definitions in ADFS console.
+  
+  Don't forget to add **Claim issuance policy**.
+  
 </details>
 
 [//]: <> (AD Sites)
@@ -81,6 +99,9 @@ If ocsp path is changed, edit applicationHost.config, and remember to use OCSPIS
 
 >   DO IT LAST AND DON'T FORGET IT
 {.is-warning}
+  
+  Do not delete the default site!
+  
 </details>
 
 
@@ -457,6 +478,19 @@ try {
 <details>
 <summary>IIS</summary>
   
+  Install IIS on SRV2:
+  
+  ```powershell
+Install-WindowsFeature `
+    Web-Server,Web-Cert-Auth,Web-Asp-Net45,Web-Mgmt-Service `
+    -IncludeManagementTools
+  ```
+  
+  Enable IIS remote management: Set the wmsvc service to automatic startup, and set the following DWORD to 1 in registry: `HKEY_LOCAL_MACHINE\Software\Microsoft\WebManagement\Server\EnableRemoteManagement`
+  
+  Restart VM.
+  
+  Create directories for all web pages (public web, app, crl, aia, intra). For CRL, add Modify permission to 'Cert Publishers' group.
 </details>
 
 [//]: <> (iSCSI)
@@ -487,6 +521,10 @@ try {
 <details>
 <summary>Firewall</summary>
   
+  Configure the following:
+  - Install RAS (`Install-WindowsFeature Routing`)
+  - Configure NAT
+  - Configure FW rules: IPvX > 
 </details>
 
 [//]: <> (GPO)
