@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-12T09:08:29.841Z
+date: 2025-08-16T13:34:27.215Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -19,6 +19,7 @@ dateCreated: 2025-06-28T08:18:12.032Z
 - Time Zone
 - Keyboard layout
 - NTP
+- Create `/ca` directory
   
 </details>
 
@@ -72,7 +73,8 @@ services=nss, pam
 [//]: <> (Backup)
 <details>
 <summary>Backup</summary>
-```bash
+  
+  ```bash
 #!/bin/bash
 
 # Variables
@@ -83,15 +85,64 @@ backupPath="/tmp/$date.tar.gz"
 tar -cvzf $backupPath /share/users
 scp $backupPath root@HQ-SAM-2:/backup/users
 rm $backupPath
-```
+  ```
   
-Add cronjob that runs every five minute and place all output to /dev/null
+Add cronjob that runs every five minute and place all output to `/dev/null`
 </details>
 
 [//]: <> (CA)
 <details>
 <summary>CA</summary>
 
+  **First, create the CA and SUBCA certificates.**
+  
+  ```bash
+  # Create the CA key and certificate
+  openssl genrsa -aes256 -out CA.key 4096
+  openssl req -new -nodes -x509 \
+    -key CA.key -sha256 \
+    -out CA.crt \
+    -days 7200 \
+    -subj '/C=DK/O=Lego APS/CN=Lego APS Root CA'
+  
+  # Create the SUBCA
+  ## Create the v3 extension file for the SUBCA
+  cat <<EOF > SUBCA.v3.ext
+  subjectKeyIdentifier=hash
+  authorityKeyIdentifier=keyid:always,issuer
+  basicConstraints=CA:TRUE
+  crlDistributionPoints=URI:http://crl.lego.dk/root_crl.pem
+  EOF
+  
+  ## Now create a request for the SUBCA and sign it with the CA
+  openssl req -new -nodes \
+    -newkey rsa:4096 \
+    -keyout SUBCA.key \
+    -out SUBCA.csr \
+    -subj '/C=DK/O=Lego APS/CN=Lego APS Intermediate CA'
+  
+  openssl x509 -req -CA CA.crt -CAkey CA.key -CAcreateserial \
+    -in SUBCA.csr -out SUBCA.crt -days 3650 -sha256 \
+    -extfile SUBCA.v3.ext
+  ```
+  
+  **Now, create directories for all hosts which need certificates. After that, create a base v3 extension file like this:**
+  
+  ```ini
+  authorityKeyIdentifier=keyid,issuer
+  basicConstraints=CA:FALSE
+  keyUsage=keyEncipherment,dataEncipherment,digitalSignature,nonRepudiation
+  crlDistributionPoints=URI:http://crl.lego.dk/sub_crl.pem
+  subjectAltName=@alt_names
+  
+  [alt_names]
+  DNS.1=
+  IP.1=
+  email.1=
+  ```
+  
+  **After that, distribute this to all directories and fill them accordingly. Then, use the following script to create and sign all certificates.**
+  
   ```bash
 #!/bin/bash
 
@@ -122,16 +173,18 @@ done
 [//]: <> (CLT)
 <details>
 <summary>CLT</summary>
-```bash
-apt install -y gnome, thunderbird, filezilla
-```
-After the installation done restart the computer and use these commands to be able to configure it using Ansible
   
-```bash
+  ```bash
+apt install -y gnome, thunderbird, filezilla
+  ```
+  
+After the installation is done, restart the computer and use these commands to be able to configure it using Ansible.
+  
+  ```bash
 adduser ansible # You will have some dialog, give it password and spam ENTER
   
 echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-```
+  ```
   
 </details>
 
@@ -139,6 +192,7 @@ echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 <details>
 <summary>CRL</summary>
 
+  After the certificates are already done
   
 </details>
 
