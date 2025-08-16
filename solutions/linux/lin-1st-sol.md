@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:42:33.608Z
+date: 2025-08-16T14:47:10.571Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -238,20 +238,23 @@ echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 [//]: <> (DHCP)
 <details>
 <summary>DHCP</summary>
-- Generate a key on DNS server and copy it to /etc/dhcp/
-- Edit /etc/default/isc-dhcp-server add the interface to IPv4
-- Copy the content of key to the end of /etc/dhcp/dhcpd.conf
-- Create a failover peer:
-```cfg
-failover peer "fail" {
-	  primary;
-  	address 10.1.10.21;
-  	peer address 10.1.10.22;
-  	mclt 3600;
-  	split 128;
-  	load balance max seconds 3;
-}
-```
+  
+  - Generate a key on DNS server and copy it to /etc/dhcp/
+  - Edit /etc/default/isc-dhcp-server add the interface to IPv4
+  - Copy the content of key to the end of /etc/dhcp/dhcpd.conf
+  - Create a failover peer:
+  
+  ```cfg
+  failover peer "fail" {
+  	primary;
+    address 10.1.10.21;
+    peer address 10.1.10.22;
+    mclt 3600;
+    split 128;
+    load balance max seconds 3;
+  }
+  ```
+ 
 - Edit the configuration for your needs.
 - Copy the files to HQ-SAM-2 and BR-SRV. Adjust failover settings on HQ-SAM-2, and adjust scope settings on BR-SRV!
   
@@ -264,10 +267,11 @@ Make sure the delimiter is a space in the config! Not ',' or ';'
 <details>
 <summary>DNS</summary>
 Create all views! Don't forget to create every record and don't forget to add SPF and DKIM
-SPF: @ IN TXT "v=spf1 a mx -all"
-DMARC: _dmarc IN TXT "v=DMARC1,p=quarantine"
-SRV: _submission._tcp.mail.lego.dk SRV 10 0 587 mail.lego.dk
-SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
+  
+  - SPF: @ IN TXT "v=spf1 a mx -all"
+  - DMARC: _dmarc IN TXT "v=DMARC1,p=quarantine"
+  - SRV: _submission._tcp.mail.lego.dk SRV 10 0 587 mail.lego.dk
+  - SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 </details>
 
 [//]: <> (Email + DKIM)
@@ -375,8 +379,9 @@ SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 [//]: <> (SFTP)
 <details>
 <summary>SFTP</summary>
-Install **FileZilla**
-Add a new host where you enter the credentials of *carl*, the destination as *BR-SRV.herning.lego.dk*, and the main directory too wwwroot so use */var/www/html*
+  
+  Install **FileZilla**
+  Add a new host where you enter the credentials of *carl*, the destination as *BR-SRV.herning.lego.dk*, and the main directory too wwwroot so use */var/www/html*
   
 </details>
 
