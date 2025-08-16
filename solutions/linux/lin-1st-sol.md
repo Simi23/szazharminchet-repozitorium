@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:40:22.882Z
+date: 2025-08-16T14:42:33.608Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -471,34 +471,38 @@ log{
 <details>
 <summary>Zabbix</summary>
 Install following packages
-```bash
+  
+  ```bash
 apt install \
   apache2 libapache2-mod-php php-mysql \
   zabbix-server-mysql zabbix-frontend-php zabbix-agent zabbix-web-service \
   snmp
-```
+  ```
   
 - Edit configuration file, include database password!
-- Create a copy of /usr/share/doc/zabbix-mysql/README.debian, make it executeable and get rid off not neccessary lines.
+- Create a copy of <kbd>/usr/share/doc/zabbix-mysql/README.debian</kbd>, make it executable and get rid off unneccessary lines.
 - Run the script
-- Create /etc/zabbix/alert.d/log.sh and give it execute permission 
-```bash
-#!/bin/bash
-date=$(date '+%Y-%m-%d_%H:%M:%S')
-echo "[$date] - $1 - $2" >> $3
-```
+- Create <kbd>/etc/zabbix/alert.d/log.sh</kbd> and give it execute permission
+
+  ```bash
+  #!/bin/bash
+  date=$(date '+%Y-%m-%d_%H:%M:%S')
+  echo "[$date] - $1 - $2" >> $3
+  ```
   
-Enable Zabbix, and make the replace the Alias with docuemnt root in the config file.
+Enable Zabbix, and make the replace the Alias with document root in the config file.
   
 Restart apache2 and zabbix-server services.
+  
 </details>
 
 [//]: <> (ZFS)
 <details>
 <summary>ZFS</summary>
-```bash
-apt install linux-headers-amd64 zfsutils-linux
-```
+
+  ```bash
+  apt install linux-headers-amd64 zfsutils-linux
+  ```
 
 Create a script that will create your ZFS pool:
 ```
