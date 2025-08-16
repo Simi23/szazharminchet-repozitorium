@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:39:01.787Z
+date: 2025-08-16T14:40:22.882Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -413,6 +413,9 @@ charon {
   retransmit_base = 1.1
 }
 ```
+  
+  **Config:** [**Route-based VPN**](/vpn/strongswan-route-based) with Strongswan. Don't forget to add DPD!
+  
   
 </details>
 
