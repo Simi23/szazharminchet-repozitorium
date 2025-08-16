@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:19:33.084Z
+date: 2025-08-16T14:37:17.213Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -286,6 +286,65 @@ SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 <details>
 <summary>Firewall</summary>
 
+  - **NFTables filter rules**
+    - Look at `ss -tulpn` output for each machine
+    - **Default accept rules for forward chain:**
+      - Traffic to other site
+      - Traffic to internet
+      - SSH traffic
+      - Established/related traffic
+      - ICMP traffic
+    - **Default accept rules for input chain:**
+      - Traffic from loopback interface
+      - UDP 500/4500, UDP 123
+      - SSH traffic
+      - Established/related traffic
+      - ICMP, ESP, GRE traffic
+  - **NFTables NAT rules:**
+    - Port-forward for public services
+    - Masquerade for internet access
+    - DNAT-rule for other site traffic, based on dynamic set
+  
+  Updown script for tunnel, named <kbd>/fw/updown.sh</kbd>
+  
+  ```bash
+  #!/bin/bash
+  if [ $PLUTO_VERB = 'up-host' ]
+    nft remove element inet filter reroute { 10.1.0.0/16 }
+    ip route add 10.2.0.0/16 via 10.200.0.2 dev ipsec0
+    ip rule add from 10.1.255.1/32 to 203.0.113.10/32 table 100
+    ip route add 203.0.113.10/32 dev ipsec0 via 10.200.0.2 table 100
+  fi
+  if [ $PLUTO_VERB = 'down-host' ]
+    nft add element inet filter reroute { 10.1.0.0/16 }
+    ip route del 10.2.0.0/16 via 10.200.0.2 dev ipsec0
+    ip route del 203.0.113.10/32 dev ipsec0 via 10.200.0.2 table 100
+    ip rule del from 10.1.255.1/32 to 203.0.113.10/32 table 100
+  fi
+  unbound-control flush_zone .
+  ```
+  
+  **Unbound config:**
+  
+  Comment out the default dnssec-related config.
+  
+  ```yaml
+  server:
+    interface: 127.0.0.1
+    outgoing-interface: 10.1.255.1
+    forward-zone:
+      name: "billund.lego.dk"
+      forward-addr: 10.1.20.11
+    forward-zone:
+      name: "herning.lego.dk"
+      forward-addr: 203.0.113.10
+    forward-zone:
+      name: "."
+      forward-addr: 10.1.20.11
+  ```
+  
+  Set <kbd>resolv.conf</kbd> to `127.0.0.1`.
+ 
   
 </details>
 
