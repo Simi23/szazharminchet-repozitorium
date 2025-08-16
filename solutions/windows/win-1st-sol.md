@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-16T09:55:20.509Z
+date: 2025-08-16T10:17:54.755Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -27,11 +27,11 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <summary>AD CS</summary>
   
   Install **ADCS** with *Certification Authority* and *Online Responder* features.
-  Configure the features, create the CA. Open CA properties, extensions:
-- Remove all default remote paths
-- Add CDP (2), AIA and OCSP paths
+  Configure the features, create the CA. Open **CA properties, extensions:**
+  - Remove all default remote paths
+  - Add CDP (2), AIA and OCSP paths
 
-  Create certificate templates:
+  **Create certificate templates:**
   
 - The ones required by the TP (Users, Endpoints, Web Servers)
 - Extra ones: _ocsp, _vpn
@@ -41,7 +41,7 @@ dateCreated: 2025-06-26T09:03:28.237Z
 
 Create CertEnroll GPO, run `certutil -crl`
   
-If ocsp path is changed, edit applicationHost.config, and remember to use OCSPISAPIPool!
+If ocsp path is changed, edit applicationHost.config, and remember to use **OCSPISAPIPool**!
   
 </details>
 
@@ -478,7 +478,7 @@ try {
 <details>
 <summary>IIS</summary>
   
-  Install IIS on SRV2:
+  **Install IIS on SRV2:**
   
   ```powershell
 Install-WindowsFeature `
@@ -486,9 +486,11 @@ Install-WindowsFeature `
     -IncludeManagementTools
   ```
   
-  Enable IIS remote management: Set the wmsvc service to automatic startup, and set the following DWORD to 1 in registry: `HKEY_LOCAL_MACHINE\Software\Microsoft\WebManagement\Server\EnableRemoteManagement`
+  **Enable IIS remote management:**
+  - Set the wmsvc service to automatic startup (`Set-Service wmsvc -StartupType Automatic`)
+  - Set the '*EnableRemoteManagement*' to 1 in registry: `HKEY_LOCAL_MACHINE\Software\Microsoft\WebManagement\Server`
   
-  Restart VM.
+  **Restart VM to apply registry change.**
   
   Create directories for all web pages (public web, app, crl, aia, intra). For CRL, add Modify permission to 'Cert Publishers' group.
 </details>
@@ -521,27 +523,29 @@ Install-WindowsFeature `
 <details>
 <summary>Firewall</summary>
   
-  Configure the following:
-  - Install RAS (`Install-WindowsFeature Routing`)
-  - In properties, enable IPv6 routing
-  - Configure NAT
-  - Configure FW rules: IPvX > General > WAN interface > Properties > Outbound filters
-  - For proper DHCPv6, enable RA, M+O flags on interfaces (but relay won't work with ULA)
+  **Configure the following:**
+  - **Install RRAS** (`Install-WindowsFeature Routing`)
+  - In properties, enable **IPv6 routing**
+  - Configure **NAT**
+  - **Configure FW rules:** IPvX > General > WAN interface > Properties > Outbound filters
+  - For proper DHCPv6, enable RA, M+O flags on interfaces *(but relay won't work with ULA)*
   
   ```powershell
-Set-NetIPInterface -ifIndex xy -AddressFamily IPv6 `
+Get-NetIPInterface
+
+Set-NetIPInterface -ifIndex x -AddressFamily IPv6 `
     -Advertising Enabled -ManagedAddressConfiguration Enabled `
     -OtherStatefulConfiguration Enabled
   ```
   
-  - Configure DHCPvX relays (General > Add protocol)
+  - **Configure DHCPvX relays** (General > Add protocol)
 </details>
 
 [//]: <> (GPO)
 <details>
 <summary>GPO</summary>
 
-  > DO THE PASSWORD POLICICES
+  > DO THE PASSWORD POLICIES
 {.is-warning}
 
 </details>
@@ -550,9 +554,9 @@ Set-NetIPInterface -ifIndex xy -AddressFamily IPv6 `
 <details>
 <summary>HA DHCP</summary>
   
-  - Install DHCP on SRVx.
-  - Create v4 scope(s) on SRV1 and then configure failover.
-  - Create v6 scope(s) on both SRVs, and set different scope preferences for HA. Higher preference is preferred by clients.
+  - **Install DHCP on SRVx**
+  - Create **v4** scope(s) on **SRV1** and then configure failover
+  - Create **v6** scope(s) on **both SRVs**, and set different scope preferences for HA. Higher preference is preferred by clients.
 </details>
 
 [//]: <> (PS)
@@ -643,15 +647,64 @@ Write-Host "============= Users and groups have been created! =============" -Ba
   ```
 </details>
 
+[//]: <> (Reverse proxy)
+<details>
+<summary>Reverse proxy</summary>
+  
+  **Install IIS with required modules:**
+  
+  ```powershell
+Install-WindowsFeature Web-Server,Web-Asp-Net45 -IncludeManagementTools
+  ```
+  
+  **Install modules from installers in this order:** rewrite, requestRouter.
+  
+  **Enable reverse proxy functionality:** IIS > Server > Application Request Routing Cache > Server proxy settings > Enable proxy
+  
+  Create a site, apply **https binding** with `www.skillspublic.dk` cert.
+  
+  Create a **Reverse proxy rule** in **URL rewrite** section of site. Inbound portion is enough.
+  
+</details>
+
 [//]: <> (S2S - PSK)
 <details>
 <summary>S2S (PSK)</summary>
   
+  Create a normal tunnel on both endpoints, set connection to persistent and set PSK.
+  
+  **IP settings:**
+  - **Tunnel routes:**
+    - CPH: `10.2.0.0/16, fd01:2::/32`
+    - AAL: `10.1.0.0/16, fd01:1::/32, 10.200.0.0/24, fd01:200::/32`
+  - **IPv4 pool:**
+    - CPH: `10.200.0.2-10.200.0.254`
+  - **IPv6 pools:**
+    - CPH: `fd01:200::`  
+    - AAL: `fd01:201::`
+  - **IPv4 tunnel addresses:**
+    - CPH: `10.200.0.1`
+    - AAL: *Auto*
+  - **IPv6 tunnel addresses:**
+    - CPH: `fd01:200::1`
+    - AAL: `fd01:200::2`
 </details>
 
 [//]: <> (S2S - Cert)
 <details>
 <summary>S2S (Cert)</summary>
+  
+  Use **same IP settings** as before. Import certificate, and store it as a variable in PS.
+  
+  Cert needs to have *IPSecIntermediate,ServerAuth,ClientAuth* **EKUs**, and **all key usages**.
+  
+  ```powershell
+  $cert = Get-ChildItem cert:\LocalMachine\My
+  $cert = $cert[1]
+  
+  Set-VpnAuthProtocol -TunnelAuthProtocolAdvertised Certificates -CertificateAdvertised $cert
+  Set-VpnS2SInterface -Name RTR-CPH -Certificate $cert
+  ```
   
 </details>
 
@@ -665,12 +718,6 @@ Write-Host "============= Users and groups have been created! =============" -Ba
   > {.is-info}
   
   `New-SmbShare D:\Users -Name 'Users' ***-EncrypData $true*** -FullAccess 'Domain Users' -ReadAccess 'Everyone'` 
-</details>
-
-[//]: <> (WAP)
-<details>
-<summary>WAP</summary>
-  
 </details>
 
 [//]: <> (WEF)
