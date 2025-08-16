@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-16T10:17:54.755Z
+date: 2025-08-16T14:48:48.288Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -434,7 +434,7 @@ try {
 - `Enable-BitLocker -TpmProtection "C:\`
 - `$password = ConvertTo-SecureString "Passw0rd!" -AsPlainText -Force`
 - `Enable-BitLocker -PasswordProtection "D:\" -Passw0rd $password`
-- `Enable-BitLockerAutoUnlock "D:\"
+- `Enable-BitLockerAutoUnlock "D:\"`
 > Bitlocker TPM encryption doesn't work in anything else than system drive, if there are snapshots on a VM or it has ThinProvision disk, in this build of the Windows 2022 you can not use BitLocker encryption!
 {.is-danger}
 
