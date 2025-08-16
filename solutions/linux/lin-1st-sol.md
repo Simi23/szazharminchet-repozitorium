@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:38:12.422Z
+date: 2025-08-16T14:39:01.787Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -360,6 +360,7 @@ SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 <details>
 <summary>RA VPN</summary>
 
+   - [**Strongswan**](/vpn/strongswan-ra-eap-tls) with **EAP-TLS** authentication
   
 </details>
 
