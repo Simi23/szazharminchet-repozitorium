@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T13:34:27.215Z
+date: 2025-08-16T14:19:33.084Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -192,7 +192,46 @@ echo "ansible	ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 <details>
 <summary>CRL</summary>
 
-  After the certificates are already done
+  After the certificates are already done, create some files necessary for the CRL.
+  
+  ```bash
+  cd /ca
+  mkdir crl
+  touch crl/index.txt
+  echo "00" > crl/crlnumber
+  ```
+  
+  Now, create <kbd>/ca/crl_openssl.conf</kbd> with the following contents:
+  
+  ```ini
+  [ca]
+  default_ca = CA_default
+  
+  [CA_default]
+  database = /ca/crl/index.txt
+  crlnumber = /ca/crl/crlnumber
+  default_days = 365
+  default_crl_days = 30
+  default_md = default
+  preserve = no
+  
+  [crl_ext]
+  authorityKeyIdentifier=issuer:always,keyid:always
+  ```
+  
+  Now, generate the CRL with the following command:
+  
+  ```bash
+  openssl ca -gencrl \
+    -keyfile /ca/CA.key \
+    -cert /ca/CA.crt \
+    -out /ca/crl/root_crl.pem \
+    -config /ca/crl_openssl.conf
+  ```
+  
+  Do these steps for both the CA and the SUBCA.
+  
+  Use `lsyncd` to sync the crl to the webserver it is hosted on. Don't forget **ssh-copy-id**.
   
 </details>
 
@@ -235,7 +274,12 @@ SRV: _imaps._tcp.mail.lego.dk SRV 10 0 993 mail.lego.dk
 <details>
 <summary>Email + DKIM</summary>
 
-  
+  **Usual config:**
+
+  - [SMTP/IMAP **separate** server](/mail/smtp-imap)
+  - [SMTP/IMAP **single** server](/mail/smtp-imap-single-server)
+  - [SPF, DKIM, DMARC **setup**](/mail/dns-records)
+  - [SPF, DKIM, DMARC **verification**](/mail/verification)
 </details>
 
 [//]: <> (Firewall)
