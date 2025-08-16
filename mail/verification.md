@@ -2,7 +2,7 @@
 title: Email security verification
 description: Verify incoming mails via SPF, DKIM and DMARC. Put non-compliant emails into Spam folder.
 published: true
-date: 2025-08-05T13:17:39.668Z
+date: 2025-08-16T14:20:41.070Z
 tags: linux
 editor: markdown
 dateCreated: 2025-08-05T12:17:49.904Z
@@ -177,8 +177,17 @@ require ["fileinto", "regex"];
 if anyof (
   header :contains "Authentication-Results" "spf=fail",
   header :contains "Authentication-Results" "spf=softfail",
+  header :contains "Authentication-Results" "spf=temperror",
+  header :contains "Authentication-Results" "spf=permerror",
+  header :contains "Authentication-Results" "spf=none",
   header :contains "Authentication-Results" "dkim=fail",
-  header :contains "Authentication-Results" "dmarc=fail"
+  header :contains "Authentication-Results" "dkim=temperror",
+  header :contains "Authentication-Results" "dkim=permerror",
+  header :contains "Authentication-Results" "dkim=none",
+  header :contains "Authentication-Results" "dmarc=fail",
+  header :contains "Authentication-Results" "dmarc=temperror",
+  header :contains "Authentication-Results" "dmarc=permerror",
+  header :contains "Authentication-Results" "dmarc=none"
 ) {
   fileinto "Spam";
   stop;
