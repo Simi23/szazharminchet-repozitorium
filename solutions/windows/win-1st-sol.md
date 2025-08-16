@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-16T09:43:14.665Z
+date: 2025-08-16T09:55:20.509Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -523,8 +523,18 @@ Install-WindowsFeature `
   
   Configure the following:
   - Install RAS (`Install-WindowsFeature Routing`)
+  - In properties, enable IPv6 routing
   - Configure NAT
-  - Configure FW rules: IPvX > 
+  - Configure FW rules: IPvX > General > WAN interface > Properties > Outbound filters
+  - For proper DHCPv6, enable RA, M+O flags on interfaces (but relay won't work with ULA)
+  
+  ```powershell
+Set-NetIPInterface -ifIndex xy -AddressFamily IPv6 `
+    -Advertising Enabled -ManagedAddressConfiguration Enabled `
+    -OtherStatefulConfiguration Enabled
+  ```
+  
+  - Configure DHCPvX relays (General > Add protocol)
 </details>
 
 [//]: <> (GPO)
@@ -540,6 +550,9 @@ Install-WindowsFeature `
 <details>
 <summary>HA DHCP</summary>
   
+  - Install DHCP on SRVx.
+  - Create v4 scope(s) on SRV1 and then configure failover.
+  - Create v6 scope(s) on both SRVs, and set different scope preferences for HA. Higher preference is preferred by clients.
 </details>
 
 [//]: <> (PS)
@@ -645,9 +658,12 @@ Write-Host "============= Users and groups have been created! =============" -Ba
 [//]: <> (SMB)
 <details>
 <summary>SMB</summary>
+  
   `Set-SmbServerConfiguration -EncryptData $true -RejectUnencryptedAccess $true`
+  
   > When creating a new share on SRV1 & SRV2 follow these scheme.
   > {.is-info}
+  
   `New-SmbShare D:\Users -Name 'Users' ***-EncrypData $true*** -FullAccess 'Domain Users' -ReadAccess 'Everyone'` 
 </details>
 
