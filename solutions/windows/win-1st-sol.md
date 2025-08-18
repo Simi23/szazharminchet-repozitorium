@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:48:48.288Z
+date: 2025-08-18T13:06:05.659Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -402,6 +402,33 @@ function IIS-Backup {
 
     Write-Host "IIS WebRoot Backup DONE!" -ForegroundColor Green
 }
+  
+function DNS-Backup {
+	# Variables
+	$i = 1
+    $dnsServers = @("DC.skillsnet.dk", "SRV.skillsdev.dk", "INET.skillspublic.dk")
+    $password = ConvertTo-SecureString "Passw0rd!" -AsPlainText -Force
+    $backupPath = "C:\Resources\DNS"
+    
+    # Logic
+    Backup-Start("DNS zones")
+    Directory-Create($backupPath)
+
+    foreach ($dnsServer in $dnsServers) {
+        $parts = $dnsServer.Split('.')
+        $domain = ($parts[1..$part.Length] -join '.')
+        $localPath = Join-Path $backupPath -ChildPath $domain
+
+        Write-Host "Backing up '$($domain)' DNS zone"
+
+        ssh Administrator@dnsServer "if (Test-Path 'C:\Windows\System32\dns\zone') { Remove-Item 'C:\Windows\System32\dns\zone' } Export-DnsServerZone -Name $($domain) -FileName zone"
+        scp "Administartor@$($dnsServer):C:\Windows\System32\dns\zone" $localPath
+
+        $i++
+        Write-Host "$($domain) zone backup done!" -ForegroundColor Green
+    }
+    Write-Host "DONE with DNS backup!" -ForegroundColor Green
+}
 
 
 # Variables
@@ -413,6 +440,7 @@ try {
     User-Backup
     GPO-Backup
     IIS-Backup
+  	DNS-Backup
     $subject = "Backup success"
     $body = "Backup successfully ran on $($env:COMPUTERNAME).skillsnet.dk at $(Get-Date)." 
     Send-MailMessage -SmtpServer "mail.nordicbackup.net" -To "support@nordicbackup.net" -From "backup@skillsnet.dk" -Body $body -Subject $subject
