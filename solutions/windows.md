@@ -2,7 +2,7 @@
 title: ES25 Windows solutions
 description: ES25 Windows solutions
 published: true
-date: 2025-07-17T11:22:39.285Z
+date: 2025-08-19T11:19:22.895Z
 tags: es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T07:53:20.472Z
