@@ -2,7 +2,7 @@
 title: ES25 - ModB - 30% Solution
 description: 
 published: true
-date: 2025-08-19T11:19:07.140Z
+date: 2025-08-19T12:29:12.141Z
 tags: windows, es25-windows
 editor: markdown
 dateCreated: 2025-08-19T11:19:07.140Z
@@ -52,7 +52,9 @@ Add-BgpCustomRoute `
 **Load balancing:** Address hash
 **Standby:** 3 interfaces
 
-## RDS !!!!!!!-----------------------!!!!!!!
+## RDS
+
+"Next next" install (Gergő megoldja)
 
 ## Access-Denied Message
 
@@ -60,7 +62,13 @@ GPO: `Computer > Policies > ADMX > System > Access-Denied Assistance`
 
   - Customize message for access denied errors: Enabled
 
-## Remote client !!!!!!!-----------------------!!!!!!!
+## Remote client
+
+Use same \_vpn certificate template. Import certificate for localmachine.
+
+On the client, add an IKEv2 VPN, in more settings select machine certificates in the Security tab.
+
+On the server, enable **IPv4** and **IPv6** remote access. Enable RAS on the IKEv2 ports. Set DNS address on all local interfaces so the client will definitely receive it.
 
 ## Disaster plan
 
