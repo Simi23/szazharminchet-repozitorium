@@ -2,11 +2,13 @@
 title: ES25 - ModB - 30% Solution
 description: 
 published: true
-date: 2025-08-19T12:29:12.141Z
+date: 2025-08-19T12:35:46.805Z
 tags: windows, es25-windows
 editor: markdown
 dateCreated: 2025-08-19T11:19:07.140Z
 ---
+
+# TODO DNSSEC !!!!!!!-----------------------!!!!!!!
 
 # Changes
 
