@@ -2,7 +2,7 @@
 title: Bind9
 description: Bind9 DNS server configuration. DDNS, high availability included.
 published: true
-date: 2025-03-06T11:27:53.196Z
+date: 2025-08-22T11:33:25.411Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-15T08:40:05.945Z
@@ -283,3 +283,12 @@ skillsit.hu	MX 10 mail.skillsit.hu.
 _<service>._<proto>.<NAME>				SRV <PRIORITY> <WEIGHT> <PORT> <TARGET>
 _minecraft._tcp.mc1.skillsit.hu 	SRV 10 0 25565 srv4.skillsit.hu.
 ```
+
+# Useful commands
+
+If you have a zone file in raw format, you can convert it back into text format with the following command:
+
+```bash
+named-compilezone -f raw -F text -o output.txt domain.com zonefile.raw
+```
+
