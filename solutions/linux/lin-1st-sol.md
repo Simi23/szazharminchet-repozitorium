@@ -2,7 +2,7 @@
 title: ES25 - ModA - 1st Solution
 description: 
 published: true
-date: 2025-08-16T14:47:10.571Z
+date: 2025-08-25T07:10:47.606Z
 tags: linux, es25, es25-linux
 editor: markdown
 dateCreated: 2025-06-28T08:18:12.032Z
@@ -373,6 +373,30 @@ Create all views! Don't forget to create every record and don't forget to add SP
 <details>
 <summary>Samba</summary>
 
+  ```bash
+  ldapadd -Q -Y EXTERNAL -H ldapi:/// \
+    -f /usr/share/doc/samba/examples/LDAP/samba.ldif
+  ```
+  
+  ```ini
+  netbios name = HQ-DC
+  workgroup = LEGO.DK
+  
+  passdb backend = ldapsam:ldap://auth.billund.lego.dk
+  ldap suffix = dc=lego,dc=dk
+  ldap user suffix = ou=Billund
+  ldap group suffix = ou=Groups
+  ldap machine suffix = ou=Computers
+  ldap idmap suffix = ou=dmap
+  ldap passwd sync = yes
+  ldap ssl = off
+  ldap admin dn = cn=admin,dc=lego,dc=dk  
+  ```
+  
+  ```bash
+  smbpasswd -W
+  smbldap-populate -g 13000 -u 13000 -r 13000
+  ```
   
 </details>
 
