@@ -2,7 +2,7 @@
 title: Email security verification
 description: Verify incoming mails via SPF, DKIM and DMARC. Put non-compliant emails into Spam folder.
 published: true
-date: 2025-08-26T07:31:57.051Z
+date: 2025-08-26T07:45:32.078Z
 tags: linux
 editor: markdown
 dateCreated: 2025-08-05T12:17:49.904Z
@@ -147,6 +147,12 @@ if not allof (
   stop;
 }
 ```
+
+> When supported, you could also use negative lookaheads, like this:
+> ```c
+> header :regex "Authentication-Results" "dkim=(?!pass)"
+> ```
+> {.is-info}
 
 **Precompile the script.**
 
