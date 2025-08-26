@@ -2,7 +2,7 @@
 title: Email security verification
 description: Verify incoming mails via SPF, DKIM and DMARC. Put non-compliant emails into Spam folder.
 published: true
-date: 2025-08-16T14:20:41.070Z
+date: 2025-08-26T07:31:57.051Z
 tags: linux
 editor: markdown
 dateCreated: 2025-08-05T12:17:49.904Z
@@ -26,6 +26,8 @@ By setting up OpenDKIM, your incoming mails from other domains should already be
 
 # Supply your DNS server information
 Nameservers 10.1.1.1
+
+AlwaysAddARHeader yes
 ```
 
 If OpenDKIM is already set up as a milter in Postfix, incoming mails will receive an **Authentication-Results** header.
