@@ -2,13 +2,11 @@
 title: ES25 - ModB - 30% Solution
 description: 
 published: true
-date: 2025-08-19T12:35:46.805Z
+date: 2025-08-30T18:16:06.215Z
 tags: windows, es25-windows
 editor: markdown
 dateCreated: 2025-08-19T11:19:07.140Z
 ---
-
-# TODO DNSSEC !!!!!!!-----------------------!!!!!!!
 
 # Changes
 
@@ -105,7 +103,47 @@ Install-WindowsFeature RSAT-Print-Services
 
   - Add shared printer
 
-## DNSSEC !!!!!!!-----------------------!!!!!!!
+## DNSSEC
+
+Create the following zones on **INET**:
+
+- . (root)
+- dk
+- net
+
+Sign all zones on **INET** and **DC** using the **DNSSEC > Sign zone** wizard. Go with the default settings.
+
+Alternatively, a zone can be signed with the command:
+
+```powershell
+Invoke-DnsServerZoneSign -ZoneName "skillsdev.dk" -SignWithDefault
+```
+
+After all zones are signed, each zone's **DS records** must be imported into the respective **parent zone**. These records are automatically put into a file with the following name syntax:
+
+```
+C:\Windows\System32\dns\dsset-<zone_name>
+```
+
+> For the root zone, *zone_name* is an empty string.
+{.is-info}
+
+Import each file into the parent zone. *(For some zones you will need to copy files using scp.)*
+
+```powershell
+# This will import the DS records for the dk zone into the root zone
+Import-DnsServerResourceRecordDS `
+  -ZoneName . `
+  -DSSetFile C:\Windows\System32\dns\dsset-dk
+```
+
+After the whole chain is created, you need to **import** the **keyset of the root zone** into any resolvers where you want the chain to be trusted *(in this case, **DC** and **DEV-SRV**)*. 
+
+This can be done with the **Import DNSKEY** wizard in the **Trust Points** section, or via the command:
+
+```powershell
+Import-DnsServerTrustAnchor -KeySetFile "C:\Windows\System32\dns\keyset-"
+```
 
 ## DNS Backup
 
