@@ -2,7 +2,7 @@
 title: ES25 - ModB - 30% Solution
 description: 
 published: true
-date: 2025-08-30T18:16:06.215Z
+date: 2025-08-30T18:27:54.225Z
 tags: windows, es25-windows
 editor: markdown
 dateCreated: 2025-08-19T11:19:07.140Z
@@ -137,13 +137,21 @@ Import-DnsServerResourceRecordDS `
   -DSSetFile C:\Windows\System32\dns\dsset-dk
 ```
 
-After the whole chain is created, you need to **import** the **keyset of the root zone** into any resolvers where you want the chain to be trusted *(in this case, **DC** and **DEV-SRV**)*. 
+After the whole chain is created, you need to **import** the **keyset of the root zone** into any resolvers where you want the chain to be trusted *(in this case, **INET**, **DC** and **DEV-SRV**)*. 
 
 This can be done with the **Import DNSKEY** wizard in the **Trust Points** section, or via the command:
 
 ```powershell
 Import-DnsServerTrustAnchor -KeySetFile "C:\Windows\System32\dns\keyset-"
 ```
+
+To test if DNS is working correctly, try to resolve a name:
+
+```powershell
+Resolve-DnsName -DnsSecOk www.skillspublic.dk
+```
+
+Querying any DNS record like this should return the record's value and parameters about the signature. If verification fails, you will get a SERVFAIL.
 
 ## DNS Backup
 
