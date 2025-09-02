@@ -2,7 +2,7 @@
 title: Windows AD FS setup
 description: Active Directory Federation Services (AD FS) Setup
 published: true
-date: 2025-06-18T14:03:50.058Z
+date: 2025-09-02T14:40:35.653Z
 tags: windows
 editor: markdown
 dateCreated: 2025-06-18T14:03:50.058Z
@@ -67,3 +67,12 @@ ADFS Setup is now complete.
 # Troubleshooting
 
 If the `Add-KdsRootKey` command fails, check if the DC is really in the default **Domain Controllers** organizational unit. Also, try to issue the same command from another domain-joined server with domain admin privileges. *(The PShell cmdlets might need RSAT-ADDS to be installed)*
+
+If the service fails to start due to a logon failure with the service account, you have the following options:
+
+- For a **quick fix**, open **Services**, ADFS, "Log On" tab, clear the password and hit Ok.
+- For a **permanent fix**, issue the following command:
+
+```powershell
+sc.exe managedaccount adfssrv true
+```
