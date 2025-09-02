@@ -2,7 +2,7 @@
 title: ES25 - ModB - 30% Solution
 description: 
 published: true
-date: 2025-08-30T18:27:54.225Z
+date: 2025-09-02T10:51:17.902Z
 tags: windows, es25-windows
 editor: markdown
 dateCreated: 2025-08-19T11:19:07.140Z
@@ -33,7 +33,7 @@ Add-BgpRouter `
   -TransitRouting Enabled
 
 Add-BgpPeer `
-	-Name HelloWorld `
+  -Name HelloWorld `
   -LocalIPAddress 1.1.1.1 `
   -PeerIPAddress 2.2.2.2 `
   -PeerASN 65222
