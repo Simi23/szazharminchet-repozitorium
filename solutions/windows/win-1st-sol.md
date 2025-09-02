@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-08-19T11:21:21.175Z
+date: 2025-09-02T14:41:10.474Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -90,6 +90,10 @@ Add-KdsRootKey -EffectiveTime (Get-Date).AddHours(-10)
   You have to wait a bit before it will work, or you will get errors in the browser ('*sent X requests in last Y seconds*'). If it still doesn't work, recreate the endpoint definitions in ADFS console.
   
   Don't forget to add **Claim issuance policy**.
+  
+  ```powershell
+sc.exe managedaccount adfssrv true
+  ```
   
 </details>
 
