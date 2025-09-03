@@ -2,7 +2,7 @@
 title: OpenLDAP
 description: Directory services with OpenLDAP
 published: true
-date: 2025-03-11T14:06:07.850Z
+date: 2025-09-03T12:06:03.768Z
 tags: linux
 editor: markdown
 dateCreated: 2025-02-18T15:05:31.500Z
@@ -87,6 +87,35 @@ delete: homeDirectory
 ```
 
 This modifies the `uid=john` object by replacing the `description`, adding a `mail` field and deleting the `homeDirectory` field.
+
+---
+
+To change the DN of an existing object, use the `changetype: modrdn` property.
+
+This will change the Relative Distinguished Name of the object, which is the value that makes the entry unique on its level, `cn=hello` in this case.
+
+```python
+dn: cn=hello,ou=world,dc=hello,dc=world
+changetype: modrdn
+newrdn: cn=helloworld
+deleteoldrdn: 1
+
+# Before: cn=hello,ou=world,dc=hello,dc=world
+# After: cn=helloworld,ou=world,dc=hello,dc=world
+```
+
+To the upper levels too, pass the `newsuperior` option.
+
+```python
+dn: cn=hello,ou=world,dc=hello,dc=world
+changetype: modrdn
+newrdn: cn=helloworld
+deleteoldrdn: 1
+newsuperior: ou=Hello,dc=hello,dc=dk
+
+# Before: cn=hello,ou=world,dc=hello,dc=world
+# After: cn=helloworld,ou=Hello,dc=hello,dc=world
+```
 
 # Populate with data
 
