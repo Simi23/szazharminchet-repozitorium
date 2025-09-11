@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-09-02T14:41:10.474Z
+date: 2025-09-11T11:21:16.709Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -10,6 +10,14 @@ dateCreated: 2025-06-26T09:03:28.237Z
 
 # ES25 - ModB - 1st Solution
 ![modb-tasks.jpg](/solutions/assets/modb-tasks.jpg)
+
+[//]: <> (ALMAFA)
+<details>
+<summary>ALMAFA</summary>
+
+https://www.makeuseof.com/windows-11-unique-login-message/
+  
+</details>
 
 [//]: <> (General)
 <details>
