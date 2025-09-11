@@ -2,7 +2,7 @@
 title: ES25 - ModB - 1st Solution
 description: 
 published: true
-date: 2025-09-11T11:21:16.709Z
+date: 2025-09-11T11:44:13.263Z
 tags: windows, es25-windows, es25
 editor: markdown
 dateCreated: 2025-06-26T09:03:28.237Z
@@ -16,6 +16,8 @@ dateCreated: 2025-06-26T09:03:28.237Z
 <summary>ALMAFA</summary>
 
 https://www.makeuseof.com/windows-11-unique-login-message/
+  
+IUSR és IIS_IUSRS service acc-nak és groupnak full access az apphoz, vagy bármi IIS-hez tartozó service cuccnak
   
 </details>
 
