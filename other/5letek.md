@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:05:35.394Z
+date: 2025-09-25T15:27:46.947Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -60,7 +60,7 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 **Helyszín:** Várna utca
 **Időpont:** febr. 28.
 
-1. US BILLENTYŰZETKIOSZTÁS - alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
+1. US BILLENTYŰZETKIOSZTÁS alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
 2. Marking scriptek írása a feladatokhoz - Cisco Python script - Szerverek - Windows Estonia framework újrafelhasználása (ezzel a Linuxot is lehetne javítani, mert SSH-n keresztül volt)
 3. Cisco -> CML - Kicsit szint növelés, szokni a nehezebb versenyfeladatok megoldását (nem úgy mint Herningben), és nem feltéltlenül azt, hogy ez egy egyszerű modul, ahol pikk pakk, minden követve mindent hibátlanul meg lehet oldani
 4. Szerver -> normális feladtot írunk;
