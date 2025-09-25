@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T16:07:15.203Z
+date: 2025-09-25T16:50:14.783Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -28,9 +28,9 @@ dateCreated: 2025-09-25T14:29:49.371Z
 
 ## JS
 
-### Első forduló - ONLINE
+### Első forduló
 
-**Helyszín:** Online
+**Helyszín:** Online - Teams
 **Időpont:** dec. 5.
 
 - ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat.
@@ -47,7 +47,7 @@ dateCreated: 2025-09-25T14:29:49.371Z
 
 ### Első forduló
 
-**Helyszín:** Online
+**Helyszín:** Online - Teams
 **Időpont:** nov. 28.
 
 - Marad ugyanúgy
@@ -57,8 +57,29 @@ dateCreated: 2025-09-25T14:29:49.371Z
 **Helyszín:** Online
 **Időpont:** dec. 5. - jan. 14.
 **Versenyzők száma:** 30-35 fő (lehetőséghez és kapacításhoz mérten)
-**Megoldhatóság:** %
+**Megoldhatóság:** 
+
+#### Feladat:
+1. CML és abba integrált virtuális gépek (Windows, Linux)
+2. Hálózat: Nem kellene túltolni, routing, alap switching, kis security 
+3. Szerverek: Windows-, HA-Linux szerver és Linux client
+4. Szolgáltatások
+  - Dual Stack
+  - Windows
+      - DHCP
+      - DDNS
+  - Linux
+    - HA kiépítése
+
+#### Javítás:
+1. 
+2. 
+3. 
+4. 
+5. 
+
 <br>
+
 ### Középdöntő
 
 **Helyszín:** Várna utca
@@ -74,6 +95,7 @@ dateCreated: 2025-09-25T14:29:49.371Z
 6. Beszélgetés -> második fordulós remekművek belecsempészése (pl. milyen volt az a munka, milyen problémákba ütközött, mi volt az erőssége, hogy tetszett a feladat, milyen megoldási módot követett. - egy rövid bemutatás, úgy hogy ne bemutatásnak érezze), és a szokásos, van 10^3 switched hogyan konfigurálnád
 
 <br>
+
 ### Döntő
 
 **Helyszín:** Szakmasztár
@@ -81,9 +103,13 @@ dateCreated: 2025-09-25T14:29:49.371Z
 **Versenyzők száma:** 6 (ha lehet)
 **Megoldhatóság:** 60% 
 
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
+1. A feladatok lehetnének, olyan nehézségűek, hogy ne az legyen a cél, hogy hibátlanra meg lehessen oldani, hanem hogy rendesen be kelljen osztani az időt és esetleg mérlegelni kelljen, hogy mi az amit ki kellene hagyni.
+2. Olyan feladatokat adjunk, amik nem workaroundokra építenek.
+3. Küldjünk ki olyan anyagokat, amik tényleg működnek, és leteszteltük, ne egy random cikket, ami teljesen mást vár, mint amit a versenyen kell konfigurálni
+4. Ha esetleg lenne elég erőforrás, akkor szerverse troublshootot is belevenni?
+
+
+## Külön ötletek
+
+1. A leszerelt szerverpark, aminek a rackje Simihez megy, azokat felhasználni versenyek lebonyolításához és készüléshez
+2. Esetleg GetCon-hoz betenni ezt a szerverparkot, ott fusson ha elfér 👉👈
