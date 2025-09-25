@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:43:02.733Z
+date: 2025-09-25T16:07:08.908Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -33,8 +33,8 @@ dateCreated: 2025-09-25T14:29:49.371Z
 **Helyszín:** Online
 **Időpont:** dec. 5.
 
-ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók számát növelni?)
-
+- ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat.
+<br>
 ### Döntő
 
 **Helyszín:** Várna utca
@@ -50,15 +50,21 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 **Helyszín:** Online
 **Időpont:** nov. 28.
 
+- Marad ugyanúgy
+<br>
 ### Második forduló
 
 **Helyszín:** Online
 **Időpont:** dec. 5. - jan. 14.
-
+**Versenyzők száma:** 30-35 fő (lehetőséghez és kapacításhoz mérten)
+**Megoldhatóság:** %
+<br>
 ### Középdöntő
 
 **Helyszín:** Várna utca
 **Időpont:** febr. 28.
+**Versenyzők száma:** 12-18 % 3 == 0 (lehetőséghez és kapacításhoz mérten)
+**Megoldhatóság:** 80%
 
 1. Modul idők növelése 2 órára
 2. US BILLENTYŰZETKIOSZTÁS alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
@@ -67,8 +73,17 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 5. Szerver -> normális feladtot írunk, a Szakma Sztár szintjére hozzuk a feladtsort, ami belefér az időben
 6. Beszélgetés -> második fordulós remekművek belecsempészése (pl. milyen volt az a munka, milyen problémákba ütközött, mi volt az erőssége, hogy tetszett a feladat, milyen megoldási módot követett. - egy rövid bemutatás, úgy hogy ne bemutatásnak érezze), és a szokásos, van 10^3 switched hogyan konfigurálnád
 
-
+<br>
 ### Döntő
 
 **Helyszín:** Szakmasztár
 **Időpont:** kb. március 27-28
+**Versenyzők száma:** 6 (ha lehet)
+**Megoldhatóság:** 60% 
+
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
