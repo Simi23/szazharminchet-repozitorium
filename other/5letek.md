@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T16:50:14.783Z
+date: 2025-09-25T17:02:23.341Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -63,13 +63,32 @@ dateCreated: 2025-09-25T14:29:49.371Z
 1. CML és abba integrált virtuális gépek (Windows, Linux)
 2. Hálózat: Nem kellene túltolni, routing, alap switching, kis security 
 3. Szerverek: Windows-, HA-Linux szerver és Linux client
-4. Szolgáltatások
+4. A szolgáltatás listát illetve egy CML logint kapnának, amivel hozzáférnek az adott lab-hoz, az IP címzést, VLANozást security szabályokat stb. hogy mennyire és hogyan oldja meg az már a versenyzőre lenne bízva
+5. Szolgáltatások
   - Dual Stack
   - Windows
-      - DHCP
-      - DDNS
+    - DS
+    - DHCP
+    - DDNS
   - Linux
     - HA kiépítése
+    - Web
+    - Slave DNS
+6. Dokumentáció - Mindent technikailag képekkel ledokumentál
+7. Eszközök:
+  - Windows:
+    - CML-be qcow2
+    - Egy háló kártya
+    - Semmi konfig nincs rajta
+    - CML-ből kezelhető
+  - Linux SRV:
+    - ESXI install (hogy csak a megadott isokból tudjon dolgozni, ne tudjon a netről leszedni akármilyen csomagot)
+    - Egy háló kártya
+    - Preconfigured interface -> SSH-n keresztüli elérés
+      - Kiemelni, hogy ne nyúljon hozzá, ha elrontaná, akkor tudunk supportot adni, mondjuk egy nappal azutánra beidőzítenénk egy service restartot, hogy jelezte, (vagy csinálunk egy olyan scriptet, ami óránként bemásolja a konfigot és restartolja a network servicet, ha változott a file - meg ssh-val is ugyanez ( egy kis gányolás sosem árt :) ))
+  - Linux CLT:
+  	- CML-be telepített qcow-ból
+    - vezérelhető CML-ből előre telepítjük a szükséges csomagokat
 
 #### Javítás:
 1. 
