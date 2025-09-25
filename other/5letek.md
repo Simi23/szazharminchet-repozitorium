@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T17:02:23.341Z
+date: 2025-09-25T17:19:22.064Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -90,12 +90,15 @@ dateCreated: 2025-09-25T14:29:49.371Z
   	- CML-be telepített qcow-ból
     - vezérelhető CML-ből előre telepítjük a szükséges csomagokat
 
-#### Javítás:
-1. 
-2. 
-3. 
-4. 
-5. 
+#### Értékelési szempontok:
+1. A javítást úgy gondoltuk, hogy kb. javítonként napi 1 lenne + tovább lenne adva egy másik személynek, hogy két ember is átnézze úgy már, hogy valaki végigpontozta.
+2. Olyan lenne mint amit a versenyeken szeretnének, hogy a dokumentáció alapján végignézzük a VM-eket, és azokat az aspecteket pontozzuk le, amiket kidolgozott, a dokumentációban is, ezért egy hasonló mondatot a leírásba beletenni: 
+   - "A dokumentációt mindenki dolgozza ki rendesen, fontos, mivel ez alapján tekintjük végig a munkátokat. Kérlek figyeljetek arra, hogy ezt nagyrészt magatoktól írjátok meg, és figyeljetek arra, hogy tükrözze a munkátokat, ne próbáljatok meg szépíteni a megoldást, mert kiderül, ha valami nem jó, vagy nem működik."
+3. Objektív - Measurement pontozás a feladat lista alapján
+    - Nem túltolva, de egy egyértelmű lista, milyen szolgáltatásoknak kell lenni beállítva és működnie, ami alapján egységesen lehet pontozni a projekteket. (1 ember lepontozza, 1 másik átnézi)
+
+4. Szubjektív - Judgement, kidolgozottság értékelése, megvalosítás, dokumentáció minősége értékelése
+    - A fentieket pontozni, egy projektet legalább 2 ember, nagyjából egy skálára helyezni a beadott megoldásokat guidelineok alapján
 
 <br>
 
