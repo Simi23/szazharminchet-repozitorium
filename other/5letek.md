@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:38:43.274Z
+date: 2025-09-25T15:42:26.016Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -17,10 +17,10 @@ dateCreated: 2025-09-25T14:29:49.371Z
 
 - 2025\. dec. 5. (p) JS 1. forduló + ES 2. forduló tájékoztató
 
-- 2026\. jan. 9. (p) ES 2. forduló határidő
+- 2026\. jan. 14. (sze) ES 2. forduló határidő
 
-- 2026\. febr. 21. (sz) Várna u. - JS döntő
-- 2026\. febr. 28. (sz) Várna u. - ES középdöntő
+- 2026\. febr. 21. (szo) Várna u. - JS döntő
+- 2026\. febr. 28. (szo) Várna u. - ES középdöntő
 
 - 2026\. márc. 27-29. (p-v?) Szakmasztár - ES döntő
 
@@ -53,19 +53,20 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 ### Második forduló
 
 **Helyszín:** Online
-**Időpont:** dec. 5. - jan. 9.
+**Időpont:** dec. 5. - jan. 14.
 
 ### Középdöntő
 
 **Helyszín:** Várna utca
 **Időpont:** febr. 28.
 
-1. US BILLENTYŰZETKIOSZTÁS alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
-2. Marking scriptek írása a feladatokhoz - Cisco Python script - Szerverek - Windows Estonia framework újrafelhasználása (ezzel a Linuxot is lehetne javítani, mert SSH-n keresztül volt)
-3. Cisco -> CML - Kicsit szint növelés, szokni a nehezebb versenyfeladatok megoldását (nem úgy mint Herningben), és nem feltéltlenül azt, hogy ez egy egyszerű modul, ahol pikk pakk, minden követve mindent hibátlanul meg lehet oldani
-4. Szerver -> normális feladtot írunk, a Szakma Sztár szintjére hozzuk a feladtsort, ami belefér az időben
-5. Beszélgetés -> második fordulós remekművek belecsempészése, és a szokásos, van 10^3 switched hogyan konfigurálnád
-6. Modul idők növelése 2 órára
+1. Modul idők növelése 2 órára
+2. US BILLENTYŰZETKIOSZTÁS alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
+3. Marking scriptek írása a feladatokhoz - Cisco Python script - Szerverek - Windows Estonia framework újrafelhasználása (ezzel a Linuxot is lehetne javítani, mert SSH-n keresztül volt)
+4. Cisco -> CML - Kicsit szint növelés, szokni a nehezebb versenyfeladatok megoldását (nem úgy mint Herningben vagy pont hogy olyan szintű feladatot mint Herningben), és nem feltéltlenül azt, hogy ez egy egyszerű modul, ahol pikk pakk, minden követve mindent hibátlanul meg lehet oldani
+5. Szerver -> normális feladtot írunk, a Szakma Sztár szintjére hozzuk a feladtsort, ami belefér az időben
+6. Beszélgetés -> második fordulós remekművek belecsempészése (pl. milyen volt az a munka, milyen problémákba ütközött, mi volt az erőssége, hogy tetszett a feladat, milyen megoldási módot követett...), és a szokásos, van 10^3 switched hogyan konfigurálnád
+
 
 ### Döntő
 
