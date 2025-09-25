@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:04:00.128Z
+date: 2025-09-25T15:05:35.394Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -31,14 +31,14 @@ dateCreated: 2025-09-25T14:29:49.371Z
 ### Első forduló - ONLINE
 
 **Helyszín:** Online
-**Időpont:** kb. március 27-28
+**Időpont:** dec. 5.
 
 ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók számát növelni?)
 
 ### Döntő
 
 **Helyszín:** Várna utca
-**Időpont:** kb. március 27-28
+**Időpont:** febr. 21.
 
 - Cisco -> CML (Szokásos szint, amik eddig PT-ben voltak, de valós virtualizált környezetben menne már itt, lenne tapasztalat)
 - Szerver -> normális feladtot írunk;
@@ -48,17 +48,17 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 ### Első forduló
 
 **Helyszín:** Online
-**Időpont:** kb. március 27-28
+**Időpont:** nov. 28.
 
 ### Második forduló
 
 **Helyszín:** Online
-**Időpont:** kb. március 27-28
+**Időpont:** dec. 5. - jan. 9.
 
 ### Középdöntő
 
 **Helyszín:** Várna utca
-**Időpont:** kb. március 27-28
+**Időpont:** febr. 28.
 
 1. US BILLENTYŰZETKIOSZTÁS - alapértelmezetten - Tájékoztatóban megemlíteni előre, hogy ne sokként érje a versenyzőket, vagy kinyomtatni a kiosztást, vagy olyan billentyűzeteket vinni
 2. Marking scriptek írása a feladatokhoz - Cisco Python script - Szerverek - Windows Estonia framework újrafelhasználása (ezzel a Linuxot is lehetne javítani, mert SSH-n keresztül volt)
