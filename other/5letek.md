@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:42:26.016Z
+date: 2025-09-25T15:43:02.733Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -65,7 +65,7 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 3. Marking scriptek írása a feladatokhoz - Cisco Python script - Szerverek - Windows Estonia framework újrafelhasználása (ezzel a Linuxot is lehetne javítani, mert SSH-n keresztül volt)
 4. Cisco -> CML - Kicsit szint növelés, szokni a nehezebb versenyfeladatok megoldását (nem úgy mint Herningben vagy pont hogy olyan szintű feladatot mint Herningben), és nem feltéltlenül azt, hogy ez egy egyszerű modul, ahol pikk pakk, minden követve mindent hibátlanul meg lehet oldani
 5. Szerver -> normális feladtot írunk, a Szakma Sztár szintjére hozzuk a feladtsort, ami belefér az időben
-6. Beszélgetés -> második fordulós remekművek belecsempészése (pl. milyen volt az a munka, milyen problémákba ütközött, mi volt az erőssége, hogy tetszett a feladat, milyen megoldási módot követett...), és a szokásos, van 10^3 switched hogyan konfigurálnád
+6. Beszélgetés -> második fordulós remekművek belecsempészése (pl. milyen volt az a munka, milyen problémákba ütközött, mi volt az erőssége, hogy tetszett a feladat, milyen megoldási módot követett. - egy rövid bemutatás, úgy hogy ne bemutatásnak érezze), és a szokásos, van 10^3 switched hogyan konfigurálnád
 
 
 ### Döntő
