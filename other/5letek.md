@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T15:38:05.590Z
+date: 2025-09-25T15:38:43.274Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -65,7 +65,7 @@ ua. szokásos Linux-, Windows-, Cisco kvíz és PT feladat. (Továbbjutók szám
 3. Cisco -> CML - Kicsit szint növelés, szokni a nehezebb versenyfeladatok megoldását (nem úgy mint Herningben), és nem feltéltlenül azt, hogy ez egy egyszerű modul, ahol pikk pakk, minden követve mindent hibátlanul meg lehet oldani
 4. Szerver -> normális feladtot írunk, a Szakma Sztár szintjére hozzuk a feladtsort, ami belefér az időben
 5. Beszélgetés -> második fordulós remekművek belecsempészése, és a szokásos, van 10^3 switched hogyan konfigurálnád
-6. Idők növelése 2 órára
+6. Modul idők növelése 2 órára
 
 ### Döntő
 
