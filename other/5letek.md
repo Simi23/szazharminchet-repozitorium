@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T16:07:08.908Z
+date: 2025-09-25T16:07:15.203Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
