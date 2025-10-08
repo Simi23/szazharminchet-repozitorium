@@ -2,7 +2,7 @@
 title: Oetletek
 description: 
 published: true
-date: 2025-09-25T17:19:22.064Z
+date: 2025-10-08T12:04:55.386Z
 tags: 
 editor: markdown
 dateCreated: 2025-09-25T14:29:49.371Z
@@ -135,3 +135,4 @@ dateCreated: 2025-09-25T14:29:49.371Z
 
 1. A leszerelt szerverpark, aminek a rackje Simihez megy, azokat felhasználni versenyek lebonyolításához és készüléshez
 2. Esetleg GetCon-hoz betenni ezt a szerverparkot, ott fusson ha elfér 👉👈
+3. Élő fordulókat CIS-ben pontozni
