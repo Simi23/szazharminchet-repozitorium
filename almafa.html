@@ -1,0 +1,76 @@
+<!--
+title: almafa
+description: 
+published: true
+date: 2026-04-26T08:31:58.136Z
+tags: 
+editor: ckeditor
+dateCreated: 2026-04-26T08:31:58.136Z
+-->
+
+<h3>Bind logs</h3>
+<p># edit <code>/etc/bind/named.conf.options</code></p>
+<p>logging {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; channel transfers {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file "/var/log/bind/transfers" versions 3 size 10M;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print-time yes;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; severity info;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; };</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; channel general {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file "/var/log/bind/general" versions 3 size 10M;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; print-time yes;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; severity info;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; };</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; channel query {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file "/var/log/bind/query" versions 3 size 10M;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; print-time yes;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; severity info;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; };</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; category xfer-out { transfers; };</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; category xfer-in { transfers; };</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p><code>category queries { query; };</code></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; category default { general; };</p>
+<p>};</p>
+<p>&nbsp;</p>
+<h3>GNOME banner</h3>
+<p><strong>Display a text banner on the login screen:</strong></p>
+<ol>
+  <li>Create the gdm profile which contains the following lines:</li>
+</ol>
+<p><strong>/etc/dconf/profile/gdm</strong></p>
+<p>user-db:user</p>
+<p>system-db:gdm</p>
+<p>file-db:/usr/share/gdm/greeter-dconf-defaults</p>
+<p>gdm is the name of a <a href="https://help.gnome.org/system-admin-guide/dconf.html">dconf</a> database.</p>
+<ol>
+  <li>Create a gdm keyfile for machine-wide settings in <strong>/etc/dconf/db/gdm.d/01-banner-message</strong>:</li>
+</ol>
+<p>[org/gnome/login-screen]</p>
+<p>banner-message-enable=true</p>
+<p>banner-message-text='Type the banner message here.'</p>
+<ol>
+  <li>Update the system databases:</li>
+</ol>
+<p># dconf update</p>
+<p>&nbsp;</p>
+<h3>Hapropxy</h3>
+<p>balance source</p>
+<p>hash-type consistent</p>
+<p>&nbsp;</p>
+<p>backend web_servers&nbsp; &nbsp;&nbsp;</p>
+<p># L7 check (by default when omitting it it checks only L4 TCP)&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp;option httpchk&nbsp; &nbsp;&nbsp;</p>
+<p># Primary server using IPv6&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp;server srv1_v6 [2001:db8::1]:80 check&nbsp; &nbsp;&nbsp;</p>
+<p># Fallback server using IPv4&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp;server srv1_v4 192.168.1.1:80 check backup&nbsp; &nbsp;&nbsp;</p>
+<p># load balancing&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; balance source&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; hash-type consistent</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
