@@ -2,7 +2,7 @@
 title: almafa
 description: 
 published: true
-date: 2026-04-26T08:33:31.315Z
+date: 2026-04-26T08:36:26.617Z
 tags: 
 editor: ckeditor
 dateCreated: 2026-04-26T08:31:58.136Z
@@ -167,6 +167,111 @@ dateCreated: 2026-04-26T08:31:58.136Z
 <p>keepalive 10 120</p>
 <p>cipher AES-256-CBC</p>
 <p>&nbsp;</p>
+<h3>install.yml</h3>
+<p>---</p>
+<p>- name: Install requested package(s) on all pod servers</p>
+<p>&nbsp;hosts: linux</p>
+<p>&nbsp;gather_facts: yes</p>
 <p>&nbsp;</p>
+<p>&nbsp;vars:</p>
+<p>&nbsp; &nbsp;pkg_list: "{{ pkg.split(',') }}"</p>
+<p>&nbsp;</p>
+<p>&nbsp;tasks:</p>
+<p>&nbsp; &nbsp;- name: Ensure pkg variable is provided</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.fail:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;msg: "You must provide the variable 'pkg', for example: -e 'pkg=curl' or -e 'pkg=atop,btop,htop'"</p>
+<p>&nbsp; &nbsp; &nbsp;when: pkg is not defined</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Install requested package(s)</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.package:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;name: "{{ pkg_list }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: present</p>
+<p>&nbsp;</p>
+<h3>install_site.yml</h3>
+<p>---</p>
+<p>- name: Deploy website virtualhost on all pod servers</p>
+<p>&nbsp;hosts: linux</p>
+<p>&nbsp;become: true</p>
+<p>&nbsp;gather_facts: true</p>
+<p>&nbsp;</p>
+<p>&nbsp;vars_files:</p>
+<p>&nbsp; &nbsp;- /opt/ansible/config/site.yml</p>
+<p>&nbsp;</p>
+<p>&nbsp;vars:</p>
+<p>&nbsp; &nbsp;apache_pkg: "{{ 'apache2' if ansible_facts.os_family == 'Debian' else 'httpd' }}"</p>
+<p>&nbsp; &nbsp;apache_service: "{{ 'apache2' if ansible_facts.os_family == 'Debian' else 'httpd' }}"</p>
+<p>&nbsp; &nbsp;vhost_file: &gt;-</p>
+<p>&nbsp; &nbsp; &nbsp;{{</p><p>&nbsp; &nbsp; &nbsp; &nbsp;'/etc/apache2/sites-available/' ~ site_name ~ '.conf'</p><p>&nbsp; &nbsp; &nbsp; &nbsp;if ansible_facts.os_family == 'Debian'</p><p>&nbsp; &nbsp; &nbsp; &nbsp;else '/etc/httpd/conf.d/' ~ site_name ~ '.conf'</p><p>&nbsp; &nbsp; &nbsp;}}</p>
+<p>&nbsp;</p>
+<p>&nbsp;tasks:</p>
+<p>&nbsp; &nbsp;- name: Install Apache</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.package:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;name: "{{ apache_pkg }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: present</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Create document root</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.file:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;path: "{{ root }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: directory</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;owner: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;group: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;mode: '0755'</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Create default index page</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.copy:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;dest: "{{ root }}/index.html"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;content: "{{ content }}\n"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;owner: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;group: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;mode: '0644'</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Create virtualhost configuration</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.copy:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;dest: "{{ vhost_file }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;owner: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;group: root</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;mode: '0644'</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;content: |</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;VirtualHost *:80&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ServerName {{ site_name }}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DocumentRoot {{ root }}</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;Directory {{ root }}&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Options Indexes FollowSymLinks</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;AllowOverride None</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Require all granted</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/Directory&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ErrorLog ${APACHE_LOG_DIR}/{{ site_name }}_error.log</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CustomLog ${APACHE_LOG_DIR}/{{ site_name }}_access.log combined</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/VirtualHost&gt;</p>
+<p>&nbsp; &nbsp; &nbsp;notify: restart apache</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Enable site on Debian</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.file:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;src: "{{ vhost_file }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;dest: "/etc/apache2/sites-enabled/{{ site_name }}.conf"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: link</p>
+<p>&nbsp; &nbsp; &nbsp;when: ansible_facts.os_family == 'Debian'</p>
+<p>&nbsp; &nbsp; &nbsp;notify: restart apache</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Disable default site on Debian</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.file:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;path: "/etc/apache2/sites-enabled/000-default.conf"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: absent</p>
+<p>&nbsp; &nbsp; &nbsp;when: ansible_facts.os_family == 'Debian'</p>
+<p>&nbsp; &nbsp; &nbsp;notify: restart apache</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;- name: Ensure Apache service is enabled and started</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.service:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;name: "{{ apache_service }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: started</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;enabled: true</p>
+<p>&nbsp;</p>
+<p>&nbsp;handlers:</p>
+<p>&nbsp; &nbsp;- name: restart apache</p>
+<p>&nbsp; &nbsp; &nbsp;ansible.builtin.service:</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;name: "{{ apache_service }}"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;state: restarted</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
