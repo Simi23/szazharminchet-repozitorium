@@ -2,13 +2,17 @@
 title:  Home
 description: 
 published: true
-date: 2025-06-11T13:54:36.176Z
+date: 2026-04-26T08:28:44.607Z
 tags: 
 editor: markdown
 dateCreated: 2025-02-11T09:45:23.641Z
 ---
 
 # Site contents
+
+---
+
+[**almafa**](/almafa)
 
 [**Ansible**](/ansible/setup)
 
