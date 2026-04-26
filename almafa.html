@@ -2,7 +2,7 @@
 title: almafa
 description: 
 published: true
-date: 2026-04-26T08:31:58.136Z
+date: 2026-04-26T08:33:31.315Z
 tags: 
 editor: ckeditor
 dateCreated: 2026-04-26T08:31:58.136Z
@@ -69,7 +69,103 @@ dateCreated: 2026-04-26T08:31:58.136Z
 <p>&nbsp; &nbsp; balance source&nbsp; &nbsp;&nbsp;</p>
 <p>&nbsp; &nbsp; hash-type consistent</p>
 <p>&nbsp;</p>
+<h3>kea-dhcp</h3>
+<p># Install</p>
+<p><code>apt install isc-kea-dhcp-server</code></p>
 <p>&nbsp;</p>
+<p><code># config file</code></p>
+<p><code>/etc/kea/kea-dhcp4.conf</code></p>
+<p>&nbsp;</p>
+<p>{</p>
+<p>&nbsp;"Dhcp4": {</p>
+<p>&nbsp; &nbsp;"interfaces-config": {</p>
+<p>&nbsp; &nbsp; &nbsp;"interfaces": [</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"ens256"</p>
+<p>&nbsp; &nbsp; &nbsp; ]</p>
+<p>&nbsp; &nbsp; },</p>
+<p>&nbsp; &nbsp;"lease-database": {</p>
+<p>&nbsp; &nbsp; &nbsp;"type": "memfile",</p>
+<p>&nbsp; &nbsp; &nbsp;"persist": true,</p>
+<p>&nbsp; &nbsp; &nbsp;"name": "dhcp4.leases"</p>
+<p>&nbsp; &nbsp; },</p>
+<p>&nbsp; &nbsp;"valid-lifetime": 28800,</p>
+<p>&nbsp; &nbsp;"option-data": [</p>
+<p>&nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"name": "domain-name-servers",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"data": "192.0.2.252, 192.0.2.253"</p>
+<p>&nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; ],</p>
+<p>&nbsp; &nbsp;"subnet4": [</p>
+<p>&nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"subnet": "192.0.2.0/24",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"pools": [</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"pool": "192.0.2.1 - 192.0.2.199"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ],</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"option-data": [</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"name": "routers",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"data": "192.0.2.254"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ]</p>
+<p>&nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; ],</p>
+<p>&nbsp; &nbsp;"loggers": [</p>
+<p>&nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"name": "kea-dhcp4",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"output_options": [</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"output": "kea-dhcp4.log",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"maxver": 10</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ],</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;"severity": "INFO"</p>
+<p>&nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; ]</p>
+<p>&nbsp; }</p>
+<p>}</p>
+<p>&nbsp;</p>
+<h3>ovpn</h3>
+<p><strong>Using a Credentials File (for Automation)</strong></p>
+<p># Store credentials in a file</p>
+<p>cat &gt; /etc/openvpn/credentials.txt &lt;&lt; 'EOF'</p>
+<p>vpnuser</p>
+<p>StrongPassword123</p>
+<p>EOF</p>
+<p>chmod 600 /etc/openvpn/credentials.txt</p>
+<p>&nbsp;</p>
+<p># Reference in client config</p>
+<p># auth-user-pass /etc/openvpn/credentials.txt</p>
+<p>&nbsp;</p>
+<p><strong>Configuring the OpenVPN Server</strong></p>
+<p>Edit&nbsp;/etc/openvpn/server.conf to enable the LDAP plugin:</p>
+<p># /etc/openvpn/server.conf</p>
+<p>&nbsp;</p>
+<p>proto udp</p>
+<p>dev tun</p>
+<p>port 1194</p>
+<p>&nbsp;</p>
+<p>ca&nbsp; /etc/openvpn/ca.crt</p>
+<p>cert /etc/openvpn/server.crt</p>
+<p>key&nbsp;/etc/openvpn/server.key</p>
+<p>dh&nbsp; /etc/openvpn/dh.pem</p>
+<p>tls-auth /etc/openvpn/ta.key 0</p>
+<p>&nbsp;</p>
+<p># IPv4 VPN subnet</p>
+<p>server 10.8.0.0 255.255.255.0</p>
+<p>push "redirect-gateway def1"</p>
+<p>push "dhcp-option DNS 8.8.8.8"</p>
+<p>&nbsp;</p>
+<p><strong># Load the LDAP authentication plugin</strong></p>
+<p><strong>plugin /usr/lib/openvpn/openvpn-auth-ldap.so /etc/openvpn/auth/ldap.conf</strong></p>
+<p>&nbsp;</p>
+<p><strong># Require both certificate AND LDAP username/password (two-factor)</strong></p>
+<p><strong># If you want password-only (no cert), use: verify-client-cert none</strong></p>
+<p><strong># verify-client-cert none</strong></p>
+<p>&nbsp;</p>
+<p>keepalive 10 120</p>
+<p>cipher AES-256-CBC</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
