@@ -2,7 +2,7 @@
 title: almafa
 description: 
 published: true
-date: 2026-04-27T06:15:39.490Z
+date: 2026-04-27T06:32:28.544Z
 tags: 
 editor: ckeditor
 dateCreated: 2026-04-26T08:31:58.136Z
@@ -10,6 +10,13 @@ dateCreated: 2026-04-26T08:31:58.136Z
 
 <h3>iSCSI</h3>
 <p>Connect-IscsiTarget -NodeAddress (Get-IscsiTarget | Where-Object { $_.NodeAddress -like "*WSC2026-FSRM-TGT*" }).NodeAddress -IsPersistent $true</p>
+<p>&nbsp;</p>
+<h3>Work Folder FIX&nbsp;</h3>
+<p>$thumbprint = " "&nbsp; &nbsp;</p>
+<p>New-WebBinding -Name "Default Web Site" -IP * -Port 443 -Protocol https&nbsp; &nbsp;</p>
+<p>Push-Location IIS:\SslBindings&nbsp; &nbsp;</p>
+<p>Get-Item cert:\LocalMachine\MY\$thumbprint | new-item *!443&nbsp; &nbsp;</p>
+<p>Pop-Location&nbsp;</p>
 <p>&nbsp;</p>
 <h3>Create OU</h3>
 <pre><code class="language-javascript"># 1-create-ou.ps1
